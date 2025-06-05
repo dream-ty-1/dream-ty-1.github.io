@@ -1,0 +1,599 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>我的收藏 | Tianyu の 个人博客</title>
+    <meta name="author" content="TianYu" />
+    <meta name="description" content="这是一个使用Hexo框架和ParticleX主题的个人博客" />
+    <meta name="keywords" content="博客, 技术, 编程, 生活" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="/css/friends.css">
+        
+            <link rel="stylesheet" href="/css/collections.css">
+        
+            <link rel="stylesheet" href="/css/categories-tags.css">
+        
+            <link rel="stylesheet" href="/css/custom.css">
+        
+            <link rel="stylesheet" href="/css/sidebar.css">
+        
+            <link rel="stylesheet" href="/css/toc.css">
+        
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>TIANYU の 个人博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/friends">
+            <i class="fa-solid fa-link fa-fw"></i>
+            <span>&ensp;Friends</span>
+        </a>
+        
+        <a href="/collections">
+            <i class="fa-solid fa-folder-open fa-fw"></i>
+            <span>&ensp;Collections</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;TIANYU の 个人博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/friends">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-link fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Friends</div>
+                    </div>
+                </a>
+                
+                <a href="/collections">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-folder-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Collections</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div id="collections-container">
+    <div class="collections-header">
+        <h1><i class="fa-solid fa-folder-open fa-fw"></i> Tianyu的收藏</h1>
+        <p class="collections-desc">这里收集了一些奇怪的内容，希望能帮到你</p>
+    </div>
+
+    <!-- 添加播放器控件，初始隐藏 -->
+    <div id="music-player-container" class="hidden">
+        <div class="music-player-info">
+            <img id="player-cover" src="" alt="Cover Art" />
+            <div class="player-details">
+                <div id="player-title" class="player-title"></div>
+                <div id="player-artist" class="player-artist"></div>
+            </div>
+        </div>
+        <div class="player-controls">
+            <audio id="music-player" controls></audio>
+            <button id="close-player" class="close-player-btn">
+                <i class="fa-solid fa-times fa-fw"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="collections-tabs">
+        <div class="tab-item active" data-target="music">
+            <i class="fa-solid fa-music fa-fw"></i> 音乐
+        </div>
+        <div class="tab-item" data-target="websites">
+            <i class="fa-solid fa-globe fa-fw"></i> 网站
+        </div>
+        <div class="tab-item" data-target="weird">
+            <i class="fa-solid fa-bomb fa-fw"></i> 奇怪玩意
+        </div>
+    </div>
+
+    <div class="collections-content">
+        <!-- 音乐收藏 -->
+        <div class="collection-section active" id="music-section">
+            
+                <div class="collection-grid">
+                    
+                        <div class="collection-item" data-aos="fade-up" data-music-index="0">
+                            <div class="collection-media">
+                                
+                                    <img src="http://p1.music.126.net/Rd8cYn0_8aMhjNLQp6Q33Q==/109951168761290065.jpg?param=130y130" alt="Fabulous" loading="lazy" />
+                                
+                                
+                                    <!-- 将网易云音乐链接存储在data属性中，点击时在本地处理 -->
+                                    <div class="play-btn" data-music-url="https://music.163.com/#/song?id=2066710146" data-music-name="Fabulous" 
+                                         data-music-artist="blu-swing" data-music-cover="http://p1.music.126.net/Rd8cYn0_8aMhjNLQp6Q33Q==/109951168761290065.jpg?param=130y130">
+                                        <i class="fa-solid fa-play fa-fw"></i>
+                                    </div>
+                                
+                            </div>
+                            <div class="collection-info">
+                                <div class="collection-title">Fabulous</div>
+                                <div class="collection-meta">blu-swing</div>
+                                
+                                    <div class="collection-desc">经典的日式城市摇滚，爱听！</div>
+                                
+                            </div>
+                        </div>
+                    
+                        <div class="collection-item" data-aos="fade-up" data-music-index="1">
+                            <div class="collection-media">
+                                
+                                    <img src="http://p1.music.126.net/o-SIgZddww9bTeVm2JhEVQ==/109951170151673217.jpg?param=130y130" alt="Metaphor" loading="lazy" />
+                                
+                                
+                                    <!-- 将网易云音乐链接存储在data属性中，点击时在本地处理 -->
+                                    <div class="play-btn" data-music-url="https://music.163.com/#/song?id=2646547342" data-music-name="Metaphor" 
+                                         data-music-artist="ichika Nito / Feryquitous" data-music-cover="http://p1.music.126.net/o-SIgZddww9bTeVm2JhEVQ==/109951170151673217.jpg?param=130y130">
+                                        <i class="fa-solid fa-play fa-fw"></i>
+                                    </div>
+                                
+                            </div>
+                            <div class="collection-info">
+                                <div class="collection-title">Metaphor</div>
+                                <div class="collection-meta">ichika Nito / Feryquitous</div>
+                                
+                                    <div class="collection-desc">ichika和经典音游曲师Feryquitous的梦幻联动</div>
+                                
+                            </div>
+                        </div>
+                    
+                        <div class="collection-item" data-aos="fade-up" data-music-index="2">
+                            <div class="collection-media">
+                                
+                                    <img src="http://p1.music.126.net/dZJZCE906R7qa53OhVLWvQ==/109951170614760655.jpg?param=130y130" alt="花弁、それにまつわる音声" loading="lazy" />
+                                
+                                
+                                    <!-- 将网易云音乐链接存储在data属性中，点击时在本地处理 -->
+                                    <div class="play-btn" data-music-url="https://music.163.com/#/song?id=2684924244" data-music-name="花弁、それにまつわる音声" 
+                                         data-music-artist="あばらや" data-music-cover="http://p1.music.126.net/dZJZCE906R7qa53OhVLWvQ==/109951170614760655.jpg?param=130y130">
+                                        <i class="fa-solid fa-play fa-fw"></i>
+                                    </div>
+                                
+                            </div>
+                            <div class="collection-info">
+                                <div class="collection-title">花弁、それにまつわる音声</div>
+                                <div class="collection-meta">あばらや</div>
+                                
+                                    <div class="collection-desc">近期我很爱听的一首术曲</div>
+                                
+                            </div>
+                        </div>
+                    
+                </div>
+            
+        </div>
+
+        <!-- 网站收藏 -->
+        <div class="collection-section" id="websites-section">
+            
+                <div class="collection-grid">
+                    
+                        <div class="collection-item" data-aos="fade-up">
+                            <a href="https://developer.mozilla.org/" target="_blank" rel="noopener noreferrer" class="website-link">
+                                <div class="collection-media">
+                                    
+                                        <img src="https://developer.mozilla.org/mdn-social-share.png" alt="MDN Web Docs" loading="lazy" />
+                                    
+                                </div>
+                                <div class="collection-info">
+                                    <div class="collection-title">MDN Web Docs</div>
+                                    
+                                        <div class="collection-desc">最全面的Web开发文档，前端开发者的必备资源</div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    
+                        <div class="collection-item" data-aos="fade-up">
+                            <a href="https://css-tricks.com/" target="_blank" rel="noopener noreferrer" class="website-link">
+                                <div class="collection-media">
+                                    
+                                        <img src="https://css-tricks.com/wp-content/uploads/2019/06/akqRGyta_400x400.jpg" alt="CSS-Tricks" loading="lazy" />
+                                    
+                                </div>
+                                <div class="collection-info">
+                                    <div class="collection-title">CSS-Tricks</div>
+                                    
+                                        <div class="collection-desc">提供各种CSS技巧和解决方案的优质网站</div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    
+                        <div class="collection-item" data-aos="fade-up">
+                            <a href="https://unsplash.com/" target="_blank" rel="noopener noreferrer" class="website-link">
+                                <div class="collection-media">
+                                    
+                                        <img src="https://unsplash.com/blog/content/images/2021/05/Secondary_Logo-6.jpg" alt="Unsplash" loading="lazy" />
+                                    
+                                </div>
+                                <div class="collection-info">
+                                    <div class="collection-title">Unsplash</div>
+                                    
+                                        <div class="collection-desc">免费高质量图片资源网站，为创作者提供灵感</div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    
+                        <div class="collection-item" data-aos="fade-up">
+                            <a href="https://dribbble.com/" target="_blank" rel="noopener noreferrer" class="website-link">
+                                <div class="collection-media">
+                                    
+                                        <img src="https://cdn.dribbble.com/assets/og-image-dribbble-69a25ccb8ece923cb9a4625d84a6f74123a3109eb7d4187e285d2ad5331572ae.png" alt="Dribbble" loading="lazy" />
+                                    
+                                </div>
+                                <div class="collection-info">
+                                    <div class="collection-title">Dribbble</div>
+                                    
+                                        <div class="collection-desc">设计师作品集展示平台，了解最新设计趋势</div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+        </div>
+
+        <!-- 奇怪玩意收藏 -->
+        <div class="collection-section" id="weird-section">
+            
+                <div class="collection-grid">
+                    
+                        <div class="collection-item" data-aos="fade-up">
+                            <a href="https://aidn.jp/mikutap/" target="_blank" rel="noopener noreferrer" class="website-link">
+                                <div class="collection-media">
+                                    
+                                        <img src="https://i.imgur.com/ceDsAJL.jpg" alt="Mikutap互动音乐体验" loading="lazy" />
+                                    
+                                    <div class="item-overlay">
+                                        <div class="play-now">
+                                            <i class="fa-solid fa-rocket fa-fw"></i> 立即体验
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collection-info">
+                                    <div class="collection-title">Mikutap互动音乐体验</div>
+                                    
+                                        <div class="collection-desc">点击屏幕就是tm的音游，狠摸！</div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    
+                        <div class="collection-item" data-aos="fade-up">
+                            <a href="https://photomosh.com/" target="_blank" rel="noopener noreferrer" class="website-link">
+                                <div class="collection-media">
+                                    
+                                        <img src="https://i.imgur.com/qxlZNUe.jpg" alt="PhotoMosh故障艺术" loading="lazy" />
+                                    
+                                    <div class="item-overlay">
+                                        <div class="play-now">
+                                            <i class="fa-solid fa-rocket fa-fw"></i> 立即体验
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collection-info">
+                                    <div class="collection-title">PhotoMosh故障艺术</div>
+                                    
+                                        <div class="collection-desc">将普通图片转换成复古故障，创造出赛博朋克风格的视觉效果</div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    
+                        <div class="collection-item" data-aos="fade-up">
+                            <a href="https://toonme.com/result" target="_blank" rel="noopener noreferrer" class="website-link">
+                                <div class="collection-media">
+                                    
+                                        <img src="https://i.imgur.com/MeQ2ttP.jpg" alt="ToonMe卡通人物生成" loading="lazy" />
+                                    
+                                    <div class="item-overlay">
+                                        <div class="play-now">
+                                            <i class="fa-solid fa-rocket fa-fw"></i> 立即体验
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collection-info">
+                                    <div class="collection-title">ToonMe卡通人物生成</div>
+                                    
+                                        <div class="collection-desc">秒变动漫、卡通人物！上传照片，AI瞬间将你变成多种风格的卡通版本（可能会被数据采集</div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    
+                        <div class="collection-item" data-aos="fade-up">
+                            <a href="http://weavesilk.com/" target="_blank" rel="noopener noreferrer" class="website-link">
+                                <div class="collection-media">
+                                    
+                                        <img src="https://i.imgur.com/Q95K8Cr.jpg" alt="Silk镜像炫光生成器" loading="lazy" />
+                                    
+                                    <div class="item-overlay">
+                                        <div class="play-now">
+                                            <i class="fa-solid fa-rocket fa-fw"></i> 立即体验
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collection-info">
+                                    <div class="collection-title">Silk镜像炫光生成器</div>
+                                    
+                                        <div class="collection-desc">米奇妙妙画板</div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    
+                        <div class="collection-item" data-aos="fade-up">
+                            <a href="https://learningmusic.ableton.com/" target="_blank" rel="noopener noreferrer" class="website-link">
+                                <div class="collection-media">
+                                    
+                                        <img src="https://i.imgur.com/hRe3KCI.jpg" alt="Ableton乐器模拟器" loading="lazy" />
+                                    
+                                    <div class="item-overlay">
+                                        <div class="play-now">
+                                            <i class="fa-solid fa-rocket fa-fw"></i> 立即体验
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collection-info">
+                                    <div class="collection-title">Ableton乐器模拟器</div>
+                                    
+                                        <div class="collection-desc">我在认识乐器中获得了0个的好成绩，你也来试试看吧？</div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    
+                        <div class="collection-item" data-aos="fade-up">
+                            <a href="https://iogames.space/" target="_blank" rel="noopener noreferrer" class="website-link">
+                                <div class="collection-media">
+                                    
+                                        <img src="https://i.imgur.com/TzF4cLO.jpg" alt="IO游戏天地" loading="lazy" />
+                                    
+                                    <div class="item-overlay">
+                                        <div class="play-now">
+                                            <i class="fa-solid fa-rocket fa-fw"></i> 立即体验
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collection-info">
+                                    <div class="collection-title">IO游戏天地</div>
+                                    
+                                        <div class="collection-desc">在线玩游戏，别学了我求求了摸鱼吧</div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.collections-tabs .tab-item');
+    const sections = document.querySelectorAll('.collection-section');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const target = this.getAttribute('data-target');
+            
+            // 切换标签高亮
+            tabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 切换内容显示
+            sections.forEach(section => {
+                section.classList.remove('active');
+                if (section.id === target + '-section') {
+                    section.classList.add('active');
+                }
+            });
+        });
+    });
+
+    // 初始化音乐播放器功能
+    initMusicPlayer();
+});
+</script> 
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Tianyu の 个人博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;TianYu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    <script src="/js/blog-effects.js"></script>
+    <script src="/js/white-canvas-nest.js"></script>
+    
+        
+            <script src="/js/custom.js"></script>
+        
+            <script src="/js/blog-effects.js"></script>
+        
+            <script src="/js/particles-effect.js"></script>
+        
+            <script src="/js/scroll-header.js"></script>
+        
+            <script src="/js/img-lightbox.js"></script>
+        
+            <script src="/js/back-to-top.js"></script>
+        
+            <script src="/js/tag-cloud.js"></script>
+        
+            <script src="/js/music-player.js"></script>
+        
+            <script src="/js/effects-loader.js"></script>
+        
+            <script src="/js/toc-helper.js"></script>
+        
+    
+    
+</body>
+</html>

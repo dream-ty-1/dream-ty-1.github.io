@@ -1,0 +1,220 @@
+ /* 友情链接页面样式 */
+
+:root {
+    --accent-primary: #64b5f6;
+    --accent-secondary: #9abbf7;
+    --card-bg: rgba(40, 40, 40, 0.7);
+    --card-border: rgba(80, 80, 80, 0.2);
+    --card-hover-border: rgba(100, 181, 246, 0.4);
+    --text-primary: #e0e0e0;
+    --text-secondary: #aaa;
+    --shadow-normal: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.4);
+    --bg-hover: rgba(50, 50, 50, 0.8);
+}
+
+#friends-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+/* 头部样式 */
+.friends-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.friends-header h1 {
+    font-size: 2.2em;
+    color: var(--text-primary);
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.friends-header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    transform: translateX(-50%);
+    border-radius: 3px;
+}
+
+.friends-desc {
+    font-size: 1.1em;
+    color: var(--text-secondary);
+    margin-top: 20px;
+}
+
+/* 友链申请提示样式 */
+.friends-tip {
+    background: var(--card-bg);
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-normal);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.friends-tip h2 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    color: var(--accent-primary);
+    border-left: 4px solid var(--accent-primary);
+    padding-left: 12px;
+}
+
+.tip-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tip-content p {
+    font-size: 1em;
+    color: var(--text-primary);
+}
+
+.tip-content p i {
+    color: var(--accent-primary);
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* 友链卡片网格 */
+.friends-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* 友链卡片样式 */
+.friend-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow-normal);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.friend-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--card-hover-border);
+}
+
+.friend-card-wrap {
+    display: flex;
+    padding: 20px;
+    gap: 15px;
+}
+
+.friend-avatar {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.friend-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(100, 181, 246, 0.3);
+    transition: all 0.4s ease;
+}
+
+.friend-card:hover .friend-avatar img {
+    transform: rotate(360deg);
+    border-color: var(--accent-primary);
+}
+
+.friend-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.friend-name {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+}
+
+.friend-card:hover .friend-name {
+    color: var(--accent-primary);
+}
+
+.friend-desc {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 没有友链时的提示 */
+.no-friends {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 0;
+    color: var(--text-secondary);
+}
+
+.no-friends i {
+    font-size: 4em;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.no-friends p {
+    font-size: 1.1em;
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    #friends-container {
+        padding: 20px;
+    }
+    
+    .friends-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .friends-header h1 {
+        font-size: 1.8em;
+    }
+    
+    .friends-desc {
+        font-size: 1em;
+    }
+}

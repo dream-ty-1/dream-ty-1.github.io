@@ -1,0 +1,165 @@
+/* 文章目录样式 */
+
+/* 目录容器 */
+.article-toc {
+    background: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    margin-bottom: 25px;
+    border: 1px solid rgba(80, 80, 80, 0.2);
+    position: relative;
+}
+
+/* 目录标题 */
+.toc-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #e0e0e0;
+    background: linear-gradient(90deg, rgba(30, 30, 30, 0.9), rgba(50, 50, 50, 0.7));
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(100, 181, 246, 0.2);
+}
+
+.toc-title i {
+    color: #64b5f6;
+    margin-right: 10px;
+}
+
+/* 目录内容容器 */
+.toc-content {
+    padding: 15px;
+    max-height: 350px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(100, 181, 246, 0.3) rgba(30, 30, 30, 0.5);
+}
+
+/* 目录内容样式 */
+.toc-content .toc {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.toc-content .toc-child {
+    margin: 0;
+    padding-left: 15px;
+    list-style: none;
+}
+
+.toc-content .toc-link {
+    display: block;
+    padding: 5px 0;
+    color: #e0e0e0;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-left: 2px solid transparent;
+    padding-left: 8px;
+    margin-left: -10px;
+}
+
+.toc-content .toc-link:hover {
+    color: #64b5f6;
+    transform: translateX(3px);
+}
+
+/* 激活的目录项 */
+.toc-content .toc-link.active {
+    color: #64b5f6;
+    border-left: 2px solid #64b5f6;
+    background-color: rgba(100, 181, 246, 0.05);
+}
+
+/* 目录层级 */
+.toc-content .toc-item.toc-level-1 > .toc-link {
+    font-weight: bold;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.toc-content .toc-item.toc-level-2 > .toc-link {
+    padding-left: 12px;
+}
+
+.toc-content .toc-item.toc-level-3 > .toc-link {
+    padding-left: 20px;
+    font-size: 13px;
+}
+
+/* TOC滚动条样式 */
+.toc-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+.toc-content::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 181, 246, 0.3);
+    border-radius: 5px;
+}
+
+.toc-content::-webkit-scrollbar-track {
+    background-color: rgba(30, 30, 30, 0.5);
+}
+
+/* 响应式调整 */
+@media (max-width: 1024px) {
+    .article-toc {
+        position: relative;
+        top: auto;
+    }
+    
+    .toc-content {
+        max-height: 250px;
+    }
+}
+
+/* 固定目录效果 */
+.article-toc.fixed {
+    position: fixed;
+    top: 70px;
+    width: 280px;
+}
+
+/* 目录折叠按钮 */
+.toc-toggle {
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toc-toggle:hover {
+    color: #64b5f6;
+    transform: rotate(180deg);
+}
+
+/* 折叠时的样式 */
+.article-toc.collapsed .toc-content {
+    display: none;
+}
+
+.article-toc.collapsed .toc-toggle {
+    transform: rotate(180deg);
+}
+
+/* 目录为空的样式 */
+.no-toc-message {
+    color: #909090;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+} 

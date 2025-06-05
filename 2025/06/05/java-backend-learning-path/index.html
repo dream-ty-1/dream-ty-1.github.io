@@ -1,0 +1,644 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>Java后端学习路线 | Tianyu の 个人博客</title>
+    <meta name="author" content="TianYu" />
+    <meta name="description" content="这是一个使用Hexo框架和ParticleX主题的个人博客" />
+    <meta name="keywords" content="博客, 技术, 编程, 生活" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="/css/friends.css">
+        
+            <link rel="stylesheet" href="/css/collections.css">
+        
+            <link rel="stylesheet" href="/css/categories-tags.css">
+        
+            <link rel="stylesheet" href="/css/custom.css">
+        
+            <link rel="stylesheet" href="/css/sidebar.css">
+        
+            <link rel="stylesheet" href="/css/toc.css">
+        
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>TIANYU の 个人博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/friends">
+            <i class="fa-solid fa-link fa-fw"></i>
+            <span>&ensp;Friends</span>
+        </a>
+        
+        <a href="/collections">
+            <i class="fa-solid fa-folder-open fa-fw"></i>
+            <span>&ensp;Collections</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;TIANYU の 个人博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/friends">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-link fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Friends</div>
+                    </div>
+                </a>
+                
+                <a href="/collections">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-folder-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Collections</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article-container">
+    <div class="article">
+        <div>
+            <h1>Java后端学习路线</h1>
+        </div>
+        <div class="info">
+            <span class="date">
+                <span class="icon">
+                    <i class="fa-solid fa-calendar fa-fw"></i>
+                </span>
+                2025/6/5
+            </span>
+            
+            <span class="category">
+                <a href="/categories/java/">
+                    <span class="icon">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </span>
+                    java
+                </a>
+            </span>
+            
+            
+            <span class="tags">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                
+                
+                <span class="tag">
+                    
+                    <a href="/tags/%E7%BC%96%E7%A8%8B/" style="color: #ffa2c4">
+                        编程
+                    </a>
+                </span>
+                
+                <span class="tag">
+                    
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="color: #ff7d73">
+                        学习
+                    </a>
+                </span>
+                
+            </span>
+            
+        </div>
+        
+        <div class="content" v-pre>
+            <h1 id="Java后端学习路线"><a href="#Java后端学习路线" class="headerlink" title="Java后端学习路线"></a>Java后端学习路线</h1><p>作为一名Java后端开发人员，需要掌握的技术栈很多，包括基础原理，框架，中间件等。以下我大一学习的路线，仅供参考</p>
+<h2 id="第一阶段：Java基础"><a href="#第一阶段：Java基础" class="headerlink" title="第一阶段：Java基础"></a>第一阶段：Java基础</h2><p>这一阶段需要学习：</p>
+<ol>
+<li><p><strong>Java语法基础</strong></p>
+<ul>
+<li>变量、数据类型、运算符</li>
+<li>控制流程（分支、循环）</li>
+<li>面向对象编程（类、对象、继承、多态、接口）</li>
+<li>异常处理</li>
+<li>集合框架（List、Set、Map等）<br>这里可以学的快一点，快速学习后用到后百度也行</li>
+</ul>
+</li>
+<li><p><strong>Java高级特性</strong></p>
+<ul>
+<li>泛型</li>
+<li>反射</li>
+<li>注解</li>
+<li>Lambda表达式和函数式编程</li>
+<li>Stream API</li>
+<li>IO&#x2F;NIO</li>
+</ul>
+</li>
+</ol>
+<h3 id="推荐学习资源"><a href="#推荐学习资源" class="headerlink" title="推荐学习资源"></a>推荐学习资源</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12J41137hu">【狂神说Java】Java零基础学习视频通俗易懂</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Kb411W75N">尚硅谷Java入门基础视频教程，eclipse版</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18J411W7cE">黑马程序员Java基础教程</a></li>
+</ul>
+<h2 id="第二阶段：数据库"><a href="#第二阶段：数据库" class="headerlink" title="第二阶段：数据库"></a>第二阶段：数据库</h2><p>后端工程重要的学习</p>
+<ol>
+<li><p><strong>关系型数据库</strong></p>
+<ul>
+<li>MySQL基础（SQL语句、约束、索引）</li>
+<li>MySQL高级（存储过程、触发器、视图）</li>
+<li>MySQL优化（索引优化、SQL优化、锁机制）</li>
+</ul>
+</li>
+<li><p><strong>ORM框架</strong><br>通过java控制数据库</p>
+<ul>
+<li>MyBatis</li>
+<li>Hibernate</li>
+<li>JPA</li>
+</ul>
+</li>
+<li><p><strong>NoSQL数据库</strong></p>
+<ul>
+<li>Redis</li>
+<li>MongoDB</li>
+</ul>
+</li>
+</ol>
+<h3 id="推荐学习资源-1"><a href="#推荐学习资源-1" class="headerlink" title="推荐学习资源"></a>推荐学习资源</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iq4y1u7vj">MySQL数据库教程天花板，mysql安装到mysql高级，强！</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1CJ411m7Gc">黑马程序员Redis入门到实战教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1NE411Q7Nx">【狂神说Java】MyBatis最新完整教程通俗易懂</a></li>
+</ul>
+<h2 id="第三阶段：JavaWeb开发"><a href="#第三阶段：JavaWeb开发" class="headerlink" title="第三阶段：JavaWeb开发"></a>第三阶段：JavaWeb开发</h2><ol>
+<li><p><strong>前端基础</strong>（后端也需要了解）</p>
+<ul>
+<li>HTML、CSS、JavaScript基础</li>
+<li>AJAX（api</li>
+</ul>
+</li>
+<li><p><strong>Web开发基础</strong></p>
+<ul>
+<li>Servlet（已弃用</li>
+<li>JSP</li>
+<li>Filter、Listener（拦截器和监听器</li>
+<li>Cookie、Session</li>
+</ul>
+</li>
+<li><p><strong>Web服务器</strong></p>
+<ul>
+<li>Tomcat</li>
+<li>Jetty</li>
+<li>Undertow</li>
+</ul>
+</li>
+</ol>
+<h3 id="推荐学习资源-2"><a href="#推荐学习资源-2" class="headerlink" title="推荐学习资源"></a>推荐学习资源</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Y7411K7zz">JavaWeb教程_前端到后台数据库全栈学习路线</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Y5411p7NG">尚硅谷最新版JavaWeb全套教程,java web零基础入门完整版</a></li>
+</ul>
+<h2 id="第四阶段：主流框架与微服务"><a href="#第四阶段：主流框架与微服务" class="headerlink" title="第四阶段：主流框架与微服务"></a>第四阶段：主流框架与微服务</h2><ol>
+<li><p><strong>Spring全家桶</strong></p>
+<ul>
+<li>Spring框架（IOC、AOP）</li>
+<li>Spring MVC</li>
+<li>Spring Boot</li>
+<li>Spring Cloud</li>
+<li>Spring Security<br>了解注解</li>
+</ul>
+</li>
+<li><p><strong>微服务架构</strong></p>
+<ul>
+<li>服务注册与发现（Eureka、Nacos）</li>
+<li>服务调用（Feign、Dubbo）</li>
+<li>服务网关（Gateway、Zuul）</li>
+<li>服务熔断与降级（Hystrix、Sentinel）</li>
+<li>分布式配置中心（Config、Apollo）</li>
+<li>消息队列（RabbitMQ、Kafka）</li>
+</ul>
+</li>
+</ol>
+<h3 id="推荐学习资源-3"><a href="#推荐学习资源-3" class="headerlink" title="推荐学习资源"></a>推荐学习资源</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PZ4y1j7QK">Spring Boot 2.x 最新教程IDEA版</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1jJ411S7xr">尚硅谷_SpringCloud框架开发教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vp4y1X7wy">2020最新RabbitMQ消息中间件保姆级教程</a></li>
+</ul>
+<h2 id="第五阶段：性能调优与高并发"><a href="#第五阶段：性能调优与高并发" class="headerlink" title="第五阶段：性能调优与高并发"></a>第五阶段：性能调优与高并发</h2><ol>
+<li><p><strong>JVM调优</strong></p>
+<ul>
+<li>JVM内存结构</li>
+<li>GC算法与垃圾回收器</li>
+<li>JVM参数调优</li>
+<li>性能监控工具（JConsole、VisualVM、Arthas）</li>
+</ul>
+</li>
+<li><p><strong>高并发编程</strong><br>面试重点</p>
+<ul>
+<li>多线程基础</li>
+<li>线程池</li>
+<li>JUC并发包</li>
+<li>锁机制（synchronized、ReentrantLock）</li>
+<li>并发容器（ConcurrentHashMap等）</li>
+</ul>
+</li>
+<li><p><strong>分布式技术</strong><br>微服务要点</p>
+<ul>
+<li>分布式事务（Seata）</li>
+<li>分布式锁（Redis、Zookeeper）</li>
+<li>分布式ID生成</li>
+<li>分布式限流</li>
+</ul>
+</li>
+</ol>
+<h3 id="推荐学习资源-4"><a href="#推荐学习资源-4" class="headerlink" title="推荐学习资源"></a>推荐学习资源</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PJ411n7xZ">尚硅谷宋红康JVM全套教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1B7411L7tE">【狂神说Java】JUC并发编程最新版通俗易懂</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV16J411h7Rd">Java高并发编程精讲</a></li>
+</ul>
+<h2 id="第六阶段：DevOps与云原生"><a href="#第六阶段：DevOps与云原生" class="headerlink" title="第六阶段：DevOps与云原生"></a>第六阶段：DevOps与云原生</h2><ol>
+<li><p><strong>容器技术</strong></p>
+<ul>
+<li>Docker</li>
+<li>Kubernetes</li>
+</ul>
+</li>
+<li><p><strong>CI&#x2F;CD</strong></p>
+<ul>
+<li>Git</li>
+<li>Jenkins</li>
+<li>GitLab CI</li>
+</ul>
+</li>
+<li><p><strong>运维监控</strong></p>
+<ul>
+<li>ELK日志系统</li>
+<li>Prometheus监控</li>
+<li>Grafana可视化</li>
+</ul>
+</li>
+<li><p><strong>云原生技术</strong></p>
+<ul>
+<li>Service Mesh（Istio）</li>
+<li>Serverless</li>
+</ul>
+</li>
+</ol>
+<h3 id="推荐学习资源-5"><a href="#推荐学习资源-5" class="headerlink" title="推荐学习资源"></a>推荐学习资源</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Vs411E7AR">Docker系统入门到精通教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GT4y1A756">k8s教程由浅入深-尚硅谷</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Mb411j7nL">GitLab使用教程</a></li>
+</ul>
+<h2 id="第七阶段：架构设计与软实力"><a href="#第七阶段：架构设计与软实力" class="headerlink" title="第七阶段：架构设计与软实力"></a>第七阶段：架构设计与软实力</h2><ol>
+<li><p><strong>设计模式</strong></p>
+<ul>
+<li>创建型模式</li>
+<li>结构型模式</li>
+<li>行为型模式</li>
+</ul>
+</li>
+<li><p><strong>架构设计能力</strong></p>
+<ul>
+<li>DDD领域驱动设计</li>
+<li>分层架构</li>
+<li>微服务架构</li>
+<li>高可用设计</li>
+<li>高性能设计</li>
+</ul>
+</li>
+<li><p><strong>软实力</strong></p>
+<ul>
+<li>编码规范</li>
+<li>代码审查</li>
+<li>技术文档撰写</li>
+<li>沟通与协作能力</li>
+</ul>
+</li>
+</ol>
+<h3 id="推荐学习资源-6"><a href="#推荐学习资源-6" class="headerlink" title="推荐学习资源"></a>推荐学习资源</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1G4411c7N4">设计模式（JAVA版）–尚学堂高琪</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Y341167TM">领域驱动设计实践（DDD实战）</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LJ411Z7vY">Java工程师面试突击第一季</a></li>
+</ul>
+<h2 id="学习建议"><a href="#学习建议" class="headerlink" title="学习建议"></a>学习建议</h2><ol>
+<li><strong>循序渐进</strong>：按照路线图一步一步学习，不要急于求成。</li>
+<li><strong>理论结合实践</strong>：光看视频不动手实践是学不会的。</li>
+<li><strong>项目驱动学习</strong>：尝试开发一些完整的项目来巩固所学知识。</li>
+<li><strong>持续学习</strong>：技术更新很快，需要有持续学习的习惯。</li>
+<li><strong>参与开源</strong>：尝试参与一些开源项目，提升自己的代码能力。不要认为自己没学好就不去写项目，在项目中成长</li>
+</ol>
+<p>希望这份学习路线能够帮助你成为一名优秀的Java后端开发人员。</p>
+
+        </div>
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    
+    <!-- 侧边栏 -->
+    
+
+<div id="sidebar">
+    
+        
+<div id="article-toc" class="article-toc">
+    <div class="toc-title">
+        <i class="fa-solid fa-list fa-fw"></i>
+        <span>目录</span>
+    </div>
+    <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF"><span class="toc-text">Java后端学习路线</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9AJava%E5%9F%BA%E7%A1%80"><span class="toc-text">第一阶段：Java基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90"><span class="toc-text">推荐学习资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">第二阶段：数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90-1"><span class="toc-text">推荐学习资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%EF%BC%9AJavaWeb%E5%BC%80%E5%8F%91"><span class="toc-text">第三阶段：JavaWeb开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90-2"><span class="toc-text">推荐学习资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%EF%BC%9A%E4%B8%BB%E6%B5%81%E6%A1%86%E6%9E%B6%E4%B8%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-text">第四阶段：主流框架与微服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90-3"><span class="toc-text">推荐学习资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91"><span class="toc-text">第五阶段：性能调优与高并发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90-4"><span class="toc-text">推荐学习资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E9%98%B6%E6%AE%B5%EF%BC%9ADevOps%E4%B8%8E%E4%BA%91%E5%8E%9F%E7%94%9F"><span class="toc-text">第六阶段：DevOps与云原生</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90-5"><span class="toc-text">推荐学习资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%BD%AF%E5%AE%9E%E5%8A%9B"><span class="toc-text">第七阶段：架构设计与软实力</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90-6"><span class="toc-text">推荐学习资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E5%BB%BA%E8%AE%AE"><span class="toc-text">学习建议</span></a></li></ol></li></ol>
+    </div>
+</div>
+ 
+    
+
+    <div class="sidebar-box">
+        <div class="sidebar-title">
+            <i class="fa-solid fa-folder-open fa-fw"></i>
+            <span>分类</span>
+        </div>
+        <div class="sidebar-content categories-list">
+            
+                
+                    <div class="category-item">
+                        <a href="/categories/java/">
+                            <span class="category-name">java</span>
+                            <span class="category-count">2</span>
+                        </a>
+                    </div>
+                
+                    <div class="category-item">
+                        <a href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">
+                            <span class="category-name">生活随笔</span>
+                            <span class="category-count">1</span>
+                        </a>
+                    </div>
+                
+            
+        </div>
+    </div>
+
+    <div class="sidebar-box">
+        <div class="sidebar-title">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>标签</span>
+        </div>
+        <div class="sidebar-content tags-cloud">
+            
+                
+                    <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 16px;">
+                        编程(2)
+                    </a>
+                
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">
+                        学习(2)
+                    </a>
+                
+                    <a href="/tags/Hexo/" style="font-size: 16px;">
+                        Hexo(1)
+                    </a>
+                
+                    <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 14px;">
+                        博客(1)
+                    </a>
+                
+                    <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 15px;">
+                        教程(1)
+                    </a>
+                
+            
+        </div>
+    </div>
+
+    <div class="sidebar-box">
+        <div class="sidebar-title">
+            <i class="fa-solid fa-clock fa-fw"></i>
+            <span>最近文章</span>
+        </div>
+        <div class="sidebar-content recent-posts">
+            
+                
+                    <div class="recent-item">
+                        <a href="/2025/06/06/java-frontend-learning-path/" class="recent-title">
+                            Java前端学习路径：从入门到精通
+                        </a>
+                        <span class="recent-date">2025-06-06</span>
+                    </div>
+                
+                    <div class="recent-item">
+                        <a href="/2025/06/05/hello-world/" class="recent-title">
+                            欢迎来到我的博客
+                        </a>
+                        <span class="recent-date">2025-06-05</span>
+                    </div>
+                
+                    <div class="recent-item">
+                        <a href="/2025/06/05/java-backend-learning-path/" class="recent-title">
+                            Java后端学习路线
+                        </a>
+                        <span class="recent-date">2025-06-05</span>
+                    </div>
+                
+            
+        </div>
+    </div>
+</div> 
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Tianyu の 个人博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;TianYu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    <script src="/js/blog-effects.js"></script>
+    <script src="/js/white-canvas-nest.js"></script>
+    
+        
+            <script src="/js/custom.js"></script>
+        
+            <script src="/js/blog-effects.js"></script>
+        
+            <script src="/js/particles-effect.js"></script>
+        
+            <script src="/js/scroll-header.js"></script>
+        
+            <script src="/js/img-lightbox.js"></script>
+        
+            <script src="/js/back-to-top.js"></script>
+        
+            <script src="/js/tag-cloud.js"></script>
+        
+            <script src="/js/music-player.js"></script>
+        
+            <script src="/js/effects-loader.js"></script>
+        
+            <script src="/js/toc-helper.js"></script>
+        
+    
+    
+    
+
+
+
+
+    
+</body>
+</html>

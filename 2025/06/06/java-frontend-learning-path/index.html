@@ -1,0 +1,531 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>Java前端学习路径：从入门到精通 | Tianyu の 个人博客</title>
+    <meta name="author" content="TianYu" />
+    <meta name="description" content="这是一个使用Hexo框架和ParticleX主题的个人博客" />
+    <meta name="keywords" content="博客, 技术, 编程, 生活" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="/css/friends.css">
+        
+            <link rel="stylesheet" href="/css/collections.css">
+        
+            <link rel="stylesheet" href="/css/categories-tags.css">
+        
+            <link rel="stylesheet" href="/css/custom.css">
+        
+            <link rel="stylesheet" href="/css/sidebar.css">
+        
+            <link rel="stylesheet" href="/css/toc.css">
+        
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>TIANYU の 个人博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/friends">
+            <i class="fa-solid fa-link fa-fw"></i>
+            <span>&ensp;Friends</span>
+        </a>
+        
+        <a href="/collections">
+            <i class="fa-solid fa-folder-open fa-fw"></i>
+            <span>&ensp;Collections</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;TIANYU の 个人博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/friends">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-link fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Friends</div>
+                    </div>
+                </a>
+                
+                <a href="/collections">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-folder-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Collections</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article-container">
+    <div class="article">
+        <div>
+            <h1>Java前端学习路径：从入门到精通</h1>
+        </div>
+        <div class="info">
+            <span class="date">
+                <span class="icon">
+                    <i class="fa-solid fa-calendar fa-fw"></i>
+                </span>
+                2025/6/6
+            </span>
+            
+            <span class="category">
+                <a href="/categories/java/">
+                    <span class="icon">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </span>
+                    java
+                </a>
+            </span>
+            
+            
+            <span class="tags">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                
+                
+                <span class="tag">
+                    
+                    <a href="/tags/%E7%BC%96%E7%A8%8B/" style="color: #ff7d73">
+                        编程
+                    </a>
+                </span>
+                
+                <span class="tag">
+                    
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="color: #03a9f4">
+                        学习
+                    </a>
+                </span>
+                
+            </span>
+            
+        </div>
+        
+        <div class="content" v-pre>
+            <h1 id="Java前端学习路径：从入门到精通"><a href="#Java前端学习路径：从入门到精通" class="headerlink" title="Java前端学习路径：从入门到精通"></a>Java前端学习路径：从入门到精通</h1><p>在当今的Web开发领域，Java开发者也需要掌握前端技术栈才能成为全栈开发工程师。本文将为您提供一条清晰的学习路径，帮助Java开发者系统地学习前端技术，实现从后端到全栈的技术跨越。</p>
+<h2 id="第一阶段：前端基础知识"><a href="#第一阶段：前端基础知识" class="headerlink" title="第一阶段：前端基础知识"></a>第一阶段：前端基础知识</h2><h3 id="HTML5基础"><a href="#HTML5基础" class="headerlink" title="HTML5基础"></a>HTML5基础</h3><ul>
+<li>文档结构和语义化标签</li>
+<li>表单和输入控件</li>
+<li>多媒体元素</li>
+<li>本地存储</li>
+<li><strong>推荐资源</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vs411M7aT">HTML5入门到精通</a></li>
+</ul>
+<h3 id="CSS3基础"><a href="#CSS3基础" class="headerlink" title="CSS3基础"></a>CSS3基础</h3><ul>
+<li>选择器和样式规则</li>
+<li>盒模型和布局</li>
+<li>响应式设计</li>
+<li>动画和过渡</li>
+<li><strong>推荐资源</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1YJ411a7dy">CSS3详细教程</a></li>
+</ul>
+<h3 id="JavaScript基础"><a href="#JavaScript基础" class="headerlink" title="JavaScript基础"></a>JavaScript基础</h3><ul>
+<li>语法和数据类型</li>
+<li>函数和对象</li>
+<li>DOM操作</li>
+<li>事件处理</li>
+<li>异步编程</li>
+<li><strong>推荐资源</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1YW411T7GX">JavaScript零基础入门教程</a></li>
+</ul>
+<h2 id="第二阶段：现代前端框架"><a href="#第二阶段：现代前端框架" class="headerlink" title="第二阶段：现代前端框架"></a>第二阶段：现代前端框架</h2><h3 id="React框架"><a href="#React框架" class="headerlink" title="React框架"></a>React框架</h3><ul>
+<li>JSX语法</li>
+<li>组件和Props</li>
+<li>State和生命周期</li>
+<li>Hooks</li>
+<li>路由管理（React Router）</li>
+<li>状态管理（Redux&#x2F;MobX）</li>
+<li><strong>推荐资源</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wy4y1D7JT">React全家桶实战教程</a></li>
+</ul>
+<h3 id="Vue-js框架"><a href="#Vue-js框架" class="headerlink" title="Vue.js框架"></a>Vue.js框架</h3><ul>
+<li>模板语法</li>
+<li>组件系统</li>
+<li>响应式原理</li>
+<li>Vue Router</li>
+<li>Vuex状态管理</li>
+<li><strong>推荐资源</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Zy4y1K7SH">Vue.js从入门到实战</a></li>
+</ul>
+<h3 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h3><ul>
+<li>类型系统</li>
+<li>接口和类</li>
+<li>泛型</li>
+<li>装饰器</li>
+<li>类型定义文件</li>
+<li><strong>推荐资源</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1H44y157gq">TypeScript入门指南</a></li>
+</ul>
+<h2 id="第三阶段：Java与前端集成"><a href="#第三阶段：Java与前端集成" class="headerlink" title="第三阶段：Java与前端集成"></a>第三阶段：Java与前端集成</h2><h3 id="Spring-Boot与前端集成"><a href="#Spring-Boot与前端集成" class="headerlink" title="Spring Boot与前端集成"></a>Spring Boot与前端集成</h3><ul>
+<li>Thymeleaf模板引擎</li>
+<li>Spring MVC与RESTful API</li>
+<li>静态资源处理</li>
+<li><strong>推荐资源</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1gE411j7T6">Spring Boot集成前端框架实战</a></li>
+</ul>
+<h3 id="前后端分离架构"><a href="#前后端分离架构" class="headerlink" title="前后端分离架构"></a>前后端分离架构</h3><ul>
+<li>RESTful API设计</li>
+<li>跨域资源共享(CORS)</li>
+<li>JWT认证</li>
+<li>接口文档（Swagger）</li>
+<li><strong>推荐资源</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1WZ4y1P7Bp">Java前后端分离项目实战</a></li>
+</ul>
+<h2 id="第四阶段：高级前端技术"><a href="#第四阶段：高级前端技术" class="headerlink" title="第四阶段：高级前端技术"></a>第四阶段：高级前端技术</h2><h3 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h3><ul>
+<li>Webpack</li>
+<li>Vite</li>
+<li>Babel</li>
+<li><strong>推荐资源</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iv411N7jg">前端工程化详解</a></li>
+</ul>
+<h3 id="测试与调试"><a href="#测试与调试" class="headerlink" title="测试与调试"></a>测试与调试</h3><ul>
+<li>Jest单元测试</li>
+<li>E2E测试</li>
+<li>Chrome DevTools高级调试</li>
+<li><strong>推荐资源</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pK4y1b7Ys">前端测试实战教程</a></li>
+</ul>
+<h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><ul>
+<li>懒加载与代码分割</li>
+<li>网络性能优化</li>
+<li>渲染性能优化</li>
+<li><strong>推荐资源</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1gt4y1Q7A4">前端性能优化实战</a></li>
+</ul>
+<h2 id="第五阶段：前端架构与设计模式"><a href="#第五阶段：前端架构与设计模式" class="headerlink" title="第五阶段：前端架构与设计模式"></a>第五阶段：前端架构与设计模式</h2><h3 id="前端架构设计"><a href="#前端架构设计" class="headerlink" title="前端架构设计"></a>前端架构设计</h3><ul>
+<li>组件设计原则</li>
+<li>状态管理策略</li>
+<li>微前端架构</li>
+<li><strong>推荐资源</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1X7411F7ZL">大型前端项目架构设计</a></li>
+</ul>
+<h3 id="UI-UX设计原则"><a href="#UI-UX设计原则" class="headerlink" title="UI&#x2F;UX设计原则"></a>UI&#x2F;UX设计原则</h3><ul>
+<li>用户体验设计</li>
+<li>Material Design</li>
+<li>Ant Design</li>
+<li><strong>推荐资源</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Xh411V7w2">前端UI设计实战</a></li>
+</ul>
+<h2 id="学习建议"><a href="#学习建议" class="headerlink" title="学习建议"></a>学习建议</h2><ol>
+<li><strong>循序渐进</strong>：按照路径顺序学习，打好基础再学习框架。</li>
+<li><strong>实践为主</strong>：每学习一个技术点，立即动手实践。</li>
+<li><strong>项目驱动</strong>：通过完整项目巩固所学知识。</li>
+<li><strong>持续学习</strong>：前端技术更新快，保持关注新技术。</li>
+<li><strong>交叉运用</strong>：尝试将Java后端与不同前端框架结合。</li>
+</ol>
+<p>通过这条学习路径，Java开发者可以系统地掌握前端技术栈，实现从后端到全栈的技术跨越。无论是提升个人竞争力还是满足项目需求，掌握前端技能都将为Java开发者带来更多职业机会和技术视野。</p>
+<p>祝您学习愉快，早日成为优秀的全栈工程师！</p>
+
+        </div>
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    
+    <!-- 侧边栏 -->
+    
+
+<div id="sidebar">
+    
+        
+<div id="article-toc" class="article-toc">
+    <div class="toc-title">
+        <i class="fa-solid fa-list fa-fw"></i>
+        <span>目录</span>
+    </div>
+    <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A"><span class="toc-text">Java前端学习路径：从入门到精通</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-text">第一阶段：前端基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML5%E5%9F%BA%E7%A1%80"><span class="toc-text">HTML5基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS3%E5%9F%BA%E7%A1%80"><span class="toc-text">CSS3基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%9F%BA%E7%A1%80"><span class="toc-text">JavaScript基础</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9A%E7%8E%B0%E4%BB%A3%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6"><span class="toc-text">第二阶段：现代前端框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#React%E6%A1%86%E6%9E%B6"><span class="toc-text">React框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue-js%E6%A1%86%E6%9E%B6"><span class="toc-text">Vue.js框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TypeScript"><span class="toc-text">TypeScript</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%EF%BC%9AJava%E4%B8%8E%E5%89%8D%E7%AB%AF%E9%9B%86%E6%88%90"><span class="toc-text">第三阶段：Java与前端集成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring-Boot%E4%B8%8E%E5%89%8D%E7%AB%AF%E9%9B%86%E6%88%90"><span class="toc-text">Spring Boot与前端集成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E6%9E%B6%E6%9E%84"><span class="toc-text">前后端分离架构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%EF%BC%9A%E9%AB%98%E7%BA%A7%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF"><span class="toc-text">第四阶段：高级前端技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7"><span class="toc-text">构建工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E4%B8%8E%E8%B0%83%E8%AF%95"><span class="toc-text">测试与调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-text">性能优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84%E4%B8%8E%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">第五阶段：前端架构与设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-text">前端架构设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UI-UX%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="toc-text">UI&#x2F;UX设计原则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E5%BB%BA%E8%AE%AE"><span class="toc-text">学习建议</span></a></li></ol></li></ol>
+    </div>
+</div>
+ 
+    
+
+    <div class="sidebar-box">
+        <div class="sidebar-title">
+            <i class="fa-solid fa-folder-open fa-fw"></i>
+            <span>分类</span>
+        </div>
+        <div class="sidebar-content categories-list">
+            
+                
+                    <div class="category-item">
+                        <a href="/categories/java/">
+                            <span class="category-name">java</span>
+                            <span class="category-count">2</span>
+                        </a>
+                    </div>
+                
+                    <div class="category-item">
+                        <a href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">
+                            <span class="category-name">生活随笔</span>
+                            <span class="category-count">1</span>
+                        </a>
+                    </div>
+                
+            
+        </div>
+    </div>
+
+    <div class="sidebar-box">
+        <div class="sidebar-title">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>标签</span>
+        </div>
+        <div class="sidebar-content tags-cloud">
+            
+                
+                    <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 17px;">
+                        编程(2)
+                    </a>
+                
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 17px;">
+                        学习(2)
+                    </a>
+                
+                    <a href="/tags/Hexo/" style="font-size: 18px;">
+                        Hexo(1)
+                    </a>
+                
+                    <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 14px;">
+                        博客(1)
+                    </a>
+                
+                    <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 13px;">
+                        教程(1)
+                    </a>
+                
+            
+        </div>
+    </div>
+
+    <div class="sidebar-box">
+        <div class="sidebar-title">
+            <i class="fa-solid fa-clock fa-fw"></i>
+            <span>最近文章</span>
+        </div>
+        <div class="sidebar-content recent-posts">
+            
+                
+                    <div class="recent-item">
+                        <a href="/2025/06/06/java-frontend-learning-path/" class="recent-title">
+                            Java前端学习路径：从入门到精通
+                        </a>
+                        <span class="recent-date">2025-06-06</span>
+                    </div>
+                
+                    <div class="recent-item">
+                        <a href="/2025/06/05/hello-world/" class="recent-title">
+                            欢迎来到我的博客
+                        </a>
+                        <span class="recent-date">2025-06-05</span>
+                    </div>
+                
+                    <div class="recent-item">
+                        <a href="/2025/06/05/java-backend-learning-path/" class="recent-title">
+                            Java后端学习路线
+                        </a>
+                        <span class="recent-date">2025-06-05</span>
+                    </div>
+                
+            
+        </div>
+    </div>
+</div> 
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Tianyu の 个人博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;TianYu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    <script src="/js/blog-effects.js"></script>
+    <script src="/js/white-canvas-nest.js"></script>
+    
+        
+            <script src="/js/custom.js"></script>
+        
+            <script src="/js/blog-effects.js"></script>
+        
+            <script src="/js/particles-effect.js"></script>
+        
+            <script src="/js/scroll-header.js"></script>
+        
+            <script src="/js/img-lightbox.js"></script>
+        
+            <script src="/js/back-to-top.js"></script>
+        
+            <script src="/js/tag-cloud.js"></script>
+        
+            <script src="/js/music-player.js"></script>
+        
+            <script src="/js/effects-loader.js"></script>
+        
+            <script src="/js/toc-helper.js"></script>
+        
+    
+    
+    
+
+
+
+
+    
+</body>
+</html>

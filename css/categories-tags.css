@@ -1,0 +1,356 @@
+/* 分类和标签页面美化 */
+
+/* ===== 搜索栏样式修复 ===== */
+#search-bar {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(80, 80, 80, 0.2);
+    background: rgba(40, 40, 40, 0.7);
+    color: #e0e0e0;
+    font-size: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 100;
+}
+
+#search-bar:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(100, 181, 246, 0.3);
+}
+
+/* ===== 整体容器样式 ===== */
+#archives {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    background: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(80, 80, 80, 0.2);
+}
+
+/* ===== 标签云效果 ===== */
+.categories-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+    position: relative;
+    padding: 20px;
+    background: rgba(40, 40, 40, 0.5);
+    border-radius: 12px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.categories-tags::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--accent-primary);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+body[class*="categories"] .categories-tags::before {
+    content: "所有分类";
+}
+
+body[class*="tags"] .categories-tags::before {
+    content: "所有标签";
+}
+
+.categories-tags span {
+    margin: 8px;
+    transform-origin: center;
+    transition: all 0.3s ease;
+}
+
+.categories-tags span a {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.categories-tags span a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-100%) rotate(45deg);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.categories-tags span a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.categories-tags span a:hover::before {
+    transform: translateX(100%) rotate(45deg);
+}
+
+.categories-tags span a .icon {
+    margin-right: 8px;
+}
+
+/* ===== 时间轴样式 ===== */
+.timeline {
+    position: relative;
+    margin: 30px 0;
+    padding-left: 30px;
+}
+
+.timeline-tail {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, 
+        var(--accent-primary) 0%, 
+        rgba(100, 181, 246, 0.5) 100%);
+    border-radius: 1px;
+}
+
+.timeline-content {
+    position: relative;
+    margin-left: 20px;
+    padding: 20px;
+    background: rgba(40, 40, 40, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    border-left: 3px solid var(--accent-primary);
+    transition: all 0.3s ease;
+}
+
+.timeline-content::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -13px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    border: 4px solid var(--bg-primary);
+    box-shadow: 0 0 0 3px rgba(100, 181, 246, 0.3);
+}
+
+.timeline-content:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-content .item-time {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    padding: 5px 15px;
+    background: var(--accent-primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 20px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-content h3 {
+    margin: 15px 0 20px;
+    color: var(--text-primary) !important;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.timeline-content:hover h3 {
+    color: var(--accent-primary) !important;
+}
+
+.timeline-content .info {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed rgba(100, 100, 100, 0.3);
+}
+
+.timeline-content .info span.category {
+    margin-right: 15px;
+}
+
+.timeline-content .info span.category a {
+    color: var(--text-secondary) !important;
+    transition: all 0.3s ease;
+    font-size: 13px;
+}
+
+.timeline-content .info span.category a:hover {
+    color: var(--accent-secondary) !important;
+}
+
+.timeline-content .info span.tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.timeline-content .info span.tag {
+    margin-right: 10px;
+    font-size: 13px;
+}
+
+.timeline-content .info span.tag a {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.timeline-content .info span.tag a:hover {
+    opacity: 0.8;
+}
+
+/* ===== 空状态样式 ===== */
+#archives .empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: var(--text-secondary);
+}
+
+#archives .empty-state .icon {
+    font-size: 60px;
+    color: rgba(100, 181, 246, 0.2);
+    margin-bottom: 20px;
+}
+
+#archives .empty-state h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+
+#archives .empty-state p {
+    font-size: 16px;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ===== 响应式设计 ===== */
+@media (max-width: 768px) {
+    #archives {
+        padding: 20px;
+    }
+    
+    .categories-tags {
+        padding: 15px 10px;
+        margin-bottom: 30px;
+    }
+    
+    .categories-tags span a {
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+    
+    .timeline {
+        padding-left: 20px;
+        margin: 25px 0;
+    }
+    
+    .timeline-content {
+        margin-left: 15px;
+        padding: 15px;
+    }
+    
+    .timeline-content::before {
+        width: 15px;
+        height: 15px;
+        left: -10px;
+    }
+    
+    .timeline-content .item-time {
+        position: relative;
+        top: 0;
+        right: 0;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+    
+    .timeline-content h3 {
+        margin: 10px 0 15px;
+        font-size: 16px;
+    }
+}
+
+/* ===== 动画效果 ===== */
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 为每个元素添加浮现动画 */
+.timeline {
+    opacity: 0;
+    animation: floatUp 0.6s ease forwards;
+}
+
+.timeline:nth-child(1) { animation-delay: 0.1s; }
+.timeline:nth-child(2) { animation-delay: 0.2s; }
+.timeline:nth-child(3) { animation-delay: 0.3s; }
+.timeline:nth-child(4) { animation-delay: 0.4s; }
+.timeline:nth-child(5) { animation-delay: 0.5s; }
+.timeline:nth-child(6) { animation-delay: 0.6s; }
+.timeline:nth-child(7) { animation-delay: 0.7s; }
+.timeline:nth-child(8) { animation-delay: 0.8s; }
+.timeline:nth-child(9) { animation-delay: 0.9s; }
+.timeline:nth-child(10) { animation-delay: 1.0s; }
+
+/* 标签云逐个呈现动画 */
+.categories-tags span {
+    opacity: 0;
+    animation: floatUp 0.5s ease forwards;
+}
+
+.categories-tags span:nth-child(1) { animation-delay: 0.05s; }
+.categories-tags span:nth-child(2) { animation-delay: 0.1s; }
+.categories-tags span:nth-child(3) { animation-delay: 0.15s; }
+.categories-tags span:nth-child(4) { animation-delay: 0.2s; }
+.categories-tags span:nth-child(5) { animation-delay: 0.25s; }
+.categories-tags span:nth-child(6) { animation-delay: 0.3s; }
+.categories-tags span:nth-child(7) { animation-delay: 0.35s; }
+.categories-tags span:nth-child(8) { animation-delay: 0.4s; }
+.categories-tags span:nth-child(9) { animation-delay: 0.45s; }
+.categories-tags span:nth-child(10) { animation-delay: 0.5s; }
+.categories-tags span:nth-child(11) { animation-delay: 0.55s; }
+.categories-tags span:nth-child(12) { animation-delay: 0.6s; }
+.categories-tags span:nth-child(13) { animation-delay: 0.65s; }
+.categories-tags span:nth-child(14) { animation-delay: 0.7s; }
+.categories-tags span:nth-child(15) { animation-delay: 0.75s; } 
