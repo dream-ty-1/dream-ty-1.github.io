@@ -1,0 +1,93 @@
+/**
+ * 移动端触摸样式
+ */
+
+/* 触摸反馈基础样式 */
+.touch-active {
+  transition: transform 0.1s ease, opacity 0.1s ease, background-color 0.1s ease !important;
+  opacity: 0.8 !important;
+}
+
+/* 链接触摸效果 */
+a.touch-active {
+  opacity: 0.7 !important;
+}
+
+/* 按钮触摸效果 */
+button.touch-active {
+  transform: scale(0.97) !important;
+  opacity: 0.9 !important;
+}
+
+/* 文章卡片触摸效果 */
+.post.touch-active {
+  transform: scale(0.97) !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 分类项触摸效果 */
+.category-item a.touch-active {
+  background: rgba(100, 181, 246, 0.15) !important;
+  transform: translateX(3px) !important;
+}
+
+/* 标签触摸效果 */
+.tag a.touch-active {
+  transform: translateY(-2px) !important;
+  background: rgba(100, 181, 246, 0.15) !important;
+}
+
+/* 页码触摸效果 */
+.page-num.touch-active {
+  transform: scale(0.9) !important;
+  background: rgba(100, 181, 246, 0.2) !important;
+}
+
+/* 移动设备专用样式 */
+.mobile-device .posts-grid .post:hover {
+  transform: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-device #menu #mobile-menu .items a:hover .item {
+  background-color: transparent;
+}
+
+/* 点击反馈替代悬停效果 */
+@media (max-width: 768px) {
+  /* 取消悬停变换效果 */
+  a:hover, 
+  button:hover,
+  .post:hover,
+  .category-item a:hover,
+  .tag a:hover,
+  .page-num:hover {
+    transform: none !important;
+  }
+  
+  /* 侧边栏标题折叠指示器 */
+  .sidebar-title {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  
+  /* 适应触摸的链接尺寸 */
+  .sidebar-box a,
+  .tag a,
+  .category-item a,
+  .post-tags a {
+    padding: 8px 12px !important;
+    margin: 5px !important;
+  }
+  
+  /* 增大点击区域 */
+  .go-post,
+  .pagination a,
+  #menu #mobile-menu .title,
+  #menu #mobile-menu .items .item {
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+} 
