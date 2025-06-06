@@ -117,4 +117,167 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+});
+
+// 目录辅助功能：平滑滚动和高亮当前阅读位置
+document.addEventListener('DOMContentLoaded', function() {
+    // 检查是否存在目录元素
+    const tocElement = document.querySelector('.article-toc');
+    if (!tocElement) return;
+    
+    const tocLinks = tocElement.querySelectorAll('a');
+    const headings = document.querySelectorAll('.content h1, .content h2, .content h3, .content h4, .content h5, .content h6');
+    const headerHeight = 60; // 顶部导航栏高度，根据实际情况调整
+    
+    // 为目录链接添加平滑滚动效果
+    tocLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // 获取目标标题的ID
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                // 计算目标位置，考虑顶部导航栏的高度
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                
+                // 平滑滚动到目标位置
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // 更新URL，但不触发页面跳转
+                history.pushState(null, null, `#${targetId}`);
+            }
+        });
+    });
+    
+    // 监听滚动事件，高亮当前阅读位置
+    let activeLink = null;
+    
+    function highlightTocLink() {
+        // 获取当前滚动位置
+        const scrollPosition = window.scrollY + headerHeight + 100; // 添加一些偏移量以提前高亮
+        
+        // 找到当前可见的最上面的标题
+        let currentHeading = null;
+        
+        for (const heading of headings) {
+            const headingPosition = heading.offsetTop;
+            
+            if (headingPosition <= scrollPosition) {
+                currentHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (currentHeading) {
+            // 找到对应的目录链接
+            const headingId = currentHeading.id;
+            const correspondingLink = document.querySelector(`.article-toc a[href="#${headingId}"]`);
+            
+            if (correspondingLink && activeLink !== correspondingLink) {
+                // 移除之前的活动状态
+                if (activeLink) {
+                    activeLink.classList.remove('active');
+                }
+                
+                // 添加新的活动状态
+                correspondingLink.classList.add('active');
+                activeLink = correspondingLink;
+                
+                // 确保当前活动链接在目录可视区域内
+                const tocContent = document.querySelector('.toc-content');
+                if (tocContent) {
+                    const linkRect = correspondingLink.getBoundingClientRect();
+                    const tocRect = tocContent.getBoundingClientRect();
+                    
+                    if (linkRect.top < tocRect.top || linkRect.bottom > tocRect.bottom) {
+                        correspondingLink.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }
+                }
+            }
+        }
+    }
+    
+    // 页面加载时和滚动时都执行高亮
+    highlightTocLink();
+    window.addEventListener('scroll', highlightTocLink);
+    
+    // 添加目录固定效果
+    const articleContainer = document.querySelector('.article-container');
+    const article = document.querySelector('.article');
+    
+    if (articleContainer && article) {
+        // 计算目录的初始位置
+        const articleRect = article.getBoundingClientRect();
+        const tocRect = tocElement.getBoundingClientRect();
+        
+        // 设置目录的固定位置
+        tocElement.style.position = 'sticky';
+        tocElement.style.top = `${headerHeight + 20}px`; // 顶部导航栏高度 + 一些间距
+    }
+    
+    // 添加目录样式
+    const style = document.createElement('style');
+    style.textContent = `
+        .article-toc {
+            background: rgba(30, 30, 30, 0.6);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        
+        .article-toc .toc-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #66afef;
+            display: flex;
+            align-items: center;
+        }
+        
+        .article-toc .toc-title i {
+            margin-right: 8px;
+        }
+        
+        .article-toc .toc-content {
+            font-size: 0.9rem;
+        }
+        
+        .article-toc .toc-content ol {
+            padding-left: 20px;
+            margin: 5px 0;
+        }
+        
+        .article-toc .toc-content a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 3px 0;
+            border-left: 2px solid transparent;
+            padding-left: 10px;
+            margin-left: -10px;
+        }
+        
+        .article-toc .toc-content a:hover {
+            color: #66afef;
+        }
+        
+        .article-toc .toc-content a.active {
+            color: #66afef;
+            border-left: 2px solid #66afef;
+            font-weight: bold;
+        }
+    `;
+    document.head.appendChild(style);
 }); 
