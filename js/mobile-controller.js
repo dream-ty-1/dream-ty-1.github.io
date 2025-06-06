@@ -9,6 +9,9 @@
     const deviceInfo = event.detail;
     console.log('移动端模式已激活', deviceInfo);
     
+    // 添加顶部标题栏
+    addMobileHeader();
+    
     // 初始化移动端导航
     initMobileNavigation();
     
@@ -23,7 +26,41 @@
     
     // 为长页面添加返回顶部按钮
     addBackToTopButton();
+    
+    // 添加页面过渡效果
+    addPageTransitionEffect();
   });
+  
+  /**
+   * 添加移动端顶部标题栏
+   */
+  function addMobileHeader() {
+    // 创建顶部标题栏
+    const mobileHeader = document.createElement('div');
+    mobileHeader.className = 'mobile-header';
+    
+    // 获取网站标题
+    let siteTitle = document.title;
+    // 如果是文章页面，显示文章标题
+    const articleTitle = document.querySelector('.article-title');
+    if (articleTitle) {
+      siteTitle = articleTitle.textContent;
+    } else if (siteTitle.includes(' | ')) {
+      // 如果标题包含分隔符，只取前面部分
+      siteTitle = siteTitle.split(' | ')[0];
+    }
+    
+    // 创建标题元素
+    const titleElement = document.createElement('div');
+    titleElement.className = 'site-title';
+    titleElement.textContent = siteTitle;
+    
+    // 添加标题到标题栏
+    mobileHeader.appendChild(titleElement);
+    
+    // 添加到页面
+    document.body.insertBefore(mobileHeader, document.body.firstChild);
+  }
   
   /**
    * 初始化移动端底部导航
@@ -38,6 +75,7 @@
       { icon: 'fa-solid fa-home', text: '首页', link: '/' },
       { icon: 'fa-solid fa-list', text: '文章', link: '/archives/' },
       { icon: 'fa-solid fa-tags', text: '标签', link: '/tags/' },
+      { icon: 'fa-solid fa-search', text: '搜索', link: '#', action: toggleSearch },
       { icon: 'fa-solid fa-user', text: '关于', link: '/about/' }
     ];
     
@@ -52,8 +90,16 @@
       
       // 检查是否为当前页面
       if (currentPath === item.link || 
-          (currentPath !== '/' && item.link !== '/' && currentPath.startsWith(item.link))) {
+          (currentPath !== '/' && item.link !== '/' && item.link !== '#' && currentPath.startsWith(item.link))) {
         link.classList.add('active');
+      }
+      
+      // 如果有自定义操作，添加点击事件
+      if (item.action) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          item.action();
+        });
       }
       
       mobileNav.appendChild(link);
@@ -61,6 +107,246 @@
     
     // 添加到页面
     document.body.appendChild(mobileNav);
+    
+    // 创建搜索面板
+    createSearchPanel();
+  }
+  
+  /**
+   * 创建搜索面板
+   */
+  function createSearchPanel() {
+    // 创建搜索面板
+    const searchPanel = document.createElement('div');
+    searchPanel.className = 'mobile-search-panel';
+    searchPanel.style.position = 'fixed';
+    searchPanel.style.top = '0';
+    searchPanel.style.left = '0';
+    searchPanel.style.width = '100%';
+    searchPanel.style.height = '100%';
+    searchPanel.style.backgroundColor = 'rgba(25, 25, 25, 0.95)';
+    searchPanel.style.zIndex = '1001';
+    searchPanel.style.display = 'none';
+    searchPanel.style.flexDirection = 'column';
+    searchPanel.style.padding = '70px 20px 20px';
+    
+    // 创建搜索框
+    const searchBox = document.createElement('div');
+    searchBox.className = 'search-box';
+    searchBox.style.position = 'relative';
+    searchBox.style.marginBottom = '20px';
+    
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.placeholder = '搜索文章...';
+    searchInput.style.width = '100%';
+    searchInput.style.padding = '10px 40px 10px 15px';
+    searchInput.style.borderRadius = '24px';
+    searchInput.style.border = 'none';
+    searchInput.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+    searchInput.style.color = '#fff';
+    searchInput.style.fontSize = '16px';
+    
+    const searchIcon = document.createElement('i');
+    searchIcon.className = 'fa-solid fa-search';
+    searchIcon.style.position = 'absolute';
+    searchIcon.style.right = '15px';
+    searchIcon.style.top = '50%';
+    searchIcon.style.transform = 'translateY(-50%)';
+    searchIcon.style.color = '#aaa';
+    
+    searchBox.appendChild(searchInput);
+    searchBox.appendChild(searchIcon);
+    
+    // 创建关闭按钮
+    const closeBtn = document.createElement('div');
+    closeBtn.className = 'search-close-btn';
+    closeBtn.innerHTML = '<i class="fa-solid fa-times"></i>';
+    closeBtn.style.position = 'absolute';
+    closeBtn.style.top = '20px';
+    closeBtn.style.right = '20px';
+    closeBtn.style.color = '#fff';
+    closeBtn.style.fontSize = '24px';
+    closeBtn.style.cursor = 'pointer';
+    closeBtn.style.zIndex = '1002';
+    
+    closeBtn.addEventListener('click', function() {
+      searchPanel.style.display = 'none';
+      document.body.style.overflow = '';
+    });
+    
+    // 创建搜索结果容器
+    const searchResults = document.createElement('div');
+    searchResults.className = 'search-results';
+    searchResults.style.flex = '1';
+    searchResults.style.overflowY = 'auto';
+    searchResults.style.color = '#fff';
+    
+    // 添加到搜索面板
+    searchPanel.appendChild(closeBtn);
+    searchPanel.appendChild(searchBox);
+    searchPanel.appendChild(searchResults);
+    
+    // 添加到页面
+    document.body.appendChild(searchPanel);
+    
+    // 添加搜索功能
+    searchInput.addEventListener('input', debounce(function() {
+      const query = this.value.trim();
+      if (query.length < 2) {
+        searchResults.innerHTML = '<div style="text-align:center;color:#aaa;margin-top:30px;">请输入至少2个字符</div>';
+        return;
+      }
+      
+      searchResults.innerHTML = '<div style="text-align:center;color:#aaa;margin-top:30px;">搜索中...</div>';
+      
+      // 这里应该调用实际的搜索API或本地搜索逻辑
+      // 为了演示，我们使用一个模拟的搜索结果
+      setTimeout(function() {
+        performSearch(query, searchResults);
+      }, 300);
+    }, 300));
+  }
+  
+  /**
+   * 执行搜索
+   */
+  function performSearch(query, resultsContainer) {
+    // 检查是否存在本地搜索数据
+    if (window.searchData) {
+      const results = searchLocalData(query, window.searchData);
+      displaySearchResults(results, resultsContainer);
+    } else {
+      // 尝试加载搜索数据
+      loadSearchData(function(data) {
+        if (data) {
+          window.searchData = data;
+          const results = searchLocalData(query, data);
+          displaySearchResults(results, resultsContainer);
+        } else {
+          resultsContainer.innerHTML = '<div style="text-align:center;color:#aaa;margin-top:30px;">搜索数据加载失败</div>';
+        }
+      });
+    }
+  }
+  
+  /**
+   * 加载搜索数据
+   */
+  function loadSearchData(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '/search.json');
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        try {
+          const data = JSON.parse(xhr.responseText);
+          callback(data);
+        } catch (e) {
+          console.error('解析搜索数据失败:', e);
+          callback(null);
+        }
+      } else {
+        console.error('加载搜索数据失败:', xhr.status);
+        callback(null);
+      }
+    };
+    xhr.onerror = function() {
+      console.error('请求搜索数据失败');
+      callback(null);
+    };
+    xhr.send();
+  }
+  
+  /**
+   * 在本地数据中搜索
+   */
+  function searchLocalData(query, data) {
+    query = query.toLowerCase();
+    const results = [];
+    
+    data.forEach(function(item) {
+      const title = item.title.toLowerCase();
+      const content = item.content ? item.content.toLowerCase() : '';
+      
+      if (title.includes(query) || content.includes(query)) {
+        results.push(item);
+      }
+    });
+    
+    return results;
+  }
+  
+  /**
+   * 显示搜索结果
+   */
+  function displaySearchResults(results, container) {
+    if (results.length === 0) {
+      container.innerHTML = '<div style="text-align:center;color:#aaa;margin-top:30px;">未找到相关结果</div>';
+      return;
+    }
+    
+    let html = '';
+    results.forEach(function(item) {
+      html += `
+        <div class="search-result-item" style="margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid rgba(255,255,255,0.1);">
+          <a href="${item.url}" style="color:#66afef;font-size:18px;font-weight:bold;text-decoration:none;display:block;margin-bottom:8px;">${item.title}</a>
+          <div style="color:#aaa;font-size:14px;margin-bottom:5px;">
+            <i class="fa-solid fa-calendar"></i> ${item.date || '未知日期'}
+            ${item.categories ? `<span style="margin-left:10px;"><i class="fa-solid fa-folder"></i> ${item.categories}</span>` : ''}
+          </div>
+          <div style="color:#ddd;font-size:14px;line-height:1.5;">${item.content ? truncateContent(item.content, 100) : '无内容预览'}</div>
+        </div>
+      `;
+    });
+    
+    container.innerHTML = html;
+    
+    // 为搜索结果添加点击事件
+    const resultItems = container.querySelectorAll('.search-result-item a');
+    resultItems.forEach(function(item) {
+      item.addEventListener('click', function() {
+        // 关闭搜索面板
+        document.querySelector('.mobile-search-panel').style.display = 'none';
+        document.body.style.overflow = '';
+      });
+    });
+  }
+  
+  /**
+   * 截断内容
+   */
+  function truncateContent(content, length) {
+    if (content.length <= length) return content;
+    return content.substr(0, length) + '...';
+  }
+  
+  /**
+   * 切换搜索面板显示
+   */
+  function toggleSearch() {
+    const searchPanel = document.querySelector('.mobile-search-panel');
+    if (searchPanel.style.display === 'none' || searchPanel.style.display === '') {
+      searchPanel.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      searchPanel.querySelector('input').focus();
+    } else {
+      searchPanel.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  }
+  
+  /**
+   * 防抖函数
+   */
+  function debounce(func, wait) {
+    let timeout;
+    return function() {
+      const context = this, args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        func.apply(context, args);
+      }, wait);
+    };
   }
   
   /**
@@ -200,6 +486,7 @@
         viewerImg.style.maxWidth = '90vw';
         viewerImg.style.maxHeight = '80vh';
         viewerImg.style.objectFit = 'contain';
+        viewerImg.style.transition = 'transform 0.3s ease';
         
         // 添加关闭按钮
         const closeBtn = document.createElement('div');
@@ -210,16 +497,35 @@
         closeBtn.style.color = 'white';
         closeBtn.style.fontSize = '24px';
         closeBtn.style.cursor = 'pointer';
+        closeBtn.style.zIndex = '10000';
         
         // 关闭查看器的事件
         closeBtn.addEventListener('click', function() {
           document.body.removeChild(viewer);
+          document.body.style.overflow = '';
         });
         
         // 点击背景也关闭
         viewer.addEventListener('click', function(e) {
           if (e.target === viewer) {
             document.body.removeChild(viewer);
+            document.body.style.overflow = '';
+          }
+        });
+        
+        // 添加缩放功能
+        let scale = 1;
+        let currentScale = 1;
+        
+        viewerImg.addEventListener('click', function(e) {
+          e.stopPropagation();
+          
+          if (currentScale === 1) {
+            currentScale = 2;
+            this.style.transform = 'scale(2)';
+          } else {
+            currentScale = 1;
+            this.style.transform = 'scale(1)';
           }
         });
         
@@ -227,6 +533,9 @@
         viewer.appendChild(viewerImg);
         viewer.appendChild(closeBtn);
         document.body.appendChild(viewer);
+        
+        // 锁定背景滚动
+        document.body.style.overflow = 'hidden';
       });
     });
   }
@@ -277,5 +586,42 @@
     
     // 添加到页面
     document.body.appendChild(backToTopBtn);
+  }
+  
+  /**
+   * 添加页面过渡效果
+   */
+  function addPageTransitionEffect() {
+    // 为主要内容区域添加过渡效果类
+    const mainContent = document.querySelector('#main');
+    if (mainContent) {
+      mainContent.classList.add('page-transition');
+    }
+    
+    // 为所有链接添加页面过渡效果
+    document.querySelectorAll('a').forEach(link => {
+      // 只处理站内链接
+      if (link.hostname === window.location.hostname || !link.hostname) {
+        link.addEventListener('click', function(e) {
+          // 排除特殊链接
+          if (this.getAttribute('target') === '_blank' || 
+              this.getAttribute('rel') === 'nofollow' ||
+              this.href.includes('#')) {
+            return;
+          }
+          
+          e.preventDefault();
+          
+          // 添加淡出效果
+          document.body.style.opacity = '0';
+          document.body.style.transition = 'opacity 0.3s ease';
+          
+          // 延迟跳转
+          setTimeout(() => {
+            window.location.href = this.href;
+          }, 300);
+        });
+      }
+    });
   }
 })(); 

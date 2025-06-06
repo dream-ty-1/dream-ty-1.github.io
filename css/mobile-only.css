@@ -21,28 +21,15 @@ html.mobile-device #layout {
   overflow-x: hidden;
 }
 
-/* 移动端导航样式 */
+/* 隐藏原导航栏 */
 html.mobile-device #menu {
-  height: 50px !important;
-  padding: 0 10px !important;
-}
-
-html.mobile-device #menu #mobile-menu .title {
-  font-size: 1.1rem !important;
-  height: 50px !important;
-  display: flex !important;
-  align-items: center !important;
-}
-
-html.mobile-device #menu #mobile-menu .items {
-  border-radius: 0 0 12px 12px !important;
-  max-height: calc(90vh - 50px) !important;
-  overflow-y: auto !important;
+  display: none !important;
 }
 
 /* 移动端首页样式 */
 html.mobile-device #home-head {
   height: 60vh !important;
+  margin-top: 0 !important; /* 移除顶部导航栏后不需要margin */
 }
 
 html.mobile-device #home-head #home-info .info {
@@ -179,18 +166,55 @@ html.mobile-device .mobile-nav a.active {
   color: #66afef !important;
 }
 
+/* 添加页面顶部标题栏 */
+html.mobile-device .mobile-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: rgba(25, 25, 25, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+html.mobile-device .mobile-header .site-title {
+  color: #e0e0e0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* 为顶部标题栏腾出空间 */
+html.mobile-device #layout {
+  padding-top: 50px !important;
+}
+
 /* iOS设备特殊样式 */
-html.ios-device .mobile-nav {
+html.mobile-device.ios-device .mobile-nav {
   padding-bottom: env(safe-area-inset-bottom) !important; /* iOS安全区域 */
   height: calc(50px + env(safe-area-inset-bottom)) !important;
 }
 
-html.ios-device #footer {
+html.mobile-device.ios-device #footer {
   padding-bottom: calc(80px + env(safe-area-inset-bottom)) !important;
 }
 
+html.mobile-device.ios-device .mobile-header {
+  padding-top: env(safe-area-inset-top) !important;
+  height: calc(50px + env(safe-area-inset-top)) !important;
+}
+
+html.mobile-device.ios-device #layout {
+  padding-top: calc(50px + env(safe-area-inset-top)) !important;
+}
+
 /* 安卓设备特殊样式 */
-html.android-device .mobile-nav {
+html.mobile-device.android-device .mobile-nav {
   height: 55px !important;
 }
 
@@ -205,4 +229,34 @@ html.mobile-device .post:active {
 /* 移动端侧边栏 */
 html.mobile-device #sidebar .sidebar-box {
   margin-bottom: 15px !important;
+}
+
+/* 美化移动端文章卡片 */
+html.mobile-device .posts-grid .post {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  border: 1px solid rgba(200, 200, 200, 0.1) !important;
+}
+
+html.mobile-device .posts-grid .post:active {
+  transform: translateY(2px) scale(0.98) !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 美化移动端返回顶部按钮 */
+html.mobile-device .mobile-back-to-top {
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #64b5f6, #4285f4) !important;
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3) !important;
+}
+
+/* 添加移动端页面过渡效果 */
+html.mobile-device .page-transition {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 } 
