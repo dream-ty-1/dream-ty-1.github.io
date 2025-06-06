@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>标签 | Tianyu の 个人博客</title>
+    <title>about | Tianyu の 个人博客</title>
     <meta name="author" content="TianYu" />
     <meta name="description" content="这是一个使用Hexo框架和ParticleX主题的个人博客" />
     <meta name="keywords" content="博客, 技术, 编程, 生活" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -193,76 +197,38 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    
-    <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch" />
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/tags/%E7%BC%96%E7%A8%8B/" style="background: #ffa2c4">
+            <div class="article-container">
+    <div class="article">
+        <div>
+            <h1>about</h1>
+        </div>
+        <div class="info">
+            <span class="date">
                 <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
+                    <i class="fa-solid fa-calendar fa-fw"></i>
                 </span>
-                编程
-            </a>
-        </span>
+                2025/6/6
+            </span>
+            
+            
+        </div>
+        
+        <div class="content" v-pre>
+            
+        </div>
         
         
         
-        <span>
-            <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
         
         
-        
-        <span>
-            <a href="/tags/Hexo/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Hexo
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                博客
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E6%95%99%E7%A8%8B/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                教程
-            </a>
-        </span>
         
         
     </div>
     
+    <!-- 侧边栏 -->
     
-    <div class="empty-tip">
-        <p>当前没有文章可以显示</p>
-    </div>
-    
+
+ 
 </div>
 
             <footer id="footer">
@@ -318,6 +284,12 @@
             <script src="/js/toc-helper.js"></script>
         
     
+    
+    
+
+
+
+
     
 </body>
 </html>

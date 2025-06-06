@@ -4,7 +4,7 @@
     const effects = [
         '/js/effects/typed.js',           // 打字机效果
         '/js/effects/click-effect.js',    // 点击特效
-        '/js/effects/canvas-nest.js',     // 3D网状背景
+        // '/js/effects/canvas-nest.js',  // 黑色3D网状背景（已移除）
         '/js/effects/fancybox.js',        // 图片灯箱
         '/js/effects/aos.js',             // 滚动动画
         '/js/effects/icon-animation.js'   // 图标动画

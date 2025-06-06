@@ -264,7 +264,7 @@ a:hover {
 
 #home-card {
     width: 280px;
-    order: 1;
+    order: 3;
 }
 
 #home-posts {
@@ -277,7 +277,7 @@ a:hover {
 #sidebar {
     width: 280px;
     margin-left: 0;
-    order: 3;
+    order: 1;
 }
 
 /* 文章网格布局 */
