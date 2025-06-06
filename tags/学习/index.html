@@ -7,8 +7,8 @@
     <meta name="author" content="TianYu" />
     <meta name="description" content="这是一个使用Hexo框架和ParticleX主题的个人博客" />
     <meta name="keywords" content="博客, 技术, 编程, 生活" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes" />
-    <meta name="theme-color" content="#121212" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=3.0, minimum-scale=0.8" />
+    <meta name="theme-color" content="#2196f3" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="icon" href="/images/avatar.jpg" />
@@ -46,24 +46,11 @@
 <link rel="stylesheet" href="/css/main.css" />
 
     
-        
-            <link rel="stylesheet" href="/css/friends.css">
-        
-            <link rel="stylesheet" href="/css/collections.css">
-        
-            <link rel="stylesheet" href="/css/categories-tags.css">
-        
-            <link rel="stylesheet" href="/css/custom.css">
-        
-            <link rel="stylesheet" href="/css/sidebar.css">
-        
-            <link rel="stylesheet" href="/css/toc.css">
-        
-            <link rel="stylesheet" href="/css/mobile-touch.css">
-        
-    
+    <!-- 设备检测 -->
+    <script src="/js/device-detector.js"></script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 <body>
+    <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:center;align-items:center;background:var(--loading-background-color);transition:opacity 0.3s ease-out;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none"><div style="width:32px;height:32px;position:relative"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" style="position:absolute;height:32px;width:32px;color:var(--loading-color);animation:rotate 3s linear infinite"><path d="M304 48C304 74.51 282.5 96 256 96C229.5 96 208 74.51 208 48C208 21.49 229.5 0 256 0C282.5 0 304 21.49 304 48zM304 464C304 490.5 282.5 512 256 512C229.5 512 208 490.5 208 464C208 437.5 229.5 416 256 416C282.5 416 304 437.5 304 464zM0 256C0 229.5 21.49 208 48 208C74.51 208 96 229.5 96 256C96 282.5 74.51 304 48 304C21.49 304 0 282.5 0 256zM512 256C512 282.5 490.5 304 464 304C437.5 304 416 282.5 416 256C416 229.5 437.5 208 464 208C490.5 208 512 229.5 512 256zM74.98 437C56.23 418.3 56.23 387.9 74.98 369.1C93.73 350.4 124.1 350.4 142.9 369.1C161.7 387.9 161.7 418.3 142.9 437C124.1 455.8 93.73 455.8 74.98 437V437zM142.9 142.9C124.1 161.7 93.73 161.7 74.98 142.9C56.24 124.1 56.24 93.73 74.98 74.98C93.73 56.23 124.1 56.23 142.9 74.98C161.7 93.73 161.7 124.1 142.9 142.9zM369.1 369.1C387.9 350.4 418.3 350.4 437 369.1C455.8 387.9 455.8 418.3 437 437C418.3 455.8 387.9 455.8 369.1 437C350.4 418.3 350.4 387.9 369.1 369.1V369.1z" stroke="currentColor" stroke-width="24"/></svg></div></div>
     <div id="layout">
         <transition name="fade">
             <div id="loading" v-show="loading">
@@ -206,7 +193,7 @@
         
         
         <span>
-            <a href="/tags/Hexo/" style="background: #03a9f4">
+            <a href="/tags/Hexo/" style="background: #00bcd4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -228,7 +215,7 @@
         
         
         <span>
-            <a href="/tags/%E6%95%99%E7%A8%8B/" style="background: #03a9f4">
+            <a href="/tags/%E6%95%99%E7%A8%8B/" style="background: #ffa2c4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -239,7 +226,7 @@
         
         
         <span>
-            <a href="/tags/%E7%BC%96%E7%A8%8B/" style="background: #00a596">
+            <a href="/tags/%E7%BC%96%E7%A8%8B/" style="background: #ff7d73">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -293,14 +280,14 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E7%BC%96%E7%A8%8B/" style="color: #ffa2c4">
+                            <a href="/tags/%E7%BC%96%E7%A8%8B/" style="color: #00bcd4">
                                 编程
                             </a>
                         </span>
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="color: #00bcd4">
+                            <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="color: #ff7d73">
                                 学习
                             </a>
                         </span>
@@ -338,14 +325,14 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E7%BC%96%E7%A8%8B/" style="color: #00bcd4">
+                            <a href="/tags/%E7%BC%96%E7%A8%8B/" style="color: #00a596">
                                 编程
                             </a>
                         </span>
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="color: #ffa2c4">
+                            <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="color: #03a9f4">
                                 学习
                             </a>
                         </span>
@@ -390,6 +377,10 @@
     <script src="/js/main.js"></script>
     <script src="/js/mobile-touch.js"></script>
     
+    
+    <!-- 移动设备控制器 -->
+    <script src="/js/mobile-controller.js"></script>
+    
         
             <script src="/js/custom.js"></script>
         
@@ -412,6 +403,8 @@
             <script src="/js/toc-helper.js"></script>
         
             <script src="/js/mobile-touch.js"></script>
+        
+            <script src="/js/mobile-controller.js"></script>
         
     
     
