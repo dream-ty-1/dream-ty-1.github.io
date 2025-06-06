@@ -91,3 +91,206 @@ button.touch-active {
     align-items: center !important;
   }
 }
+
+/**
+ * 移动端触摸反馈样式
+ * 提供触摸反馈效果，增强移动端交互体验
+ */
+
+/* 触摸反馈基础样式 */
+.touch-feedback {
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent; /* 移除默认点击高亮 */
+  transition: transform 0.15s ease-out;
+}
+
+/* 触摸时的缩放效果 */
+.touch-feedback:active {
+  transform: scale(0.97);
+}
+
+/* 波纹效果 */
+.touch-feedback::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2) 1%, transparent 1%);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform 0.4s, opacity 0.5s;
+}
+
+.touch-feedback:active::after {
+  transform: scale(0, 0);
+  opacity: 0.3;
+  transition: 0s;
+}
+
+/* 滑动指示器样式 */
+.swipe-indicator {
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* 下拉刷新指示器样式 */
+.refresh-indicator i {
+  transition: transform 0.3s ease-out;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 上下文菜单样式 */
+.context-menu {
+  user-select: none;
+}
+
+.context-menu-item {
+  white-space: nowrap;
+}
+
+.context-menu-item:not(:last-child) {
+  border-bottom: 1px solid var(--border-color, rgba(200, 200, 200, 0.2));
+}
+
+/* 提示消息样式 */
+.toast {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 滚动指示器动画 */
+.scroll-indicator {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* 滚动到顶部动画 */
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* 针对iOS设备的优化 */
+@supports (-webkit-touch-callout: none) {
+  /* iOS设备特定样式 */
+  .touch-feedback:active {
+    transform: scale(0.98); /* iOS上稍微减弱缩放效果 */
+  }
+  
+  /* 修复iOS上的滚动问题 */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* 修复iOS上的固定元素问题 */
+  .fixed-ios {
+    position: fixed;
+    width: 100%;
+    -webkit-transform: translateZ(0);
+  }
+}
+
+/* 针对Android设备的优化 */
+@supports not (-webkit-touch-callout: none) {
+  /* Android设备特定样式 */
+  .touch-feedback:active::after {
+    opacity: 0.4; /* Android上增强波纹效果 */
+  }
+}
+
+/* 长按效果 */
+.long-press-active {
+  animation: longPress 0.5s forwards;
+}
+
+@keyframes longPress {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.95);
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* 禁用长按选择文本 */
+.disable-selection {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* 启用长按选择文本 */
+.enable-selection {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
+/* 适配不同屏幕尺寸的触摸区域 */
+@media screen and (max-width: 320px) {
+  /* 小屏幕手机 */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 768px) {
+  /* 中等屏幕手机和小型平板 */
+  .touch-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  /* 大屏幕设备 */
+  .touch-target {
+    min-height: 40px;
+    min-width: 40px;
+  }
+}

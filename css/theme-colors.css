@@ -1,0 +1,178 @@
+/**
+ * 主题颜色样式
+ * 支持深色/浅色模式
+ */
+
+/* 默认变量（深色模式） */
+:root {
+  --background-color: #121212;
+  --card-background-color: #1e1e1e;
+  --text-color: #e0e0e0;
+  --secondary-text-color: #aaaaaa;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --primary-color: #64b5f6;
+  --accent-color: #4285f4;
+  --hover-color: rgba(255, 255, 255, 0.05);
+  --loading-background-color: #121212;
+  --loading-color: #64b5f6;
+  --code-background: #2d2d2d;
+  --blockquote-color: #424242;
+  --nav-background: rgba(25, 25, 25, 0.95);
+  --card-hover-transform: translateY(-5px);
+  --animation-duration: 0.3s;
+}
+
+/* 浅色模式 */
+html.light {
+  --background-color: #f5f5f5;
+  --card-background-color: #ffffff;
+  --text-color: #333333;
+  --secondary-text-color: #666666;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --primary-color: #1976d2;
+  --accent-color: #2196f3;
+  --hover-color: rgba(0, 0, 0, 0.05);
+  --loading-background-color: #ffffff;
+  --loading-color: #1976d2;
+  --code-background: #f0f0f0;
+  --blockquote-color: #e0e0e0;
+  --nav-background: rgba(255, 255, 255, 0.95);
+}
+
+/* 应用主题颜色到移动端元素 */
+html.mobile-device .mobile-header {
+  background-color: var(--nav-background);
+  border-bottom: 1px solid var(--border-color);
+}
+
+html.mobile-device .mobile-header .site-title {
+  color: var(--text-color);
+}
+
+html.mobile-device .mobile-nav {
+  background-color: var(--nav-background);
+  border-top: 1px solid var(--border-color);
+}
+
+html.mobile-device .mobile-nav a {
+  color: var(--secondary-text-color);
+}
+
+html.mobile-device .mobile-nav a.active {
+  color: var(--primary-color);
+}
+
+html.mobile-device .mobile-nav a.active::after {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+html.mobile-device .mobile-nav a:active,
+html.mobile-device .mobile-nav a.touch-active {
+  background-color: var(--hover-color);
+}
+
+/* 文章卡片样式 */
+html.mobile-device .posts-grid .post {
+  background-color: var(--card-background-color);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+html.mobile-device .posts-grid .post .post-title {
+  color: var(--text-color);
+}
+
+html.mobile-device .posts-grid .post .post-meta {
+  color: var(--secondary-text-color);
+}
+
+/* 搜索面板样式 */
+html.mobile-device .mobile-search-panel {
+  background-color: var(--nav-background);
+}
+
+html.mobile-device .mobile-search-panel input {
+  background-color: var(--hover-color);
+  color: var(--text-color);
+}
+
+html.mobile-device .mobile-search-panel input:focus {
+  box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+html.mobile-device .mobile-search-panel .search-close-btn {
+  color: var(--text-color);
+}
+
+html.mobile-device .mobile-search-panel .search-result-item a {
+  color: var(--primary-color);
+}
+
+/* 返回顶部按钮 */
+html.mobile-device .mobile-back-to-top {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+}
+
+/* 主题切换按钮 */
+html.mobile-device .theme-switcher {
+  background-color: var(--card-background-color);
+  box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+/* 动画效果 */
+html.mobile-device .page-transition {
+  animation: fadeIn var(--animation-duration) ease-in-out;
+}
+
+/* 卡片悬停效果 */
+html.mobile-device .posts-grid .post:hover {
+  transform: var(--card-hover-transform);
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+/* 文章内容样式 */
+html.mobile-device .article .content {
+  color: var(--text-color);
+}
+
+html.mobile-device .article .content h1,
+html.mobile-device .article .content h2,
+html.mobile-device .article .content h3,
+html.mobile-device .article .content h4,
+html.mobile-device .article .content h5,
+html.mobile-device .article .content h6 {
+  color: var(--text-color);
+}
+
+html.mobile-device .article .content pre,
+html.mobile-device .article .content code {
+  background-color: var(--code-background);
+}
+
+html.mobile-device .article .content blockquote {
+  background-color: var(--blockquote-color);
+  border-left: 4px solid var(--primary-color);
+}
+
+/* 侧边栏样式 */
+html.mobile-device #sidebar .sidebar-box {
+  background-color: var(--card-background-color);
+  border: 1px solid var(--border-color);
+}
+
+html.mobile-device #sidebar .sidebar-title {
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* 页脚样式 */
+html.mobile-device #footer {
+  color: var(--secondary-text-color);
+}
+
+/* 图片查看器样式 */
+html.mobile-device .mobile-image-viewer {
+  background-color: rgba(0, 0, 0, 0.9);
+} 
