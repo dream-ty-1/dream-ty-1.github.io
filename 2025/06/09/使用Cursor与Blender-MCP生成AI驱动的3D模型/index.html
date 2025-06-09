@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>使用Cursor与Blender-MCP生成3D模型 | Tianyu の 个人博客</title>
+    <meta name="author" content="TianYu" />
+    <meta name="description" content="这是一个使用Hexo框架和ParticleX主题的个人博客" />
+    <meta name="keywords" content="博客, 技术, 编程, 生活" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="/css/friends.css">
+        
+            <link rel="stylesheet" href="/css/collections.css">
+        
+            <link rel="stylesheet" href="/css/categories-tags.css">
+        
+            <link rel="stylesheet" href="/css/custom.css">
+        
+            <link rel="stylesheet" href="/css/sidebar.css">
+        
+            <link rel="stylesheet" href="/css/toc.css">
+        
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>TIANYU の 个人博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/friends">
+            <i class="fa-solid fa-link fa-fw"></i>
+            <span>&ensp;Friends</span>
+        </a>
+        
+        <a href="/collections">
+            <i class="fa-solid fa-folder-open fa-fw"></i>
+            <span>&ensp;Collections</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;TIANYU の 个人博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/friends">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-link fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Friends</div>
+                    </div>
+                </a>
+                
+                <a href="/collections">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-folder-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Collections</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article-container">
+    <div class="article">
+        <div>
+            <h1>使用Cursor与Blender-MCP生成3D模型</h1>
+        </div>
+        <div class="info">
+            <span class="date">
+                <span class="icon">
+                    <i class="fa-solid fa-calendar fa-fw"></i>
+                </span>
+                2025/6/9
+            </span>
+            
+            <span class="category">
+                <a href="/categories/Cursor/">
+                    <span class="icon">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </span>
+                    Cursor
+                </a>
+            </span>
+            
+            
+            <span class="tags">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                
+                
+                <span class="tag">
+                    
+                    <a href="/tags/AI/" style="color: #ff7d73">
+                        AI
+                    </a>
+                </span>
+                
+                <span class="tag">
+                    
+                    <a href="/tags/Blender/" style="color: #03a9f4">
+                        Blender
+                    </a>
+                </span>
+                
+                <span class="tag">
+                    
+                    <a href="/tags/3D%E5%BB%BA%E6%A8%A1/" style="color: #00a596">
+                        3D建模
+                    </a>
+                </span>
+                
+            </span>
+            
+        </div>
+        
+        <div class="content" v-pre>
+            <h1 id="使用Cursor与Blender-MCP生成3D模型"><a href="#使用Cursor与Blender-MCP生成3D模型" class="headerlink" title="使用Cursor与Blender-MCP生成3D模型"></a>使用Cursor与Blender-MCP生成3D模型</h1><h2 id="概要：CURSOR-blender-mcp快速生成可用的（进一步细化模型需要手动调整）3d模型"><a href="#概要：CURSOR-blender-mcp快速生成可用的（进一步细化模型需要手动调整）3d模型" class="headerlink" title="概要：CURSOR+blender-mcp快速生成可用的（进一步细化模型需要手动调整）3d模型"></a>概要：CURSOR+blender-mcp快速生成可用的（进一步细化模型需要手动调整）3d模型</h2><h2 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h2><h3 id="Cursor"><a href="#Cursor" class="headerlink" title="Cursor"></a>Cursor</h3><p>Cursor是一款AI增强型IDE（集成开发环境），基于最新的Claude模型，能够：</p>
+<ul>
+<li>理解复杂的代码库和项目结构</li>
+<li>根据自然语言描述生成代码</li>
+<li>提供智能的代码补全和优化建议</li>
+<li>帮助编写、调试和重构Python脚本</li>
+</ul>
+<h3 id="Blender-MCP（Motion-Capture-Processing）"><a href="#Blender-MCP（Motion-Capture-Processing）" class="headerlink" title="Blender-MCP（Motion Capture Processing）"></a>Blender-MCP（Motion Capture Processing）</h3><p>Blender-MCP是Blender的一个专业插件，主要用于：</p>
+<ul>
+<li>导入和处理各种格式的动作捕捉数据</li>
+<li>将动作数据应用到3D模型上</li>
+<li>清理和优化动作数据</li>
+<li>创建高质量的动画序列</li>
+</ul>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>我们需要以下工具：</p>
+<ol>
+<li><strong>Blender</strong>：下载最新版本的Blender（推荐4.0或更高版本）</li>
+<li><strong>Cursor</strong>：访问<a target="_blank" rel="noopener" href="https://cursor.sh/">Cursor官网</a>下载安装</li>
+<li><strong>Blender-MCP插件</strong>：从Blender插件市场或GitHub获取最新版本</li>
+<li><strong>Python环境</strong>：确保安装了Python 3.9+</li>
+</ol>
+<h2 id="流程概述"><a href="#流程概述" class="headerlink" title="流程概述"></a>流程概述</h2><p>使用Cursor与Blender-MCP生成3d模型的步骤主要为</p>
+<ol>
+<li>使用Cursor生成Blender Python脚本</li>
+<li>配置Blender-MCP插件</li>
+<li>导入参考数据&#x2F;动作捕捉数据</li>
+<li>处理和优化模型</li>
+<li>应用动作数据和材质</li>
+<li>最终渲染和导出</li>
+</ol>
+<h2 id="步骤详解"><a href="#步骤详解" class="headerlink" title="步骤详解"></a>步骤详解</h2><h3 id="第一步：使用Cursor生成Blender-Python脚本"><a href="#第一步：使用Cursor生成Blender-Python脚本" class="headerlink" title="第一步：使用Cursor生成Blender Python脚本"></a>第一步：使用Cursor生成Blender Python脚本</h3><p>Cursor的强大之处在于可以通过自然语言描述生成复杂的Blender Python脚本。以下是一个示例：</p>
+<ol>
+<li>在Cursor中创建一个新的Python文件</li>
+<li>描述您想要实现的3D模型效果，例如：</li>
+</ol>
+<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
+# 请帮我生成一个Blender Python脚本，用于创建一个人形角色模型，
+# 并设置基本的骨骼结构，以便后续应用动作捕捉数据
+</pre>
+
+<ol start="3">
+<li>Cursor会生成类似以下的代码：</li>
+</ol>
+<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
+import bpy
+import math
+import bmesh
+
+# 清除当前场景
+bpy.ops.object.select_all(action='SELECT')
+bpy.ops.object.delete()
+
+# 创建基础人形模型
+bpy.ops.mesh.primitive_cube_add(size=0.5, location=(0, 0, 1))
+torso = bpy.context.active_object
+torso.name = "Torso"
+
+# 创建头部
+bpy.ops.mesh.primitive_sphere_add(radius=0.25, location=(0, 0, 1.5))
+head = bpy.context.active_object
+head.name = "Head"
+
+# 创建四肢
+# ... (更多代码)
+
+# 设置骨骼结构
+bpy.ops.object.armature_add(location=(0, 0, 0))
+armature = bpy.context.active_object
+armature.name = "Character_Armature"
+
+# 进入编辑模式添加骨骼
+bpy.ops.object.mode_set(mode='EDIT')
+# ... (骨骼创建代码)
+
+# 设置父子关系
+bpy.ops.object.mode_set(mode='OBJECT')
+# ... (绑定代码)
+
+print("基础人形模型和骨骼创建完成")
+</pre>
+
+<ol start="4">
+<li>保存脚本，准备导入Blender</li>
+</ol>
+<h3 id="第二步：配置Blender-MCP插件"><a href="#第二步：配置Blender-MCP插件" class="headerlink" title="第二步：配置Blender-MCP插件"></a>第二步：配置Blender-MCP插件</h3><ol>
+<li>在Blender中，进入<code>编辑 &gt; 首选项 &gt; 插件</code></li>
+<li>点击”安装”，选择下载好的MCP插件ZIP文件</li>
+<li>启用插件</li>
+<li>在Blender界面中，打开MCP面板（通常位于侧边栏N面板中）</li>
+</ol>
+<h3 id="第三步：导入参考数据-动作捕捉数据"><a href="#第三步：导入参考数据-动作捕捉数据" class="headerlink" title="第三步：导入参考数据&#x2F;动作捕捉数据"></a>第三步：导入参考数据&#x2F;动作捕捉数据</h3><p>MCP插件支持多种动作捕捉数据格式，包括：</p>
+<ul>
+<li>BVH（生物虚拟人类）文件</li>
+<li>FBX动画</li>
+<li>CSV数据文件等</li>
+</ul>
+<ol>
+<li>在MCP面板中，选择”Import Motion”</li>
+<li>浏览并选择您的动作捕捉数据文件</li>
+<li>设置导入参数（如帧率、缩放比例等）</li>
+<li>点击”导入”</li>
+</ol>
+<h3 id="第四步：处理和优化模型"><a href="#第四步：处理和优化模型" class="headerlink" title="第四步：处理和优化模型"></a>第四步：处理和优化模型</h3><p>这一步中，我们需要使用Cursor生成更多的Python脚本来处理和优化我们的3D模型：</p>
+<ol>
+<li>在Cursor中，描述您需要的处理和优化：</li>
+</ol>
+<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
+# 生成Blender Python脚本，用于优化导入的3D模型网格，
+# 包括去除重叠顶点、平滑表面，并准备UV映射
+</pre>
+
+<ol start="2">
+<li>使用Cursor生成的脚本进行模型优化</li>
+</ol>
+<h3 id="第五步：应用动作数据和材质"><a href="#第五步：应用动作数据和材质" class="headerlink" title="第五步：应用动作数据和材质"></a>第五步：应用动作数据和材质</h3><ol>
+<li>在MCP面板中，将导入的动作数据与骨架进行匹配</li>
+<li>使用Cursor生成材质应用脚本：</li>
+</ol>
+<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
+import bpy
+
+# 为人物模型创建PBR材质
+def create_pbr_material(name, base_color, metallic=0.0, roughness=0.7):
+    mat = bpy.data.materials.new(name)
+    mat.use_nodes = True
+    nodes = mat.node_tree.nodes
+    
+    # 清除默认节点
+    for node in nodes:
+        nodes.remove(node)
+    
+    # 创建PBR节点
+    output = nodes.new(type='ShaderNodeOutputMaterial')
+    principled = nodes.new(type='ShaderNodeBsdfPrincipled')
+    
+    # 设置基本属性
+    principled.inputs['Base Color'].default_value = base_color
+    principled.inputs['Metallic'].default_value = metallic
+    principled.inputs['Roughness'].default_value = roughness
+    
+    # 连接节点
+    mat.node_tree.links.new(principled.outputs['BSDF'], output.inputs['Surface'])
+    
+    return mat
+
+# 为不同身体部位创建材质
+skin_material = create_pbr_material("Skin", (0.8, 0.6, 0.5, 1.0), 0.0, 0.3)
+clothes_material = create_pbr_material("Clothes", (0.1, 0.2, 0.8, 1.0), 0.0, 0.8)
+
+# 应用材质到模型
+body_parts = ["Torso", "Head", "LeftArm", "RightArm", "LeftLeg", "RightLeg"]
+
+for part_name in body_parts:
+    if part_name in bpy.data.objects:
+        obj = bpy.data.objects[part_name]
+        if part_name == "Head":
+            obj.data.materials.append(skin_material)
+        else:
+            obj.data.materials.append(clothes_material)
+
+print("材质应用完成")
+</pre>
+
+<h3 id="第六步：最终渲染和导出"><a href="#第六步：最终渲染和导出" class="headerlink" title="第六步：最终渲染和导出"></a>第六步：最终渲染和导出</h3><ol>
+<li>设置相机和灯光</li>
+<li>配置渲染参数</li>
+<li>使用Cursor生成的脚本进行批量渲染：</li>
+</ol>
+<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
+import bpy
+import os
+
+# 设置渲染参数
+bpy.context.scene.render.engine = 'CYCLES'
+bpy.context.scene.cycles.device = 'GPU'
+bpy.context.scene.render.film_transparent = True
+bpy.context.scene.render.resolution_x = 1920
+bpy.context.scene.render.resolution_y = 1080
+
+# 设置输出路径
+output_path = "//renders/"
+if not os.path.exists(bpy.path.abspath(output_path)):
+    os.makedirs(bpy.path.abspath(output_path))
+bpy.context.scene.render.filepath = output_path
+
+# 设置帧范围
+start_frame = 1
+end_frame = 250  # 或根据您的动画长度调整
+
+# 批量渲染
+for frame in range(start_frame, end_frame + 1):
+    bpy.context.scene.frame_set(frame)
+    bpy.context.scene.render.filepath = f"{output_path}frame_{frame:04d}"
+    bpy.ops.render.render(write_still=True)
+
+print(f"渲染完成，输出位置: {bpy.path.abspath(output_path)}")
+</pre>
+
+<h2 id="高级技巧"><a href="#高级技巧" class="headerlink" title="高级技巧"></a>高级技巧</h2><h3 id="使用Cursor生成自定义MCP处理脚本"><a href="#使用Cursor生成自定义MCP处理脚本" class="headerlink" title="使用Cursor生成自定义MCP处理脚本"></a>使用Cursor生成自定义MCP处理脚本</h3><p>Cursor不仅可以生成基础的Blender脚本，还可以帮助创建复杂的MCP处理流程：</p>
+<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
+import bpy
+from mathutils import Vector, Quaternion
+import math
+
+# MCP数据处理函数
+def smooth_motion_data(armature, bone_names, frames, strength=0.5):
+    """平滑指定骨骼在指定帧范围的运动数据"""
+    obj = bpy.data.objects.get(armature)
+    if not obj or obj.type != 'ARMATURE':
+        print(f"未找到骨架: {armature}")
+        return
+    
+    # 进入姿态模式
+    bpy.context.view_layer.objects.active = obj
+    bpy.ops.object.mode_set(mode='POSE')
+    
+    for bone_name in bone_names:
+        if bone_name not in obj.pose.bones:
+            print(f"未找到骨骼: {bone_name}")
+            continue
+            
+        bone = obj.pose.bones[bone_name]
+        
+        # 收集原始关键帧数据
+        keyframes = []
+        for f in range(frames[0], frames[1]+1):
+            bpy.context.scene.frame_set(f)
+            keyframes.append({
+                'frame': f,
+                'location': bone.location.copy(),
+                'rotation': bone.rotation_quaternion.copy() if bone.rotation_mode == 'QUATERNION' else None
+            })
+        
+        # 应用平滑算法
+        # ... (这里是平滑算法的实现)
+        
+        # 重新设置关键帧
+        # ... (这里是重设关键帧的代码)
+
+# 使用示例
+smooth_motion_data("Character_Armature", ["spine", "neck", "head"], [1, 100], 0.3)
+</pre>
+
+<h3 id="结合AI生成的纹理"><a href="#结合AI生成的纹理" class="headerlink" title="结合AI生成的纹理"></a>结合AI生成的纹理</h3><p>您还可以使用其他AI工具（如Stable Diffusion）生成纹理，然后在Cursor中编写脚本将这些纹理应用到模型上：</p>
+<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
+import bpy
+import os
+
+def apply_ai_textures(model_obj, textures_folder):
+    """应用AI生成的纹理到模型"""
+    # 实现代码...
+</pre>
+
+<h2 id="常见问题解决"><a href="#常见问题解决" class="headerlink" title="常见问题解决"></a>常见问题解决</h2><p>我在测试生成3d模型时遇到了贼烦的几个问题。T T</p>
+<ol>
+<li><p><strong>动作捕捉数据与模型不匹配</strong></p>
+<ul>
+<li>解决方案：使用MCP的重定向功能，或使用Cursor生成自定义重定向脚本</li>
+</ul>
+</li>
+<li><p><strong>骨骼旋转问题</strong></p>
+<ul>
+<li>解决方案：检查骨骼方向设置，确保遵循正确的坐标系统</li>
+</ul>
+</li>
+<li><p><strong>性能问题</strong></p>
+<ul>
+<li>解决方案：优化网格，减少顶点数量，使用LOD（细节级别）技术</li>
+</ul>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>无论是对于非专业3d建模手还是专业领域的建模大神，cursor+blender可以快速生成可用的3d模型，可用于数据可视化或前端页面，我觉得很厉害（但是因为我现在正在学springcloud，我觉得我在这里TM浪费好多时间</p>
+<p>希望能帮到你们0rz</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.blender.org/">Blender官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://cursor.sh/">Cursor官网</a></li>
+<li><a target="_blank" rel="noopener" href="https://blender-mcp.readthedocs.io/">MCP插件文档</a></li>
+</ul>
+
+        </div>
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    
+    <!-- 侧边栏 -->
+    
+
+
+<div id="sidebar">
+    
+        
+<div id="article-toc" class="article-toc">
+    <div class="toc-title">
+        <i class="fa-solid fa-list fa-fw"></i>
+        <span>目录</span>
+    </div>
+    <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Cursor%E4%B8%8EBlender-MCP%E7%94%9F%E6%88%903D%E6%A8%A1%E5%9E%8B"><span class="toc-text">使用Cursor与Blender-MCP生成3D模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%A6%81%EF%BC%9ACURSOR-blender-mcp%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90%E5%8F%AF%E7%94%A8%E7%9A%84%EF%BC%88%E8%BF%9B%E4%B8%80%E6%AD%A5%E7%BB%86%E5%8C%96%E6%A8%A1%E5%9E%8B%E9%9C%80%E8%A6%81%E6%89%8B%E5%8A%A8%E8%B0%83%E6%95%B4%EF%BC%893d%E6%A8%A1%E5%9E%8B"><span class="toc-text">概要：CURSOR+blender-mcp快速生成可用的（进一步细化模型需要手动调整）3d模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%BB%8D"><span class="toc-text">工具介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cursor"><span class="toc-text">Cursor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Blender-MCP%EF%BC%88Motion-Capture-Processing%EF%BC%89"><span class="toc-text">Blender-MCP（Motion Capture Processing）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%A6%82%E8%BF%B0"><span class="toc-text">流程概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%E8%AF%A6%E8%A7%A3"><span class="toc-text">步骤详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E4%BD%BF%E7%94%A8Cursor%E7%94%9F%E6%88%90Blender-Python%E8%84%9A%E6%9C%AC"><span class="toc-text">第一步：使用Cursor生成Blender Python脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E9%85%8D%E7%BD%AEBlender-MCP%E6%8F%92%E4%BB%B6"><span class="toc-text">第二步：配置Blender-MCP插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%AF%BC%E5%85%A5%E5%8F%82%E8%80%83%E6%95%B0%E6%8D%AE-%E5%8A%A8%E4%BD%9C%E6%8D%95%E6%8D%89%E6%95%B0%E6%8D%AE"><span class="toc-text">第三步：导入参考数据&#x2F;动作捕捉数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E5%A4%84%E7%90%86%E5%92%8C%E4%BC%98%E5%8C%96%E6%A8%A1%E5%9E%8B"><span class="toc-text">第四步：处理和优化模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E5%BA%94%E7%94%A8%E5%8A%A8%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%92%8C%E6%9D%90%E8%B4%A8"><span class="toc-text">第五步：应用动作数据和材质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E6%AD%A5%EF%BC%9A%E6%9C%80%E7%BB%88%E6%B8%B2%E6%9F%93%E5%92%8C%E5%AF%BC%E5%87%BA"><span class="toc-text">第六步：最终渲染和导出</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7"><span class="toc-text">高级技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Cursor%E7%94%9F%E6%88%90%E8%87%AA%E5%AE%9A%E4%B9%89MCP%E5%A4%84%E7%90%86%E8%84%9A%E6%9C%AC"><span class="toc-text">使用Cursor生成自定义MCP处理脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E5%90%88AI%E7%94%9F%E6%88%90%E7%9A%84%E7%BA%B9%E7%90%86"><span class="toc-text">结合AI生成的纹理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="toc-text">常见问题解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol></li></ol>
+    </div>
+</div>
+ 
+    
+</div> 
+ 
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Tianyu の 个人博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;TianYu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    <script src="/js/blog-effects.js"></script>
+    <script src="/js/white-canvas-nest.js"></script>
+    
+        
+            <script src="/js/custom.js"></script>
+        
+            <script src="/js/blog-effects.js"></script>
+        
+            <script src="/js/particles-effect.js"></script>
+        
+            <script src="/js/scroll-header.js"></script>
+        
+            <script src="/js/img-lightbox.js"></script>
+        
+            <script src="/js/back-to-top.js"></script>
+        
+            <script src="/js/tag-cloud.js"></script>
+        
+            <script src="/js/music-player.js"></script>
+        
+            <script src="/js/effects-loader.js"></script>
+        
+            <script src="/js/toc-helper.js"></script>
+        
+            <script src="/js/code-block-fix.js"></script>
+        
+    
+    
+    
+
+
+
+
+    
+</body>
+</html>
