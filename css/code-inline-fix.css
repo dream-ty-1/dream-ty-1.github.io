@@ -1,0 +1,64 @@
+/* 强制覆盖内联样式 */
+
+/* 直接添加到HTML的style标签 */
+@media screen {
+    /* 全局覆盖 */
+    .highlight, pre, code, .code {
+        all: revert !important;
+        font-family: var(--code-font), monospace !important;
+    }
+    
+    /* 确保代码块的背景色和文字颜色 */
+    pre, .highlight {
+        background: #191b25 !important;
+        color: #f8f8f2 !important;
+        margin: 1.5em 0 !important;
+        padding: 1.5em !important;
+        border-radius: 8px !important;
+        position: relative !important;
+        overflow: hidden !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    /* 代码文本样式 */
+    pre code, .code {
+        color: #f8f8f2 !important;
+        font-size: 1.05em !important;
+        font-weight: 500 !important;
+        line-height: 1.6 !important;
+        letter-spacing: 0.03em !important;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3) !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+    }
+    
+    /* 修复可能被主题覆盖的高亮颜色 */
+    .comment { color: #95a0b5 !important; }
+    .keyword, .selector-tag, .tag { color: #ff80bf !important; }
+    .string { color: #baffa3 !important; }
+    .number, .literal { color: #ffbe80 !important; }
+    .function, .title { color: #80d7ff !important; }
+    
+    /* 确保代码内语法高亮的可见性 */
+    pre .hljs-keyword, pre .keyword { color: #ff80bf !important; }
+    pre .hljs-string, pre .string { color: #baffa3 !important; }
+    pre .hljs-comment, pre .comment { color: #95a0b5 !important; }
+    pre .hljs-function, pre .function { color: #80d7ff !important; }
+    pre .hljs-number, pre .number { color: #ffbe80 !important; }
+}
+
+/* 移动设备适配 */
+@media (max-width: 768px) {
+    pre, .highlight {
+        margin: 1em -0.5em !important;
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        padding: 1.5em 0.75em !important;
+    }
+    
+    pre code, .code {
+        font-size: 1em !important;
+    }
+} 

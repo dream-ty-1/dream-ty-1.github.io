@@ -1,5 +1,30 @@
-// 粒子连线背景效果
+// 粒子连线背景效果 - 性能优化版
 (function() {
+    // 性能配置选项
+    const CONFIG = {
+        particleCount: 30,           // 减少粒子数量从100到30
+        particleMaxDistance: 100,    // 减少连线最大距离从150到100
+        particleSpeed: 0.3,          // 降低粒子速度
+        drawConnections: true,       // 是否绘制连线（可设为false进一步提高性能）
+        animationFrameLimit: 30,     // 限制帧率，每秒30帧
+        disableOnMobile: true,       // 在移动设备上禁用粒子效果
+        opacityReduction: 0.7        // 降低整体透明度以减轻视觉负担
+    };
+
+    // 检测是否为移动设备
+    const isMobileDevice = () => {
+        return (window.innerWidth < 768) || 
+               ('ontouchstart' in window) || 
+               (navigator.maxTouchPoints > 0) || 
+               (navigator.msMaxTouchPoints > 0);
+    };
+
+    // 如果是移动设备且设置为在移动设备上禁用，则直接返回
+    if (CONFIG.disableOnMobile && isMobileDevice()) {
+        console.log('粒子效果在移动设备上已禁用');
+        return;
+    }
+
     // 创建canvas元素
     function createCanvas() {
         const canvas = document.createElement('canvas');
@@ -12,7 +37,7 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
-            opacity: 0.6;
+            opacity: ${CONFIG.opacityReduction};
         `;
         document.body.appendChild(canvas);
         return canvas;
@@ -20,28 +45,29 @@
 
     // 设置canvas尺寸
     function setupCanvas(canvas) {
-        const ctx = canvas.getContext('2d');
-        const dpr = window.devicePixelRatio || 1;
+        const ctx = canvas.getContext('2d', { alpha: true });
+        const dpr = 1; // 固定为1，不使用devicePixelRatio以提高性能
         const rect = canvas.getBoundingClientRect();
         
         canvas.width = rect.width * dpr;
         canvas.height = rect.height * dpr;
-        ctx.scale(dpr, dpr);
         
         return ctx;
     }
 
-    // 重设canvas尺寸
-    function resizeCanvas(canvas) {
-        const ctx = canvas.getContext('2d');
-        const dpr = window.devicePixelRatio || 1;
+    // 重设canvas尺寸 - 优化版本，节流处理
+    let resizeTimeout;
+    function resizeCanvas(canvas, ctx) {
+        if (resizeTimeout) clearTimeout(resizeTimeout);
         
-        canvas.width = window.innerWidth * dpr;
-        canvas.height = window.innerHeight * dpr;
-        ctx.scale(dpr, dpr);
+        resizeTimeout = setTimeout(() => {
+            const dpr = 1;
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+        }, 200);
     }
 
-    // 粒子类
+    // 简化的粒子类
     class Particle {
         constructor(canvas) {
             this.canvas = canvas;
@@ -49,157 +75,102 @@
         }
         
         init() {
-            this.x = Math.random() * this.canvas.width / window.devicePixelRatio;
-            this.y = Math.random() * this.canvas.height / window.devicePixelRatio;
-            this.vx = (Math.random() - 0.5) * 0.5; // x轴速度
-            this.vy = (Math.random() - 0.5) * 0.5; // y轴速度
-            this.radius = Math.random() * 2 + 1;   // 粒子大小
-            this.initialRadius = this.radius;
-            this.opacity = Math.random() * 0.5 + 0.3; // 初始透明度
-            
-            // 彩色渐变粒子（蓝色基调）
-            const blueShades = [
-                '#64B5F6', // 浅蓝
-                '#2196F3', // 蓝
-                '#1976D2', // 深蓝
-                '#90CAF9', // 更浅的蓝
-                '#42A5F5', // 中蓝
-                '#E3F2FD'  // 非常浅的蓝
-            ];
-            
-            // 随机从蓝色调中选择一种
-            this.color = blueShades[Math.floor(Math.random() * blueShades.length)];
-        }
-        
-        draw(ctx) {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
-            ctx.globalAlpha = this.opacity;
-            ctx.fill();
-            ctx.globalAlpha = 1;
+            this.x = Math.random() * this.canvas.width;
+            this.y = Math.random() * this.canvas.height;
+            this.vx = (Math.random() - 0.5) * CONFIG.particleSpeed;
+            this.vy = (Math.random() - 0.5) * CONFIG.particleSpeed;
+            this.radius = Math.random() * 1.5 + 0.5; // 减小粒子大小
+            this.color = '#64B5F6'; // 使用单一颜色提高性能
         }
         
         update() {
-            // 边界检测
-            if (this.x + this.radius > this.canvas.width / window.devicePixelRatio) {
-                this.vx = -Math.abs(this.vx);
-            } else if (this.x - this.radius < 0) {
-                this.vx = Math.abs(this.vx);
-            }
-            
-            if (this.y + this.radius > this.canvas.height / window.devicePixelRatio) {
-                this.vy = -Math.abs(this.vy);
-            } else if (this.y - this.radius < 0) {
-                this.vy = Math.abs(this.vy);
-            }
-            
             // 更新位置
             this.x += this.vx;
             this.y += this.vy;
             
-            // 呼吸效果
-            this.radius = this.initialRadius * (1 + 0.1 * Math.sin(Date.now() * 0.001));
+            // 边界检测 - 简化为环绕边界
+            if (this.x < 0) this.x = this.canvas.width;
+            else if (this.x > this.canvas.width) this.x = 0;
             
-            // 轻微变化透明度
-            this.opacity = Math.max(0.3, Math.min(0.8, this.opacity + (Math.random() - 0.5) * 0.02));
+            if (this.y < 0) this.y = this.canvas.height;
+            else if (this.y > this.canvas.height) this.y = 0;
         }
     }
 
     // 主函数
     function init() {
-        const canvas = createCanvas();
-        const ctx = setupCanvas(canvas);
-        
-        // 创建粒子
-        const particleCount = Math.min(100, Math.floor((window.innerWidth * window.innerHeight) / 10000));
-        const particles = [];
-        
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle(canvas));
-        }
-        
-        // 连线最大距离
-        const maxDistance = 150;
-        
-        // 鼠标交互
-        let mouse = {
-            x: null,
-            y: null,
-            radius: 100
-        };
-        
-        window.addEventListener('mousemove', function(event) {
-            mouse.x = event.x;
-            mouse.y = event.y;
-        });
-        
-        window.addEventListener('mouseout', function() {
-            mouse.x = null;
-            mouse.y = null;
-        });
-        
-        // 窗口大小变化时重设canvas
-        window.addEventListener('resize', function() {
-            resizeCanvas(canvas);
-        });
-        
-        // 动画循环
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width / window.devicePixelRatio, canvas.height / window.devicePixelRatio);
+        // 使用延迟初始化，避免影响页面首次加载
+        setTimeout(() => {
+            const canvas = createCanvas();
+            const ctx = setupCanvas(canvas);
             
-            // 更新和绘制所有粒子
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw(ctx);
-                
-                // 鼠标交互 - 当鼠标靠近时粒子会被吸引
-                if (mouse.x !== null && mouse.y !== null) {
-                    const dx = particles[i].x - mouse.x;
-                    const dy = particles[i].y - mouse.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < mouse.radius) {
-                        const forceDirectionX = dx / distance;
-                        const forceDirectionY = dy / distance;
-                        const force = (mouse.radius - distance) / mouse.radius;
-                        
-                        // 施加一个微弱的力
-                        particles[i].vx += forceDirectionX * force * 0.2;
-                        particles[i].vy += forceDirectionY * force * 0.2;
-                    }
-                }
-                
-                // 粒子连线
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < maxDistance) {
-                        // 线条透明度基于距离
-                        const opacity = 1 - (distance / maxDistance);
-                        
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(100, 181, 246, ${opacity * 0.5})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
+            // 创建粒子
+            const particles = [];
+            for (let i = 0; i < CONFIG.particleCount; i++) {
+                particles.push(new Particle(canvas));
             }
             
-            requestAnimationFrame(animate);
-        }
-        
-        animate();
+            // 最后一次动画帧时间戳
+            let lastFrameTime = 0;
+            const frameInterval = 1000 / CONFIG.animationFrameLimit;
+            
+            // 窗口大小变化时重设canvas - 使用节流函数
+            window.addEventListener('resize', () => resizeCanvas(canvas, ctx));
+            
+            // 优化的动画循环，使用RAF时间戳控制帧率
+            function animate(timestamp) {
+                // 帧率限制
+                if (timestamp - lastFrameTime < frameInterval) {
+                    requestAnimationFrame(animate);
+                    return;
+                }
+                lastFrameTime = timestamp;
+                
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 使用批处理减少状态更改
+                ctx.fillStyle = '#64B5F6';
+                ctx.strokeStyle = 'rgba(100, 181, 246, 0.3)';
+                ctx.lineWidth = 0.5;
+                ctx.globalAlpha = 0.6;
+                
+                // 更新和绘制所有粒子
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.update();
+                    
+                    // 绘制粒子
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // 绘制连线 - 仅在开启时执行
+                    if (CONFIG.drawConnections) {
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const p2 = particles[j];
+                            const dx = p.x - p2.x;
+                            const dy = p.y - p2.y;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+                            
+                            if (distance < CONFIG.particleMaxDistance) {
+                                ctx.beginPath();
+                                ctx.moveTo(p.x, p.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            // 启动动画
+            animate(0);
+            
+        }, 1000); // 延迟1秒后初始化粒子效果
     }
 
-    // DOM加载完成后初始化
-    if (document.readyState === 'complete') {
-        init();
-    } else {
-        window.addEventListener('load', init);
-    }
+    // 仅在页面完全加载后才初始化粒子效果
+    window.addEventListener('load', init);
 })(); 

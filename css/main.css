@@ -981,3 +981,220 @@ ol li {
         padding-left: 20px;
     }
 }
+
+/* 文章卡片样式开始 */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.post-card {
+    color: #e0e0e0;
+    text-decoration: none;
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    height: 100%;
+}
+
+.post-card-inner {
+    background: rgba(34, 34, 34, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.post-card:hover .post-title {
+    color: #64B5F6;
+}
+
+.post-card:hover .cover-shade {
+    opacity: 0.4;
+}
+
+.post-cover-wrapper {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+}
+
+.post-cover {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #2d2d2d;
+    position: relative;
+}
+
+.post-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.post-card:hover .post-cover img {
+    transform: scale(1.05);
+}
+
+/* 添加图片加载前的骨架屏效果 */
+.post-cover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    z-index: -1;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.cover-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.post-pin {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4757;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+.post-info {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-title {
+    color: #e0e0e0;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 12px;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-meta {
+    color: #999;
+    font-size: 13px;
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.post-meta i {
+    margin-right: 4px;
+}
+
+.post-meta > span {
+    margin-right: 12px;
+    display: inline-block;
+}
+
+.post-date, .post-categories, .post-tags {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.post-tags {
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.post-tags .tag {
+    color: #999;
+    display: inline-block;
+}
+
+.post-excerpt {
+    color: #bbb;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 12px 0 0;
+    padding-bottom: 8px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-pinned .post-card-inner {
+    border: 1px solid rgba(255, 71, 87, 0.3);
+    box-shadow: 0 6px 16px rgba(255, 71, 87, 0.15);
+}
+/* 文章卡片样式结束 */
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+    .posts-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0 10px;
+    }
+    
+    .post-cover-wrapper {
+        height: 160px;
+    }
+    
+    .post-title {
+        font-size: 16px;
+    }
+    
+    .post-info {
+        padding: 16px;
+    }
+}
+
+/* 兼容旧的样式 */
+#home-posts .post {
+    display: none;
+}

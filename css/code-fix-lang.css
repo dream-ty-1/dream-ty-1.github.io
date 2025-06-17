@@ -1,0 +1,96 @@
+/* 代码块语言标签修复 - 解决重复显示问题 */
+
+/* 使用较高优先级选择器确保语言标签正确显示 */
+body pre::before,
+body .highlight::before {
+    content: attr(data-lang) !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    min-width: 40px !important;
+    padding: 0.25em 0.5em !important;
+    text-align: center !important;
+    color: #ffffff !important;
+    font-size: 0.85em !important;
+    font-weight: 700 !important;
+    background: var(--lang-color, #4d78cc) !important;
+    border-bottom-right-radius: 8px !important;
+    text-transform: uppercase !important;
+    z-index: 10 !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+}
+
+/* 隐藏代码块内部可能出现的语言标签类和文本 */
+body pre .language-python,
+body pre .language-javascript,
+body pre .language-html, 
+body pre .language-css,
+body pre .language-text,
+body pre .language-plaintext,
+body pre [class^="language-"],
+body pre [class*=" language-"],
+body .highlight .language-python,
+body .highlight .language-javascript,
+body .highlight .language-html,
+body .highlight .language-css,
+body .highlight .language-text,
+body .highlight .language-plaintext,
+body .highlight [class^="language-"],
+body .highlight [class*=" language-"] {
+    visibility: hidden !important;
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    overflow: hidden !important;
+    z-index: -1 !important;
+    clip: rect(0, 0, 0, 0) !important;
+}
+
+/* 确保代码块内的 "language-" 文本不显示 */
+body pre *:not(pre)::before,
+body .highlight *:not(.highlight)::before {
+    content: none !important;
+}
+
+/* 针对特定的元素，可能包含语言标识符 */
+body pre figcaption,
+body .highlight figcaption,
+body pre .figcaption,
+body .highlight .figcaption {
+    display: none !important;
+}
+
+/* 确保语言颜色变量正确应用 */
+body [data-lang="python"] {
+    --lang-color: #3572A5 !important;
+}
+
+body [data-lang="PYTHON"] {
+    --lang-color: #3572A5 !important;
+}
+
+body [data-lang="javascript"] {
+    --lang-color: #f1e05a !important;
+}
+
+body [data-lang="JAVASCRIPT"] {
+    --lang-color: #f1e05a !important;
+}
+
+body [data-lang="html"] {
+    --lang-color: #e34c26 !important;
+}
+
+body [data-lang="HTML"] {
+    --lang-color: #e34c26 !important;
+}
+
+body [data-lang="css"] {
+    --lang-color: #563d7c !important;
+}
+
+body [data-lang="CSS"] {
+    --lang-color: #563d7c !important;
+} 

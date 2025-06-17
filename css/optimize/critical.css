@@ -1,0 +1,98 @@
+/* 关键渲染路径CSS
+ * 此文件包含首屏渲染所需的最小CSS
+ * 将这些样式内联到HTML中，可以减少首屏加载时间
+ */
+
+/* 重置基本样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #212121; /* 暗色主题 */
+}
+
+/* 页面容器 */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* 页眉样式 */
+header {
+    padding: 20px 0;
+    background-color: #1a1a1a;
+}
+
+/* 导航栏 */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+nav a {
+    color: #eaeaea;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+/* 博客标题 */
+.site-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* 文章卡片 - 首屏可见部分 */
+.post-card {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.post-card .post-title {
+    font-size: 1.4rem;
+    color: #ffffff;
+    margin: 0 0 10px;
+}
+
+.post-card .post-meta {
+    font-size: 0.9rem;
+    color: #aaaaaa;
+}
+
+/* 暗色主题文本颜色 */
+.post-content {
+    color: #d4d4d4;
+}
+
+/* 首屏加载动画 */
+.site-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    z-index: 9999;
+    animation: loading-bar 2s ease-in-out;
+}
+
+@keyframes loading-bar {
+    0% { width: 0; }
+    20% { width: 20%; }
+    50% { width: 50%; }
+    80% { width: 80%; }
+    100% { width: 100%; }
+} 

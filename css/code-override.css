@@ -1,0 +1,184 @@
+/* 代码块样式覆盖 - 强制应用我们的自定义样式 */
+
+/* 强制覆盖主题的代码块样式 */
+.highlight, figure.highlight, pre {
+    position: relative !important;
+    margin: 1.5em 0 !important;
+    border-radius: 8px !important;
+    background: #191b25 !important; /* 更深更暗的背景色 */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important; /* 添加微妙边框 */
+}
+
+/* 语言标签 */
+.highlight::before, figure.highlight::before, pre::before {
+    content: attr(data-lang) !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    min-width: 40px !important;
+    padding: 0.25em 0.5em !important;
+    text-align: center !important;
+    color: #ffffff !important;
+    font-size: 0.9em !important;
+    font-weight: 700 !important;
+    background: var(--lang-color, #4d78cc) !important;
+    border-bottom-right-radius: 8px !important;
+    text-transform: uppercase !important;
+    z-index: 10 !important;
+}
+
+/* 代码容器 */
+.highlight .code, figure.highlight .code, pre code {
+    padding: 1.5em 1.5em 1.5em 3.5em !important;
+    background: transparent !important;
+    color: #f8f8f2 !important; /* 更亮的文本颜色 */
+    font-family: var(--code-font), monospace !important;
+    font-size: 1.05em !important; /* 进一步增大字体大小 */
+    font-weight: 500 !important; /* 略微加粗 */
+    line-height: 1.6 !important; /* 增加行高 */
+    letter-spacing: 0.03em !important; /* 增加字符间距 */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3) !important; /* 添加文字阴影增强可读性 */
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* 行号 */
+.highlight .gutter, figure.highlight .gutter, .line-numbers {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 2.5em !important;
+    padding: 1.5em 0 !important;
+    margin: 0 !important;
+    text-align: center !important;
+    background: rgba(0, 0, 0, 0.4) !important; /* 更深的背景色 */
+    color: #bbb !important; /* 更亮的行号颜色 */
+    font-size: 1em !important; /* 增大行号字体 */
+    line-height: 1.6 !important; /* 增加行高 */
+    font-family: var(--code-font), monospace !important; /* 使用变量引用字体 */
+    user-select: none !important;
+}
+
+/* 行号中的数字 */
+.highlight .gutter .line, figure.highlight .gutter .line, .line-numbers span {
+    color: #bbb !important; /* 更亮的行号颜色 */
+    padding: 0 0.5em !important;
+    font-weight: 500 !important; /* 略微加粗 */
+}
+
+/* 代码行 */
+.highlight .code .line, figure.highlight .code .line, pre code .line {
+    min-height: 1.6em !important;
+    padding: 0 0.2em !important; /* 添加行内padding */
+}
+
+/* 突出显示当前行 */
+.highlight .code .line:hover, figure.highlight .code .line:hover,
+pre code .line:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 代码高亮颜色方案 - 强制应用更高对比度的颜色 */
+.keyword, .hljs-keyword,
+.selector-tag, .hljs-selector-tag,
+.built_in, .hljs-built_in,
+.name, .hljs-name,
+.tag, .hljs-tag {
+    color: #ff80bf !important; /* 更亮的紫色 */
+    font-weight: 600 !important; /* 加粗关键字 */
+}
+
+.string, .hljs-string,
+.title, .hljs-title,
+.section, .hljs-section,
+.attribute, .hljs-attribute,
+.literal, .hljs-literal,
+.template-tag, .hljs-template-tag,
+.template-variable, .hljs-template-variable,
+.type, .hljs-type,
+.addition, .hljs-addition {
+    color: #baffa3 !important; /* 更亮的绿色 */
+}
+
+.comment, .hljs-comment,
+.quote, .hljs-quote,
+.deletion, .hljs-deletion,
+.meta, .hljs-meta {
+    color: #95a0b5 !important; /* 更亮的灰色 */
+    font-style: italic !important;
+}
+
+.number, .hljs-number,
+.symbol, .hljs-symbol,
+.bullet, .hljs-bullet,
+.link, .hljs-link,
+.variable, .hljs-variable,
+.regexp, .hljs-regexp {
+    color: #ffbe80 !important; /* 更亮的橙色 */
+}
+
+.function, .hljs-function,
+.params, .hljs-params {
+    color: #80d7ff !important; /* 更亮的蓝色 */
+    font-weight: 600 !important; /* 加粗函数名 */
+}
+
+/* 行内代码样式 */
+p code, li code, td code {
+    color: #ff80bf !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    padding: 0.1em 0.4em !important;
+    border-radius: 3px !important;
+    font-family: var(--code-font), monospace !important;
+    font-size: 0.9em !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+}
+
+/* 代码复制按钮 */
+.code-copy-btn {
+    position: absolute !important;
+    right: 10px !important;
+    top: 10px !important;
+    padding: 0.3em 0.6em !important;
+    font-size: 0.85em !important;
+    color: #f8f8f2 !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    opacity: 0 !important;
+    transition: all 0.3s ease !important;
+}
+
+.highlight:hover .code-copy-btn, figure.highlight:hover .code-copy-btn, pre:hover .code-copy-btn {
+    opacity: 1 !important;
+}
+
+.code-copy-btn:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    transform: translateY(-1px) !important;
+}
+
+/* 移动设备适配 */
+@media (max-width: 768px) {
+    .highlight, figure.highlight, pre {
+        margin: 1em -0.5em !important;
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+    
+    .highlight .code, figure.highlight .code, pre code {
+        padding: 1.5em 1em 1.5em 2.5em !important;
+        font-size: 1em !important; /* 略微减小移动设备上的字体 */
+    }
+    
+    .highlight .gutter, figure.highlight .gutter, .line-numbers {
+        width: 2em !important;
+    }
+} 

@@ -50,6 +50,10 @@
 
     
         
+            <style>{% include "../source/css/optimize/critical.css" %}</style>
+        
+            <link rel="stylesheet" href="/css/code-fonts.css">
+        
             <link rel="stylesheet" href="/css/friends.css">
         
             <link rel="stylesheet" href="/css/collections.css">
@@ -62,8 +66,23 @@
         
             <link rel="stylesheet" href="/css/toc.css">
         
+            <link rel="preload" href="/fonts/main-font.woff2" as="font" type="font/woff2" crossorigin>
+        
+            <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+        
+            <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        
+            <meta name="theme-color" content="#212121">
+        
+            <link rel="manifest" href="/manifest.json">
+        
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Tianyu の 个人博客" type="application/atom+xml">
+</head>
 <body>
     <div id="layout">
         <transition name="fade">
@@ -263,27 +282,27 @@
     <script src="/js/white-canvas-nest.js"></script>
     
         
-            <script src="/js/custom.js"></script>
+            <script src="/js/optimize/performance-loader.js"></script>
         
-            <script src="/js/blog-effects.js"></script>
+            <script defer-load src="/js/custom.js"></script>
         
-            <script src="/js/particles-effect.js"></script>
+            <script defer-load src="/js/blog-effects.js"></script>
         
-            <script src="/js/scroll-header.js"></script>
+            <script defer-load src="/js/particles-effect.js"></script>
         
-            <script src="/js/img-lightbox.js"></script>
+            <script defer-load src="/js/scroll-header.js"></script>
         
-            <script src="/js/back-to-top.js"></script>
+            <script defer-load src="/js/img-lightbox.js"></script>
         
-            <script src="/js/tag-cloud.js"></script>
+            <script defer-load src="/js/back-to-top.js"></script>
         
-            <script src="/js/music-player.js"></script>
+            <script defer-load src="/js/tag-cloud.js"></script>
         
-            <script src="/js/effects-loader.js"></script>
+            <script defer-load src="/js/music-player.js"></script>
         
-            <script src="/js/toc-helper.js"></script>
+            <script defer-load src="/js/effects-loader.js"></script>
         
-            <script src="/js/code-block-fix.js"></script>
+            <script defer-load src="/js/toc-helper.js"></script>
         
     
     
@@ -293,5 +312,8 @@
 
 
     
-</body>
+<!-- hexo injector body_end start -->
+<script src="/assets/prism-bundle.js"></script>
+<script src="/assets/prism-plus.js" data-pjax=""></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":0.15,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"live2d-widget-model-mianmian"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":10,"vOffset":0},"mobile":{"show":true,"scale":0.12},"react":{"opacityDefault":0.85,"opacityOnHover":1},"log":false});</script></body>
 </html>

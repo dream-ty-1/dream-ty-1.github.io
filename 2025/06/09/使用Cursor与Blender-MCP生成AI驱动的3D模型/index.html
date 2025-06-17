@@ -50,6 +50,10 @@
 
     
         
+            <style>{% include "../source/css/optimize/critical.css" %}</style>
+        
+            <link rel="stylesheet" href="/css/code-fonts.css">
+        
             <link rel="stylesheet" href="/css/friends.css">
         
             <link rel="stylesheet" href="/css/collections.css">
@@ -62,8 +66,23 @@
         
             <link rel="stylesheet" href="/css/toc.css">
         
+            <link rel="preload" href="/fonts/main-font.woff2" as="font" type="font/woff2" crossorigin>
+        
+            <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+        
+            <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        
+            <meta name="theme-color" content="#212121">
+        
+            <link rel="manifest" href="/manifest.json">
+        
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Tianyu の 个人博客" type="application/atom+xml">
+</head>
 <body>
     <div id="layout">
         <transition name="fade">
@@ -228,21 +247,21 @@
                 
                 <span class="tag">
                     
-                    <a href="/tags/AI/" style="color: #00bcd4">
+                    <a href="/tags/AI/" style="color: '#00a596'">
                         AI
                     </a>
                 </span>
                 
                 <span class="tag">
                     
-                    <a href="/tags/Blender/" style="color: #00a596">
+                    <a href="/tags/Blender/" style="color: '#03a9f4'">
                         Blender
                     </a>
                 </span>
                 
                 <span class="tag">
                     
-                    <a href="/tags/3D%E5%BB%BA%E6%A8%A1/" style="color: #03a9f4">
+                    <a href="/tags/3D%E5%BB%BA%E6%A8%A1/" style="color: '#ffa2c4'">
                         3D建模
                     </a>
                 </span>
@@ -277,7 +296,7 @@
 <ol>
 <li>使用Cursor生成Blender Python脚本</li>
 <li>配置Blender-MCP插件</li>
-<li>导入参考数据&#x2F;动作捕捉数据</li>
+<li>导入参考数据/动作捕捉数据</li>
 <li>处理和优化模型</li>
 <li>应用动作数据和材质</li>
 <li>最终渲染和导出</li>
@@ -287,51 +306,47 @@
 <li>在Cursor中创建一个新的Python文件</li>
 <li>描述您想要实现的3D模型效果，例如：</li>
 </ol>
-<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
-# 请帮我生成一个Blender Python脚本，用于创建一个人形角色模型，
-# 并设置基本的骨骼结构，以便后续应用动作捕捉数据
-</pre>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 请帮我生成一个Blender Python脚本，用于创建一个人形角色模型，</span></span>
+<span class="line"><span style="color:#6A737D"># 并设置基本的骨骼结构，以便后续应用动作捕捉数据</span></span></code></pre>
 
 <ol start="3">
 <li>Cursor会生成类似以下的代码：</li>
 </ol>
-<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
-import bpy
-import math
-import bmesh
-
-# 清除当前场景
-bpy.ops.object.select_all(action='SELECT')
-bpy.ops.object.delete()
-
-# 创建基础人形模型
-bpy.ops.mesh.primitive_cube_add(size=0.5, location=(0, 0, 1))
-torso = bpy.context.active_object
-torso.name = "Torso"
-
-# 创建头部
-bpy.ops.mesh.primitive_sphere_add(radius=0.25, location=(0, 0, 1.5))
-head = bpy.context.active_object
-head.name = "Head"
-
-# 创建四肢
-# ... (更多代码)
-
-# 设置骨骼结构
-bpy.ops.object.armature_add(location=(0, 0, 0))
-armature = bpy.context.active_object
-armature.name = "Character_Armature"
-
-# 进入编辑模式添加骨骼
-bpy.ops.object.mode_set(mode='EDIT')
-# ... (骨骼创建代码)
-
-# 设置父子关系
-bpy.ops.object.mode_set(mode='OBJECT')
-# ... (绑定代码)
-
-print("基础人形模型和骨骼创建完成")
-</pre>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> bpy</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> math</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> bmesh</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 清除当前场景</span></span>
+<span class="line"><span style="color:#E1E4E8">bpy.ops.object.select_all(</span><span style="color:#FFAB70">action</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">'SELECT'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">bpy.ops.object.delete()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 创建基础人形模型</span></span>
+<span class="line"><span style="color:#E1E4E8">bpy.ops.mesh.primitive_cube_add(</span><span style="color:#FFAB70">size</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0.5</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">location</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"><span style="color:#E1E4E8">torso </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> bpy.context.active_object</span></span>
+<span class="line"><span style="color:#E1E4E8">torso.name </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Torso"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 创建头部</span></span>
+<span class="line"><span style="color:#E1E4E8">bpy.ops.mesh.primitive_sphere_add(</span><span style="color:#FFAB70">radius</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0.25</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">location</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">1.5</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"><span style="color:#E1E4E8">head </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> bpy.context.active_object</span></span>
+<span class="line"><span style="color:#E1E4E8">head.name </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Head"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 创建四肢</span></span>
+<span class="line"><span style="color:#6A737D"># ... (更多代码)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 设置骨骼结构</span></span>
+<span class="line"><span style="color:#E1E4E8">bpy.ops.object.armature_add(</span><span style="color:#FFAB70">location</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"><span style="color:#E1E4E8">armature </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> bpy.context.active_object</span></span>
+<span class="line"><span style="color:#E1E4E8">armature.name </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Character_Armature"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 进入编辑模式添加骨骼</span></span>
+<span class="line"><span style="color:#E1E4E8">bpy.ops.object.mode_set(</span><span style="color:#FFAB70">mode</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">'EDIT'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#6A737D"># ... (骨骼创建代码)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 设置父子关系</span></span>
+<span class="line"><span style="color:#E1E4E8">bpy.ops.object.mode_set(</span><span style="color:#FFAB70">mode</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">'OBJECT'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#6A737D"># ... (绑定代码)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"基础人形模型和骨骼创建完成"</span><span style="color:#E1E4E8">)</span></span></code></pre>
 
 <ol start="4">
 <li>保存脚本，准备导入Blender</li>
@@ -342,7 +357,7 @@ print("基础人形模型和骨骼创建完成")
 <li>启用插件</li>
 <li>在Blender界面中，打开MCP面板（通常位于侧边栏N面板中）</li>
 </ol>
-<h3 id="第三步：导入参考数据-动作捕捉数据"><a href="#第三步：导入参考数据-动作捕捉数据" class="headerlink" title="第三步：导入参考数据&#x2F;动作捕捉数据"></a>第三步：导入参考数据&#x2F;动作捕捉数据</h3><p>MCP插件支持多种动作捕捉数据格式，包括：</p>
+<h3 id="第三步：导入参考数据-动作捕捉数据"><a href="#第三步：导入参考数据-动作捕捉数据" class="headerlink" title="第三步：导入参考数据/动作捕捉数据"></a>第三步：导入参考数据/动作捕捉数据</h3><p>MCP插件支持多种动作捕捉数据格式，包括：</p>
 <ul>
 <li>BVH（生物虚拟人类）文件</li>
 <li>FBX动画</li>
@@ -358,10 +373,8 @@ print("基础人形模型和骨骼创建完成")
 <ol>
 <li>在Cursor中，描述您需要的处理和优化：</li>
 </ol>
-<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
-# 生成Blender Python脚本，用于优化导入的3D模型网格，
-# 包括去除重叠顶点、平滑表面，并准备UV映射
-</pre>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 生成Blender Python脚本，用于优化导入的3D模型网格，</span></span>
+<span class="line"><span style="color:#6A737D"># 包括去除重叠顶点、平滑表面，并准备UV映射</span></span></code></pre>
 
 <ol start="2">
 <li>使用Cursor生成的脚本进行模型优化</li>
@@ -370,140 +383,132 @@ print("基础人形模型和骨骼创建完成")
 <li>在MCP面板中，将导入的动作数据与骨架进行匹配</li>
 <li>使用Cursor生成材质应用脚本：</li>
 </ol>
-<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
-import bpy
-
-# 为人物模型创建PBR材质
-def create_pbr_material(name, base_color, metallic=0.0, roughness=0.7):
-    mat = bpy.data.materials.new(name)
-    mat.use_nodes = True
-    nodes = mat.node_tree.nodes
-    
-    # 清除默认节点
-    for node in nodes:
-        nodes.remove(node)
-    
-    # 创建PBR节点
-    output = nodes.new(type='ShaderNodeOutputMaterial')
-    principled = nodes.new(type='ShaderNodeBsdfPrincipled')
-    
-    # 设置基本属性
-    principled.inputs['Base Color'].default_value = base_color
-    principled.inputs['Metallic'].default_value = metallic
-    principled.inputs['Roughness'].default_value = roughness
-    
-    # 连接节点
-    mat.node_tree.links.new(principled.outputs['BSDF'], output.inputs['Surface'])
-    
-    return mat
-
-# 为不同身体部位创建材质
-skin_material = create_pbr_material("Skin", (0.8, 0.6, 0.5, 1.0), 0.0, 0.3)
-clothes_material = create_pbr_material("Clothes", (0.1, 0.2, 0.8, 1.0), 0.0, 0.8)
-
-# 应用材质到模型
-body_parts = ["Torso", "Head", "LeftArm", "RightArm", "LeftLeg", "RightLeg"]
-
-for part_name in body_parts:
-    if part_name in bpy.data.objects:
-        obj = bpy.data.objects[part_name]
-        if part_name == "Head":
-            obj.data.materials.append(skin_material)
-        else:
-            obj.data.materials.append(clothes_material)
-
-print("材质应用完成")
-</pre>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> bpy</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 为人物模型创建PBR材质</span></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> create_pbr_material</span><span style="color:#E1E4E8">(name, base_color, metallic</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0.0</span><span style="color:#E1E4E8">, roughness</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0.7</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#E1E4E8">    mat </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> bpy.data.materials.new(name)</span></span>
+<span class="line"><span style="color:#E1E4E8">    mat.use_nodes </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> True</span></span>
+<span class="line"><span style="color:#E1E4E8">    nodes </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mat.node_tree.nodes</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    # 清除默认节点</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> node </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> nodes:</span></span>
+<span class="line"><span style="color:#E1E4E8">        nodes.remove(node)</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    # 创建PBR节点</span></span>
+<span class="line"><span style="color:#E1E4E8">    output </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> nodes.new(</span><span style="color:#FFAB70">type</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">'ShaderNodeOutputMaterial'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    principled </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> nodes.new(</span><span style="color:#FFAB70">type</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">'ShaderNodeBsdfPrincipled'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    # 设置基本属性</span></span>
+<span class="line"><span style="color:#E1E4E8">    principled.inputs[</span><span style="color:#9ECBFF">'Base Color'</span><span style="color:#E1E4E8">].default_value </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> base_color</span></span>
+<span class="line"><span style="color:#E1E4E8">    principled.inputs[</span><span style="color:#9ECBFF">'Metallic'</span><span style="color:#E1E4E8">].default_value </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> metallic</span></span>
+<span class="line"><span style="color:#E1E4E8">    principled.inputs[</span><span style="color:#9ECBFF">'Roughness'</span><span style="color:#E1E4E8">].default_value </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> roughness</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    # 连接节点</span></span>
+<span class="line"><span style="color:#E1E4E8">    mat.node_tree.links.new(principled.outputs[</span><span style="color:#9ECBFF">'BSDF'</span><span style="color:#E1E4E8">], output.inputs[</span><span style="color:#9ECBFF">'Surface'</span><span style="color:#E1E4E8">])</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> mat</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 为不同身体部位创建材质</span></span>
+<span class="line"><span style="color:#E1E4E8">skin_material </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> create_pbr_material(</span><span style="color:#9ECBFF">"Skin"</span><span style="color:#E1E4E8">, (</span><span style="color:#79B8FF">0.8</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.6</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.5</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">1.0</span><span style="color:#E1E4E8">), </span><span style="color:#79B8FF">0.0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.3</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">clothes_material </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> create_pbr_material(</span><span style="color:#9ECBFF">"Clothes"</span><span style="color:#E1E4E8">, (</span><span style="color:#79B8FF">0.1</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.2</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.8</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">1.0</span><span style="color:#E1E4E8">), </span><span style="color:#79B8FF">0.0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.8</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 应用材质到模型</span></span>
+<span class="line"><span style="color:#E1E4E8">body_parts </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span><span style="color:#9ECBFF">"Torso"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Head"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"LeftArm"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"RightArm"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"LeftLeg"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"RightLeg"</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> part_name </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> body_parts:</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> part_name </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> bpy.data.objects:</span></span>
+<span class="line"><span style="color:#E1E4E8">        obj </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> bpy.data.objects[part_name]</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> part_name </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> "Head"</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">            obj.data.materials.append(skin_material)</span></span>
+<span class="line"><span style="color:#F97583">        else</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">            obj.data.materials.append(clothes_material)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"材质应用完成"</span><span style="color:#E1E4E8">)</span></span></code></pre>
 
 <h3 id="第六步：最终渲染和导出"><a href="#第六步：最终渲染和导出" class="headerlink" title="第六步：最终渲染和导出"></a>第六步：最终渲染和导出</h3><ol>
 <li>设置相机和灯光</li>
 <li>配置渲染参数</li>
 <li>使用Cursor生成的脚本进行批量渲染：</li>
 </ol>
-<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
-import bpy
-import os
-
-# 设置渲染参数
-bpy.context.scene.render.engine = 'CYCLES'
-bpy.context.scene.cycles.device = 'GPU'
-bpy.context.scene.render.film_transparent = True
-bpy.context.scene.render.resolution_x = 1920
-bpy.context.scene.render.resolution_y = 1080
-
-# 设置输出路径
-output_path = "//renders/"
-if not os.path.exists(bpy.path.abspath(output_path)):
-    os.makedirs(bpy.path.abspath(output_path))
-bpy.context.scene.render.filepath = output_path
-
-# 设置帧范围
-start_frame = 1
-end_frame = 250  # 或根据您的动画长度调整
-
-# 批量渲染
-for frame in range(start_frame, end_frame + 1):
-    bpy.context.scene.frame_set(frame)
-    bpy.context.scene.render.filepath = f"{output_path}frame_{frame:04d}"
-    bpy.ops.render.render(write_still=True)
-
-print(f"渲染完成，输出位置: {bpy.path.abspath(output_path)}")
-</pre>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> bpy</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> os</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 设置渲染参数</span></span>
+<span class="line"><span style="color:#E1E4E8">bpy.context.scene.render.engine </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'CYCLES'</span></span>
+<span class="line"><span style="color:#E1E4E8">bpy.context.scene.cycles.device </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'GPU'</span></span>
+<span class="line"><span style="color:#E1E4E8">bpy.context.scene.render.film_transparent </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> True</span></span>
+<span class="line"><span style="color:#E1E4E8">bpy.context.scene.render.resolution_x </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1920</span></span>
+<span class="line"><span style="color:#E1E4E8">bpy.context.scene.render.resolution_y </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1080</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 设置输出路径</span></span>
+<span class="line"><span style="color:#E1E4E8">output_path </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "//renders/"</span></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#F97583"> not</span><span style="color:#E1E4E8"> os.path.exists(bpy.path.abspath(output_path)):</span></span>
+<span class="line"><span style="color:#E1E4E8">    os.makedirs(bpy.path.abspath(output_path))</span></span>
+<span class="line"><span style="color:#E1E4E8">bpy.context.scene.render.filepath </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> output_path</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 设置帧范围</span></span>
+<span class="line"><span style="color:#E1E4E8">start_frame </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span></span>
+<span class="line"><span style="color:#E1E4E8">end_frame </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 250</span><span style="color:#6A737D">  # 或根据您的动画长度调整</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 批量渲染</span></span>
+<span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> frame </span><span style="color:#F97583">in</span><span style="color:#79B8FF"> range</span><span style="color:#E1E4E8">(start_frame, end_frame </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#E1E4E8">    bpy.context.scene.frame_set(frame)</span></span>
+<span class="line"><span style="color:#E1E4E8">    bpy.context.scene.render.filepath </span><span style="color:#F97583">=</span><span style="color:#F97583"> f</span><span style="color:#9ECBFF">"</span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">output_path</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">frame_</span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">frame</span><span style="color:#F97583">:04d</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#E1E4E8">    bpy.ops.render.render(</span><span style="color:#FFAB70">write_still</span><span style="color:#F97583">=</span><span style="color:#79B8FF">True</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">f</span><span style="color:#9ECBFF">"渲染完成，输出位置: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">bpy.path.abspath(output_path)</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span></code></pre>
 
 <h2 id="高级技巧"><a href="#高级技巧" class="headerlink" title="高级技巧"></a>高级技巧</h2><h3 id="使用Cursor生成自定义MCP处理脚本"><a href="#使用Cursor生成自定义MCP处理脚本" class="headerlink" title="使用Cursor生成自定义MCP处理脚本"></a>使用Cursor生成自定义MCP处理脚本</h3><p>Cursor不仅可以生成基础的Blender脚本，还可以帮助创建复杂的MCP处理流程：</p>
-<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
-import bpy
-from mathutils import Vector, Quaternion
-import math
-
-# MCP数据处理函数
-def smooth_motion_data(armature, bone_names, frames, strength=0.5):
-    """平滑指定骨骼在指定帧范围的运动数据"""
-    obj = bpy.data.objects.get(armature)
-    if not obj or obj.type != 'ARMATURE':
-        print(f"未找到骨架: {armature}")
-        return
-    
-    # 进入姿态模式
-    bpy.context.view_layer.objects.active = obj
-    bpy.ops.object.mode_set(mode='POSE')
-    
-    for bone_name in bone_names:
-        if bone_name not in obj.pose.bones:
-            print(f"未找到骨骼: {bone_name}")
-            continue
-            
-        bone = obj.pose.bones[bone_name]
-        
-        # 收集原始关键帧数据
-        keyframes = []
-        for f in range(frames[0], frames[1]+1):
-            bpy.context.scene.frame_set(f)
-            keyframes.append({
-                'frame': f,
-                'location': bone.location.copy(),
-                'rotation': bone.rotation_quaternion.copy() if bone.rotation_mode == 'QUATERNION' else None
-            })
-        
-        # 应用平滑算法
-        # ... (这里是平滑算法的实现)
-        
-        # 重新设置关键帧
-        # ... (这里是重设关键帧的代码)
-
-# 使用示例
-smooth_motion_data("Character_Armature", ["spine", "neck", "head"], [1, 100], 0.3)
-</pre>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> bpy</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> mathutils </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Vector, Quaternion</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> math</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># MCP数据处理函数</span></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> smooth_motion_data</span><span style="color:#E1E4E8">(armature, bone_names, frames, strength</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0.5</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#9ECBFF">    """平滑指定骨骼在指定帧范围的运动数据"""</span></span>
+<span class="line"><span style="color:#E1E4E8">    obj </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> bpy.data.objects.get(armature)</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#F97583"> not</span><span style="color:#E1E4E8"> obj </span><span style="color:#F97583">or</span><span style="color:#E1E4E8"> obj.type </span><span style="color:#F97583">!=</span><span style="color:#9ECBFF"> 'ARMATURE'</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#79B8FF">        print</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">f</span><span style="color:#9ECBFF">"未找到骨架: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">armature</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">        return</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    # 进入姿态模式</span></span>
+<span class="line"><span style="color:#E1E4E8">    bpy.context.view_layer.objects.active </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> obj</span></span>
+<span class="line"><span style="color:#E1E4E8">    bpy.ops.object.mode_set(</span><span style="color:#FFAB70">mode</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">'POSE'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> bone_name </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> bone_names:</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> bone_name </span><span style="color:#F97583">not</span><span style="color:#F97583"> in</span><span style="color:#E1E4E8"> obj.pose.bones:</span></span>
+<span class="line"><span style="color:#79B8FF">            print</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">f</span><span style="color:#9ECBFF">"未找到骨骼: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">bone_name</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            continue</span></span>
+<span class="line"><span style="color:#E1E4E8">            </span></span>
+<span class="line"><span style="color:#E1E4E8">        bone </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> obj.pose.bones[bone_name]</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#6A737D">        # 收集原始关键帧数据</span></span>
+<span class="line"><span style="color:#E1E4E8">        keyframes </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> []</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> f </span><span style="color:#F97583">in</span><span style="color:#79B8FF"> range</span><span style="color:#E1E4E8">(frames[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">], frames[</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">+</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#E1E4E8">            bpy.context.scene.frame_set(f)</span></span>
+<span class="line"><span style="color:#E1E4E8">            keyframes.append({</span></span>
+<span class="line"><span style="color:#9ECBFF">                'frame'</span><span style="color:#E1E4E8">: f,</span></span>
+<span class="line"><span style="color:#9ECBFF">                'location'</span><span style="color:#E1E4E8">: bone.location.copy(),</span></span>
+<span class="line"><span style="color:#9ECBFF">                'rotation'</span><span style="color:#E1E4E8">: bone.rotation_quaternion.copy() </span><span style="color:#F97583">if</span><span style="color:#E1E4E8"> bone.rotation_mode </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> 'QUATERNION'</span><span style="color:#F97583"> else</span><span style="color:#79B8FF"> None</span></span>
+<span class="line"><span style="color:#E1E4E8">            })</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#6A737D">        # 应用平滑算法</span></span>
+<span class="line"><span style="color:#6A737D">        # ... (这里是平滑算法的实现)</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#6A737D">        # 重新设置关键帧</span></span>
+<span class="line"><span style="color:#6A737D">        # ... (这里是重设关键帧的代码)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 使用示例</span></span>
+<span class="line"><span style="color:#E1E4E8">smooth_motion_data(</span><span style="color:#9ECBFF">"Character_Armature"</span><span style="color:#E1E4E8">, [</span><span style="color:#9ECBFF">"spine"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"neck"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"head"</span><span style="color:#E1E4E8">], [</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">], </span><span style="color:#79B8FF">0.3</span><span style="color:#E1E4E8">)</span></span></code></pre>
 
 <h3 id="结合AI生成的纹理"><a href="#结合AI生成的纹理" class="headerlink" title="结合AI生成的纹理"></a>结合AI生成的纹理</h3><p>您还可以使用其他AI工具（如Stable Diffusion）生成纹理，然后在Cursor中编写脚本将这些纹理应用到模型上：</p>
-<pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre; line-height: 1.5;">
-import bpy
-import os
-
-def apply_ai_textures(model_obj, textures_folder):
-    """应用AI生成的纹理到模型"""
-    # 实现代码...
-</pre>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> bpy</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> os</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> apply_ai_textures</span><span style="color:#E1E4E8">(model_obj, textures_folder):</span></span>
+<span class="line"><span style="color:#9ECBFF">    """应用AI生成的纹理到模型"""</span></span>
+<span class="line"><span style="color:#6A737D">    # 实现代码...</span></span></code></pre>
 
 <h2 id="常见问题解决"><a href="#常见问题解决" class="headerlink" title="常见问题解决"></a>常见问题解决</h2><p>我在测试生成3d模型时遇到了贼烦的几个问题。T T</p>
 <ol>
@@ -595,27 +600,27 @@ def apply_ai_textures(model_obj, textures_folder):
     <script src="/js/white-canvas-nest.js"></script>
     
         
-            <script src="/js/custom.js"></script>
+            <script src="/js/optimize/performance-loader.js"></script>
         
-            <script src="/js/blog-effects.js"></script>
+            <script defer-load src="/js/custom.js"></script>
         
-            <script src="/js/particles-effect.js"></script>
+            <script defer-load src="/js/blog-effects.js"></script>
         
-            <script src="/js/scroll-header.js"></script>
+            <script defer-load src="/js/particles-effect.js"></script>
         
-            <script src="/js/img-lightbox.js"></script>
+            <script defer-load src="/js/scroll-header.js"></script>
         
-            <script src="/js/back-to-top.js"></script>
+            <script defer-load src="/js/img-lightbox.js"></script>
         
-            <script src="/js/tag-cloud.js"></script>
+            <script defer-load src="/js/back-to-top.js"></script>
         
-            <script src="/js/music-player.js"></script>
+            <script defer-load src="/js/tag-cloud.js"></script>
         
-            <script src="/js/effects-loader.js"></script>
+            <script defer-load src="/js/music-player.js"></script>
         
-            <script src="/js/toc-helper.js"></script>
+            <script defer-load src="/js/effects-loader.js"></script>
         
-            <script src="/js/code-block-fix.js"></script>
+            <script defer-load src="/js/toc-helper.js"></script>
         
     
     
@@ -625,5 +630,8 @@ def apply_ai_textures(model_obj, textures_folder):
 
 
     
-</body>
+<!-- hexo injector body_end start -->
+<script src="/assets/prism-bundle.js"></script>
+<script src="/assets/prism-plus.js" data-pjax=""></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":0.15,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"live2d-widget-model-mianmian"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":10,"vOffset":0},"mobile":{"show":true,"scale":0.12},"react":{"opacityDefault":0.85,"opacityOnHover":1},"log":false});</script></body>
 </html>

@@ -1,0 +1,172 @@
+/* 
+ * 性能优化相关样式
+ * 用于减少首屏加载时间、优化动画性能和提高页面渲染速度
+ */
+
+/* 减少布局偏移 */
+:root {
+    --content-width: 100%;
+    --sidebar-width: 300px;
+    --gutter: 2rem;
+    --main-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 预留空间，防止布局偏移 */
+.post-card, .sidebar-card, .comment-form {
+    min-height: 50px;
+    contain: content;
+}
+
+/* 图片容器预留空间 */
+.post-content p:has(img), .post-content figure {
+    min-height: 200px;
+    contain: layout;
+}
+
+/* 优化动画性能 */
+.animated, .post-card, .sidebar-item, .nav-item {
+    will-change: transform, opacity;
+}
+
+/* 使用硬件加速 */
+.hardware-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* 减少复杂动画在移动设备上的使用 */
+@media (max-width: 768px) {
+    .reduced-motion {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* 优化字体渲染 */
+body {
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 减少大型背景图的性能影响 */
+.hero-image, .banner-image {
+    background-attachment: scroll !important; /* 避免在移动设备上使用fixed */
+}
+
+/* 优化滚动性能 */
+.smooth-scroll {
+    scroll-behavior: smooth;
+}
+
+/* 对于长列表页面，增加分段渲染支持 */
+.post-list {
+    content-visibility: auto;
+    contain-intrinsic-size: 200px; /* 估算每个列表项高度 */
+}
+
+/* 减少不必要的hover效果在移动设备上的使用 */
+@media (hover: none) {
+    .hover-effect {
+        display: none;
+    }
+}
+
+/* 优化动画帧率 */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* 优化CSS选择器性能 */
+/* 使用类选择器代替标签选择器 */
+.post-title, .post-meta, .post-content p {
+    margin-bottom: 1rem;
+}
+
+/* 避免过深的后代选择器 */
+.sidebar .widget .widget-title {
+    /* 不推荐的深层选择器 */
+}
+.widget-title {
+    /* 推荐：使用更简洁的选择器 */
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* 占位符图片容器样式 */
+.placeholder-image {
+    background-color: #f0f0f0;
+    position: relative;
+    overflow: hidden;
+}
+
+.placeholder-image::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -150px;
+    top: 0;
+    height: 100%;
+    width: 150px;
+    background: linear-gradient(to right, transparent 0%, #e8e8e8 50%, transparent 100%);
+    animation: placeholder-shine 1.5s infinite;
+}
+
+@keyframes placeholder-shine {
+    0% {
+        left: -150px;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* 离线提示样式 */
+.offline-notice {
+    background-color: #ff9800;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    font-size: 14px;
+}
+
+/* 最近访问的文章列表样式 */
+.recent-posts-offline {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.recent-posts-offline h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.recent-posts-offline ul {
+    margin: 0;
+    padding: 0 0 0 20px;
+}
+
+.recent-posts-offline li {
+    margin-bottom: 5px;
+}
+
+.recent-posts-offline a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.recent-posts-offline a:hover {
+    text-decoration: underline;
+} 

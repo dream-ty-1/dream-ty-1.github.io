@@ -1,0 +1,56 @@
+/* 懒加载图片和资源的样式 */
+
+/* 懒加载图片的占位样式 */
+img.lazy {
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+img.lazy.loaded {
+    opacity: 1;
+}
+
+/* 懒加载背景图的占位样式 */
+.lazy-background {
+    background-color: #f6f6f6;
+    background-image: none !important;
+    transition: background-image 0.3s ease-in;
+}
+
+/* 懒加载iframe的占位样式 */
+iframe.lazy {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+iframe.lazy.loaded {
+    opacity: 1;
+}
+
+/* 图片加载中的骨架屏效果 */
+.img-skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: #f6f6f6;
+}
+
+.img-skeleton::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -150px;
+    top: 0;
+    height: 100%;
+    width: 150px;
+    background: linear-gradient(to right, transparent 0%, #e8e8e8 50%, transparent 100%);
+    animation: skeleton-loading 1.5s ease infinite;
+}
+
+@keyframes skeleton-loading {
+    from {
+        left: -150px;
+    }
+    to {
+        left: 100%;
+    }
+} 

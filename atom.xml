@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Tianyu の 个人博客</title>
+  <icon>http://localhost:4000/icon.png</icon>
+  <subtitle>个人技术分享和生活记录</subtitle>
+  <link href="http://localhost:4000/atom.xml" rel="self"/>
+  
+  <link href="http://localhost:4000/"/>
+  <updated>2025-06-16T12:52:03.342Z</updated>
+  <id>http://localhost:4000/</id>
+  
+  <author>
+    <name>TianYu</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Hexo插件增强博客体验</title>
+    <link href="http://localhost:4000/2025/06/16/using-hexo-plugins/"/>
+    <id>http://localhost:4000/2025/06/16/using-hexo-plugins/</id>
+    <published>2025-06-16T12:30:00.000Z</published>
+    <updated>2025-06-16T12:52:03.342Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="博客技巧" scheme="http://localhost:4000/categories/%E5%8D%9A%E5%AE%A2%E6%8A%80%E5%B7%A7/"/>
+    
+    
+    <category term="Hexo" scheme="http://localhost:4000/tags/Hexo/"/>
+    
+    <category term="教程" scheme="http://localhost:4000/tags/%E6%95%99%E7%A8%8B/"/>
+    
+    <category term="插件" scheme="http://localhost:4000/tags/%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Cloud-OpenFeign笔记</title>
+    <link href="http://localhost:4000/2025/06/12/microservice-openfeign-tutorial/"/>
+    <id>http://localhost:4000/2025/06/12/microservice-openfeign-tutorial/</id>
+    <published>2025-06-12T02:30:00.000Z</published>
+    <updated>2025-06-16T13:12:26.821Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Spring-Cloud微服务实战：OpenFeign笔记&quot;&gt;&lt;a href=&quot;#Spring-Cloud微服务实战：OpenFeign笔记&quot; class=&quot;headerlink&quot; title=&quot;Spring Cloud微服务实战：OpenFeign笔记&quot;&gt;&lt;/a&gt;Spring Cloud微服务实战：OpenFeign笔记&lt;/h1&gt;&lt;p&gt;在微服务架构中，服务间通信是一个基础而关键的问题。Spring Cloud OpenFeign作为声明式REST客户端，极大地简化了微服务间的调用过程。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="后端开发" scheme="http://localhost:4000/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="微服务" scheme="http://localhost:4000/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+    
+    <category term="Spring Cloud" scheme="http://localhost:4000/tags/Spring-Cloud/"/>
+    
+    <category term="OpenFeign" scheme="http://localhost:4000/tags/OpenFeign/"/>
+    
+    <category term="微服务" scheme="http://localhost:4000/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+    <category term="Java" scheme="http://localhost:4000/tags/Java/"/>
+    
+    <category term="Spring Boot" scheme="http://localhost:4000/tags/Spring-Boot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用Cursor与Blender-MCP生成3D模型</title>
+    <link href="http://localhost:4000/2025/06/09/%E4%BD%BF%E7%94%A8Cursor%E4%B8%8EBlender-MCP%E7%94%9F%E6%88%90AI%E9%A9%B1%E5%8A%A8%E7%9A%843D%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://localhost:4000/2025/06/09/%E4%BD%BF%E7%94%A8Cursor%E4%B8%8EBlender-MCP%E7%94%9F%E6%88%90AI%E9%A9%B1%E5%8A%A8%E7%9A%843D%E6%A8%A1%E5%9E%8B/</id>
+    <published>2025-06-09T08:30:00.000Z</published>
+    <updated>2025-06-16T12:02:11.988Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Cursor" scheme="http://localhost:4000/categories/Cursor/"/>
+    
+    
+    <category term="AI" scheme="http://localhost:4000/tags/AI/"/>
+    
+    <category term="Blender" scheme="http://localhost:4000/tags/Blender/"/>
+    
+    <category term="3D建模" scheme="http://localhost:4000/tags/3D%E5%BB%BA%E6%A8%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java前端学习路线</title>
+    <link href="http://localhost:4000/2025/06/06/java-frontend-learning-path/"/>
+    <id>http://localhost:4000/2025/06/06/java-frontend-learning-path/</id>
+    <published>2025-06-06T07:30:00.000Z</published>
+    <updated>2025-06-16T12:02:11.984Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="java" scheme="http://localhost:4000/categories/java/"/>
+    
+    
+    <category term="编程" scheme="http://localhost:4000/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="学习" scheme="http://localhost:4000/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>欢迎来到我的博客</title>
+    <link href="http://localhost:4000/2025/06/05/hello-world/"/>
+    <id>http://localhost:4000/2025/06/05/hello-world/</id>
+    <published>2025-06-05T08:30:00.000Z</published>
+    <updated>2025-06-16T12:02:11.981Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="生活随笔" scheme="http://localhost:4000/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="Hexo" scheme="http://localhost:4000/tags/Hexo/"/>
+    
+    <category term="博客" scheme="http://localhost:4000/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+    <category term="教程" scheme="http://localhost:4000/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java后端学习路线</title>
+    <link href="http://localhost:4000/2025/06/05/java-backend-learning-path/"/>
+    <id>http://localhost:4000/2025/06/05/java-backend-learning-path/</id>
+    <published>2025-06-05T02:00:00.000Z</published>
+    <updated>2025-06-16T12:02:11.984Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="java" scheme="http://localhost:4000/categories/java/"/>
+    
+    
+    <category term="编程" scheme="http://localhost:4000/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="学习" scheme="http://localhost:4000/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+</feed>

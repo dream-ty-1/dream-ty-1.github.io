@@ -1,0 +1,313 @@
+/* 代码高亮样式 - 适配ParticleX主题 */
+
+/* 代码块容器 */
+.highlight, pre {
+    position: relative;
+    margin: 1.5em 0;
+    padding: 1.5em 1.5em 1.5em 3.5em; /* 增加左侧padding以适应行号 */
+    border-radius: 8px;
+    background: #191b25; /* 更深更暗的背景色 */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+}
+
+/* 语言标签 - 适配ParticleX主题的标签位置 */
+.highlight::before, pre::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 40px;
+    padding: 0.25em 0.5em;
+    text-align: center;
+    color: #ffffff;
+    font-size: 0.85em;
+    font-weight: 700;
+    background: #4d78cc;
+    border-bottom-right-radius: 8px;
+    text-transform: uppercase;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* 隐藏代码块内可能的语言类名 */
+.highlight .language-python, 
+.highlight .language-javascript,
+.highlight .language-html, 
+.highlight .language-css,
+.highlight .language-text,
+.highlight .language-plaintext,
+.highlight .language-shell,
+.highlight [class^="language-"],
+.highlight [class*=" language-"],
+pre .language-python,
+pre .language-javascript,
+pre .language-html,
+pre .language-css,
+pre .language-text,
+pre .language-plaintext,
+pre .language-shell,
+pre [class^="language-"],
+pre [class*=" language-"] {
+    visibility: hidden;
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    overflow: hidden !important;
+    z-index: -1 !important;
+}
+
+/* 语言标签的具体样式 */
+.language-python, [data-lang="python"] {
+    --lang-color: #3572A5;
+}
+
+.language-javascript, [data-lang="javascript"] {
+    --lang-color: #f1e05a;
+}
+
+.language-html, [data-lang="html"] {
+    --lang-color: #e34c26;
+}
+
+.language-css, [data-lang="css"] {
+    --lang-color: #563d7c;
+}
+
+/* 使用变量设置语言标签颜色 */
+.highlight::before, pre::before {
+    background: var(--lang-color, #4d78cc);
+}
+
+/* 行号样式 - 调整位置以匹配ParticleX主题 */
+.gutter, .line-numbers {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2.5em;
+    padding: 1.5em 0;
+    margin: 0;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.4); /* 更深的背景色 */
+    color: #bbb; /* 更亮的行号颜色 */
+    font-size: 1em; /* 增大行号字体 */
+    line-height: 1.6; /* 增加行高 */
+    user-select: none;
+}
+
+/* 行号中的具体数字 */
+.gutter .line, .line-numbers span {
+    display: block;
+    padding: 0 0.5em;
+    color: #bbb; /* 更亮的行号颜色 */
+    font-weight: 500; /* 略微加粗 */
+}
+
+/* 代码内容 */
+.code, pre code {
+    display: block;
+    overflow-x: auto;
+    color: #f8f8f2; /* 更亮的文本颜色 */
+    font-family: var(--code-font), monospace;
+    font-size: 1.05em; /* 进一步增大字体大小 */
+    font-weight: 500; /* 略微加粗 */
+    line-height: 1.6; /* 增加行高 */
+    letter-spacing: 0.03em; /* 增加字符间距 */
+    tab-size: 4;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); /* 添加文字阴影增强可读性 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 代码行 */
+.code .line, pre code .line {
+    min-height: 1.6em;
+    padding: 0 0.2em; /* 添加行内padding */
+}
+
+/* 突出显示当前行 */
+.code .line:hover, pre code .line:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* 代码复制按钮 */
+.code-copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 0.3em 0.6em;
+    font-size: 0.85em;
+    color: #f8f8f2;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.highlight:hover .code-copy-btn, pre:hover .code-copy-btn {
+    opacity: 1;
+}
+
+.code-copy-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* 代码高亮颜色方案 - 更高对比度的配色 */
+.keyword, .hljs-keyword,
+.selector-tag, .hljs-selector-tag,
+.built_in, .hljs-built_in,
+.name, .hljs-name,
+.tag, .hljs-tag {
+    color: #ff80bf; /* 更亮的紫色 */
+    font-weight: 600; /* 加粗关键字 */
+}
+
+.string, .hljs-string,
+.title, .hljs-title,
+.section, .hljs-section,
+.attribute, .hljs-attribute,
+.literal, .hljs-literal,
+.template-tag, .hljs-template-tag,
+.template-variable, .hljs-template-variable,
+.type, .hljs-type,
+.addition, .hljs-addition {
+    color: #baffa3; /* 更亮的绿色 */
+}
+
+.comment, .hljs-comment,
+.quote, .hljs-quote,
+.deletion, .hljs-deletion,
+.meta, .hljs-meta {
+    color: #95a0b5; /* 更亮的灰色 */
+    font-style: italic;
+}
+
+.doctag, .hljs-doctag,
+.selector-id, .hljs-selector-id,
+.selector-class, .hljs-selector-class,
+.selector-attr, .hljs-selector-attr,
+.selector-pseudo, .hljs-selector-pseudo {
+    color: #ffffa0; /* 更亮的黄色 */
+}
+
+.number, .hljs-number,
+.symbol, .hljs-symbol,
+.bullet, .hljs-bullet,
+.link, .hljs-link,
+.variable, .hljs-variable,
+.regexp, .hljs-regexp {
+    color: #ffbe80; /* 更亮的橙色 */
+}
+
+.operator, .hljs-operator,
+.punctuation, .hljs-punctuation {
+    color: #ffffff; /* 纯白色 */
+}
+
+.function, .hljs-function,
+.params, .hljs-params {
+    color: #80d7ff; /* 更亮的蓝色 */
+    font-weight: 600; /* 加粗函数名 */
+}
+
+/* 特定语言的高亮调整 */
+/* Python */
+.language-python .decorator, [data-lang="python"] .decorator {
+    color: #69ffb3; /* 更亮的青色 */
+    font-weight: 600;
+}
+
+.language-python .function, [data-lang="python"] .function {
+    color: #80d7ff; /* 更亮的蓝色 */
+    font-weight: 600;
+}
+
+.language-python .string, [data-lang="python"] .string {
+    color: #baffa3; /* 更亮的绿色 */
+}
+
+.language-python .comment, [data-lang="python"] .comment {
+    color: #95a0b5; /* 更亮的灰色 */
+    font-style: italic;
+}
+
+/* JavaScript */
+.language-javascript .keyword, [data-lang="javascript"] .keyword {
+    color: #ff80bf; /* 更亮的紫色 */
+    font-weight: 600;
+}
+
+.language-javascript .function, [data-lang="javascript"] .function {
+    color: #80d7ff; /* 更亮的蓝色 */
+    font-weight: 600;
+}
+
+/* 代码块动画效果 */
+.highlight, pre {
+    transition: transform 0.2s ease;
+}
+
+.highlight:hover, pre:hover {
+    transform: translateY(-2px);
+}
+
+/* 适配暗色主题 */
+@media (prefers-color-scheme: dark) {
+    .highlight, pre {
+        background: #191b25; /* 更深更暗的背景色 */
+    }
+    
+    .highlight::before, pre::before {
+        background: var(--lang-color, #4d78cc);
+    }
+    
+    .gutter, .line-numbers {
+        background: rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* 适配移动设备 */
+@media (max-width: 768px) {
+    .highlight, pre {
+        margin: 1em -0.5em;
+        border-radius: 0;
+        padding: 1.5em 1em 1.5em 2.5em;
+    }
+    
+    .highlight::before, pre::before {
+        font-size: 0.7em;
+        padding: 0.2em 0.5em;
+    }
+    
+    .gutter, .line-numbers {
+        width: 2em;
+    }
+    
+    .code, pre code {
+        font-size: 1em; /* 移动设备上稍微小一点 */
+    }
+}
+
+/* 添加字体预加载，确保代码字体正确显示 */
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+}
+
+@font-face {
+    font-family: 'Fira Code';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap');
+} 

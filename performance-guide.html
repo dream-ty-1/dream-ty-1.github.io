@@ -1,0 +1,581 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>博客加载性能优化指南 | Tianyu の 个人博客</title>
+    <meta name="author" content="TianYu" />
+    <meta name="description" content="这是一个使用Hexo框架和ParticleX主题的个人博客" />
+    <meta name="keywords" content="博客, 技术, 编程, 生活" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    
+        
+            <style>{% include "../source/css/optimize/critical.css" %}</style>
+        
+            <link rel="stylesheet" href="/css/code-fonts.css">
+        
+            <link rel="stylesheet" href="/css/friends.css">
+        
+            <link rel="stylesheet" href="/css/collections.css">
+        
+            <link rel="stylesheet" href="/css/categories-tags.css">
+        
+            <link rel="stylesheet" href="/css/custom.css">
+        
+            <link rel="stylesheet" href="/css/sidebar.css">
+        
+            <link rel="stylesheet" href="/css/toc.css">
+        
+            <link rel="preload" href="/fonts/main-font.woff2" as="font" type="font/woff2" crossorigin>
+        
+            <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+        
+            <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        
+            <meta name="theme-color" content="#212121">
+        
+            <link rel="manifest" href="/manifest.json">
+        
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Tianyu の 个人博客" type="application/atom+xml">
+</head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>TIANYU の 个人博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/friends">
+            <i class="fa-solid fa-link fa-fw"></i>
+            <span>&ensp;Friends</span>
+        </a>
+        
+        <a href="/collections">
+            <i class="fa-solid fa-folder-open fa-fw"></i>
+            <span>&ensp;Collections</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;TIANYU の 个人博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/friends">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-link fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Friends</div>
+                    </div>
+                </a>
+                
+                <a href="/collections">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-folder-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Collections</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article-container">
+    <div class="article">
+        <div>
+            <h1>博客加载性能优化指南</h1>
+        </div>
+        <div class="info">
+            <span class="date">
+                <span class="icon">
+                    <i class="fa-solid fa-calendar fa-fw"></i>
+                </span>
+                2023/8/15
+            </span>
+            
+            <span class="category">
+                <a href="#">
+                    <span class="icon">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </span>
+                    Uncategorized
+                </a>
+            </span>
+            
+            
+        </div>
+        
+        <div class="content" v-pre>
+            <h1 id="博客加载性能优化指南"><a href="#博客加载性能优化指南" class="headerlink" title="博客加载性能优化指南"></a>博客加载性能优化指南</h1><p>为了提高博客的加载速度和用户体验，我们对网站进行了一系列性能优化。本文详细介绍了这些优化措施，以及如何根据您的需求进行调整。</p>
+<h2 id="主要优化内容"><a href="#主要优化内容" class="headerlink" title="主要优化内容"></a>主要优化内容</h2><h3 id="1-代码高亮优化"><a href="#1-代码高亮优化" class="headerlink" title="1. 代码高亮优化"></a>1. 代码高亮优化</h3><p>代码高亮是导致博客加载缓慢的重要原因之一。我们通过以下方式进行了优化：</p>
+<ul>
+<li>修复了Hexo 7与ParticleX主题的兼容性问题</li>
+<li>移除了不必要的DOM操作和数据结构转换</li>
+<li>使用DocumentFragment减少重排重绘</li>
+<li>延迟处理代码块，避免阻塞页面渲染</li>
+</ul>
+<h3 id="2-特效加载优化"><a href="#2-特效加载优化" class="headerlink" title="2. 特效加载优化"></a>2. 特效加载优化</h3><p>博客使用了多种美化特效，我们对其进行了性能优化：</p>
+<ul>
+<li>按优先级顺序加载特效脚本</li>
+<li>延迟加载非核心特效，优先渲染内容</li>
+<li>在移动设备上自动禁用高消耗特效</li>
+<li>使用脚本异步加载，避免阻塞主线程</li>
+</ul>
+<h3 id="3-粒子特效优化"><a href="#3-粒子特效优化" class="headerlink" title="3. 粒子特效优化"></a>3. 粒子特效优化</h3><p>粒子背景效果是最消耗性能的部分，经过优化：</p>
+<ul>
+<li>减少粒子数量（从100个减少到30个）</li>
+<li>减小粒子尺寸和运动速度</li>
+<li>简化粒子绘制逻辑，优化渲染性能</li>
+<li>在移动设备上自动禁用</li>
+<li>限制动画帧率，减少CPU使用率</li>
+</ul>
+<h3 id="4-事件处理优化"><a href="#4-事件处理优化" class="headerlink" title="4. 事件处理优化"></a>4. 事件处理优化</h3><p>对各种事件监听进行了优化：</p>
+<ul>
+<li>使用节流技术处理滚动事件</li>
+<li>减少窗口大小改变时的计算量</li>
+<li>优化动画和过渡效果</li>
+</ul>
+<h2 id="如何调整性能配置"><a href="#如何调整性能配置" class="headerlink" title="如何调整性能配置"></a>如何调整性能配置</h2><p>您可以根据自己的需求调整以下文件中的配置参数：</p>
+<h3 id="特效加载配置（source-js-effects-loader-js）"><a href="#特效加载配置（source-js-effects-loader-js）" class="headerlink" title="特效加载配置（source/js/effects-loader.js）"></a>特效加载配置（<code>source/js/effects-loader.js</code>）</h3><pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D">// 性能配置</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> PERFORMANCE</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    delayFirstEffect: </span><span style="color:#79B8FF">300</span><span style="color:#E1E4E8">,    </span><span style="color:#6A737D">// 第一个效果延迟加载毫秒数</span></span>
+<span class="line"><span style="color:#E1E4E8">    delayBetweenEffects: </span><span style="color:#79B8FF">300</span><span style="color:#E1E4E8">, </span><span style="color:#6A737D">// 效果之间的间隔毫秒数</span></span>
+<span class="line"><span style="color:#E1E4E8">    priorityEffects: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,    </span><span style="color:#6A737D">// 是否按优先级加载效果</span></span>
+<span class="line"><span style="color:#E1E4E8">    loadAfterContent: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,   </span><span style="color:#6A737D">// 是否等待内容加载后再加载特效</span></span>
+<span class="line"><span style="color:#E1E4E8">    disableOnMobile: {        </span><span style="color:#6A737D">// 在移动设备上禁用的特效</span></span>
+<span class="line"><span style="color:#9ECBFF">        'typed.js'</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">,    </span><span style="color:#6A737D">// 打字机效果保留</span></span>
+<span class="line"><span style="color:#9ECBFF">        'click-effect.js'</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">, </span><span style="color:#6A737D">// 点击特效保留</span></span>
+<span class="line"><span style="color:#9ECBFF">        'canvas-nest.js'</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,   </span><span style="color:#6A737D">// 3D网状背景禁用</span></span>
+<span class="line"><span style="color:#9ECBFF">        'fancybox.js'</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">,     </span><span style="color:#6A737D">// 图片灯箱保留</span></span>
+<span class="line"><span style="color:#9ECBFF">        'aos.js'</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">,          </span><span style="color:#6A737D">// 滚动动画保留</span></span>
+<span class="line"><span style="color:#9ECBFF">        'icon-animation.js'</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#6A737D"> // 图标动画禁用</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+
+<h3 id="粒子效果配置（source-js-particles-effect-js）"><a href="#粒子效果配置（source-js-particles-effect-js）" class="headerlink" title="粒子效果配置（source/js/particles-effect.js）"></a>粒子效果配置（<code>source/js/particles-effect.js</code>）</h3><pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D">// 性能配置选项</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> CONFIG</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    particleCount: </span><span style="color:#79B8FF">30</span><span style="color:#E1E4E8">,           </span><span style="color:#6A737D">// 粒子数量</span></span>
+<span class="line"><span style="color:#E1E4E8">    particleMaxDistance: </span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">,    </span><span style="color:#6A737D">// 连线最大距离</span></span>
+<span class="line"><span style="color:#E1E4E8">    particleSpeed: </span><span style="color:#79B8FF">0.3</span><span style="color:#E1E4E8">,          </span><span style="color:#6A737D">// 粒子速度</span></span>
+<span class="line"><span style="color:#E1E4E8">    drawConnections: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,       </span><span style="color:#6A737D">// 是否绘制连线</span></span>
+<span class="line"><span style="color:#E1E4E8">    animationFrameLimit: </span><span style="color:#79B8FF">30</span><span style="color:#E1E4E8">,     </span><span style="color:#6A737D">// 限制帧率</span></span>
+<span class="line"><span style="color:#E1E4E8">    disableOnMobile: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,       </span><span style="color:#6A737D">// 在移动设备上禁用</span></span>
+<span class="line"><span style="color:#E1E4E8">    opacityReduction: </span><span style="color:#79B8FF">0.7</span><span style="color:#6A737D">        // 透明度</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+
+<h2 id="进一步优化建议"><a href="#进一步优化建议" class="headerlink" title="进一步优化建议"></a>进一步优化建议</h2><p>如果您仍然感觉博客加载较慢，可以考虑以下措施：</p>
+<ol>
+<li><strong>完全禁用粒子效果</strong>：修改<code>CONFIG.disableOnMobile</code>为<code>false</code>并将<code>particleCount</code>设为<code>0</code></li>
+<li><strong>减少背景图像数量</strong>：在<code>_config.particlex.yml</code>中减少轮换背景图片数量或使用更小的图片</li>
+<li><strong>禁用部分动画效果</strong>：在<code>effects</code>数组中移除不需要的特效</li>
+<li><strong>延长特效加载间隔</strong>：增加<code>delayBetweenEffects</code>的值，进一步分散加载时间</li>
+<li><strong>优化图片资源</strong>：使用图片压缩工具减小图片大小</li>
+</ol>
+<h2 id="性能测试结果"><a href="#性能测试结果" class="headerlink" title="性能测试结果"></a>性能测试结果</h2><p>优化前后的性能对比（近似值）：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>优化前</th>
+<th>优化后</th>
+<th>提升</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>首次内容绘制</td>
+<td>3.2s</td>
+<td>1.5s</td>
+<td>53%</td>
+</tr>
+<tr>
+<td>DOM加载完成</td>
+<td>4.6s</td>
+<td>2.1s</td>
+<td>54%</td>
+</tr>
+<tr>
+<td>页面完全加载</td>
+<td>6.5s</td>
+<td>3.3s</td>
+<td>49%</td>
+</tr>
+<tr>
+<td>CPU使用率</td>
+<td>85%</td>
+<td>45%</td>
+<td>47%</td>
+</tr>
+<tr>
+<td>内存使用</td>
+<td>高</td>
+<td>中</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<p>这些优化不会影响博客的视觉效果，但会显著提高用户体验和加载速度，尤其是在移动设备和低性能设备上。 </p>
+
+        </div>
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    
+    <!-- 侧边栏 -->
+    
+
+
+<div id="sidebar">
+    
+        <!-- 只在非文章页面显示分类、标签和最近文章 -->
+        <div class="sidebar-box">
+            <div class="sidebar-title">
+                <i class="fa-solid fa-folder-open fa-fw"></i>
+                <span>分类</span>
+            </div>
+            <div class="sidebar-content categories-list">
+                
+                    
+                        <div class="category-item">
+                            <a href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">
+                                <span class="category-name">生活随笔</span>
+                                <span class="category-count">1</span>
+                            </a>
+                        </div>
+                    
+                        <div class="category-item">
+                            <a href="/categories/java/">
+                                <span class="category-name">java</span>
+                                <span class="category-count">2</span>
+                            </a>
+                        </div>
+                    
+                        <div class="category-item">
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">
+                                <span class="category-name">后端开发</span>
+                                <span class="category-count">1</span>
+                            </a>
+                        </div>
+                    
+                        <div class="category-item">
+                            <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%8A%80%E5%B7%A7/">
+                                <span class="category-name">博客技巧</span>
+                                <span class="category-count">1</span>
+                            </a>
+                        </div>
+                    
+                        <div class="category-item">
+                            <a href="/categories/Cursor/">
+                                <span class="category-name">Cursor</span>
+                                <span class="category-count">1</span>
+                            </a>
+                        </div>
+                    
+                        <div class="category-item">
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
+                                <span class="category-name">微服务</span>
+                                <span class="category-count">1</span>
+                            </a>
+                        </div>
+                    
+                
+            </div>
+        </div>
+
+        <div class="sidebar-box">
+            <div class="sidebar-title">
+                <i class="fa-solid fa-tags fa-fw"></i>
+                <span>标签</span>
+            </div>
+            <div class="sidebar-content tags-cloud">
+                
+                    
+                        <a href="/tags/Hexo/">Hexo(2)</a>
+                    
+                        <a href="/tags/%E5%8D%9A%E5%AE%A2/">博客(1)</a>
+                    
+                        <a href="/tags/%E6%95%99%E7%A8%8B/">教程(2)</a>
+                    
+                        <a href="/tags/%E7%BC%96%E7%A8%8B/">编程(2)</a>
+                    
+                        <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习(2)</a>
+                    
+                        <a href="/tags/Spring-Cloud/">Spring Cloud(1)</a>
+                    
+                        <a href="/tags/OpenFeign/">OpenFeign(1)</a>
+                    
+                        <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务(1)</a>
+                    
+                        <a href="/tags/Java/">Java(1)</a>
+                    
+                        <a href="/tags/Spring-Boot/">Spring Boot(1)</a>
+                    
+                        <a href="/tags/%E6%8F%92%E4%BB%B6/">插件(1)</a>
+                    
+                        <a href="/tags/AI/">AI(1)</a>
+                    
+                        <a href="/tags/Blender/">Blender(1)</a>
+                    
+                        <a href="/tags/3D%E5%BB%BA%E6%A8%A1/">3D建模(1)</a>
+                    
+                
+            </div>
+        </div>
+
+        <div class="sidebar-box">
+            <div class="sidebar-title">
+                <i class="fa-solid fa-clock fa-fw"></i>
+                <span>最近文章</span>
+            </div>
+            <div class="sidebar-content recent-posts">
+                
+                    
+                        <div class="recent-item">
+                            <a href="/2025/06/16/using-hexo-plugins/" class="recent-title">
+                                使用Hexo插件增强博客体验
+                            </a>
+                            <span class="recent-date">2025-06-16</span>
+                        </div>
+                    
+                        <div class="recent-item">
+                            <a href="/2025/06/12/microservice-openfeign-tutorial/" class="recent-title">
+                                Spring Cloud-OpenFeign笔记
+                            </a>
+                            <span class="recent-date">2025-06-12</span>
+                        </div>
+                    
+                        <div class="recent-item">
+                            <a href="/2025/06/09/%E4%BD%BF%E7%94%A8Cursor%E4%B8%8EBlender-MCP%E7%94%9F%E6%88%90AI%E9%A9%B1%E5%8A%A8%E7%9A%843D%E6%A8%A1%E5%9E%8B/" class="recent-title">
+                                使用Cursor与Blender-MCP生成3D模型
+                            </a>
+                            <span class="recent-date">2025-06-09</span>
+                        </div>
+                    
+                        <div class="recent-item">
+                            <a href="/2025/06/06/java-frontend-learning-path/" class="recent-title">
+                                Java前端学习路线
+                            </a>
+                            <span class="recent-date">2025-06-06</span>
+                        </div>
+                    
+                        <div class="recent-item">
+                            <a href="/2025/06/05/hello-world/" class="recent-title">
+                                欢迎来到我的博客
+                            </a>
+                            <span class="recent-date">2025-06-05</span>
+                        </div>
+                    
+                
+            </div>
+        </div>
+    
+</div> 
+ 
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Tianyu の 个人博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;TianYu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    <script src="/js/blog-effects.js"></script>
+    <script src="/js/white-canvas-nest.js"></script>
+    
+        
+            <script src="/js/optimize/performance-loader.js"></script>
+        
+            <script defer-load src="/js/custom.js"></script>
+        
+            <script defer-load src="/js/blog-effects.js"></script>
+        
+            <script defer-load src="/js/particles-effect.js"></script>
+        
+            <script defer-load src="/js/scroll-header.js"></script>
+        
+            <script defer-load src="/js/img-lightbox.js"></script>
+        
+            <script defer-load src="/js/back-to-top.js"></script>
+        
+            <script defer-load src="/js/tag-cloud.js"></script>
+        
+            <script defer-load src="/js/music-player.js"></script>
+        
+            <script defer-load src="/js/effects-loader.js"></script>
+        
+            <script defer-load src="/js/toc-helper.js"></script>
+        
+    
+    
+    
+
+
+
+
+    
+<!-- hexo injector body_end start -->
+<script src="/assets/prism-bundle.js"></script>
+<script src="/assets/prism-plus.js" data-pjax=""></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":0.15,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"live2d-widget-model-mianmian"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":10,"vOffset":0},"mobile":{"show":true,"scale":0.12},"react":{"opacityDefault":0.85,"opacityOnHover":1},"log":false});</script></body>
+</html>
