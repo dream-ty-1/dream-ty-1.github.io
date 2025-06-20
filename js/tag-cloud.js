@@ -1,7 +1,16 @@
-// 标签云动态效果
+// 标签云动态效果和权重计算
 (function() {
     // 等待DOM加载完成
     function init() {
+        // 处理主标签页的标签云
+        handleCategoriesTags();
+        
+        // 处理侧边栏的标签云
+        handleSidebarTags();
+    }
+    
+    // 处理主标签页的标签云
+    function handleCategoriesTags() {
         // 标签云容器
         const container = document.querySelector('.categories-tags');
         if (!container) return;
@@ -84,6 +93,102 @@
                 });
             });
         }
+    }
+    
+    // 处理侧边栏的标签云
+    function handleSidebarTags() {
+        const tagCloud = document.querySelector('.sidebar-box .tags-cloud');
+        if (!tagCloud) return;
+        
+        const tagLinks = tagCloud.querySelectorAll('a');
+        if (!tagLinks.length) return;
+        
+        // 计算权重
+        calculateTagWeights(tagLinks);
+        
+        // 添加3D悬浮效果
+        add3DHoverEffect(tagCloud);
+    }
+    
+    // 计算并设置标签权重
+    function calculateTagWeights(tagLinks) {
+        // 收集所有标签的文章计数
+        const tagCounts = [];
+        
+        tagLinks.forEach(link => {
+            // 获取标签计数（如果有的话）
+            let count = 1; // 默认为1
+            
+            // 尝试从内容中提取数字（格式通常是 "标签名 (数量)"）
+            const countMatch = link.textContent.match(/\((\d+)\)$/);
+            if (countMatch && countMatch[1]) {
+                count = parseInt(countMatch[1], 10);
+            }
+            
+            tagCounts.push(count);
+        });
+        
+        // 如果没有足够的标签或者计数，则使用默认权重
+        if (tagCounts.length <= 1) {
+            tagLinks.forEach(link => {
+                link.setAttribute('data-weight', '5');  // 默认中等权重
+            });
+            return;
+        }
+        
+        // 找出最大值和最小值
+        const maxCount = Math.max(...tagCounts);
+        const minCount = Math.min(...tagCounts);
+        
+        // 计算权重范围
+        const range = maxCount - minCount;
+        const step = range === 0 ? 1 : range / 10;
+        
+        // 为每个标签设置权重
+        tagLinks.forEach((link, index) => {
+            const count = tagCounts[index];
+            
+            // 计算1-10的权重值
+            let weight;
+            if (range === 0) {
+                weight = 5;  // 如果所有标签数量相同，则使用中等权重
+            } else {
+                weight = Math.min(10, Math.max(1, Math.ceil((count - minCount) / step)));
+            }
+            
+            // 设置data-weight属性
+            link.setAttribute('data-weight', weight.toString());
+        });
+    }
+    
+    // 添加3D悬浮效果
+    function add3DHoverEffect(container) {
+        // 跟踪鼠标位置
+        let mouseX = 0, mouseY = 0;
+        let centerX = container.offsetWidth / 2;
+        let centerY = container.offsetHeight / 2;
+        
+        // 监听鼠标移动
+        container.addEventListener('mousemove', e => {
+            // 获取容器相对位置
+            const rect = container.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+            centerX = rect.width / 2;
+            centerY = rect.height / 2;
+            
+            // 计算偏移量（从中心点）
+            const offsetX = (mouseX - centerX) / 20;
+            const offsetY = (mouseY - centerY) / 20;
+            
+            // 应用整体变换
+            container.style.transform = `perspective(600px) rotateX(${-offsetY}deg) rotateY(${offsetX}deg)`;
+        });
+        
+        // 鼠标离开时恢复正常
+        container.addEventListener('mouseleave', () => {
+            container.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg)';
+        });
     }
 
     // 页面加载完成后初始化

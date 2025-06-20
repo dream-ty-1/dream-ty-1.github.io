@@ -1,0 +1,627 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>YOLO算法简易应用 | Tianyu の 个人博客</title>
+    <meta name="author" content="TianYu" />
+    <meta name="description" content="这是一个使用Hexo框架和ParticleX主题的个人博客" />
+    <meta name="keywords" content="博客, 技术, 编程, 生活" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    
+        
+            <style>{% include "../source/css/optimize/critical.css" %}</style>
+        
+            <link rel="stylesheet" href="/css/code-fonts.css">
+        
+            <link rel="stylesheet" href="/css/friends.css">
+        
+            <link rel="stylesheet" href="/css/collections.css">
+        
+            <link rel="stylesheet" href="/css/categories-tags.css">
+        
+            <link rel="stylesheet" href="/css/custom.css">
+        
+            <link rel="stylesheet" href="/css/sidebar.css">
+        
+            <link rel="stylesheet" href="/css/toc.css">
+        
+            <link rel="preload" href="/fonts/main-font.woff2" as="font" type="font/woff2" crossorigin>
+        
+            <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+        
+            <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        
+            <meta name="theme-color" content="#212121">
+        
+            <link rel="manifest" href="/manifest.json">
+        
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Tianyu の 个人博客" type="application/atom+xml">
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>TIANYU の 个人博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/friends">
+            <i class="fa-solid fa-link fa-fw"></i>
+            <span>&ensp;Friends</span>
+        </a>
+        
+        <a href="/collections">
+            <i class="fa-solid fa-folder-open fa-fw"></i>
+            <span>&ensp;Collections</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;TIANYU の 个人博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/friends">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-link fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Friends</div>
+                    </div>
+                </a>
+                
+                <a href="/collections">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-folder-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Collections</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article-container">
+    <div class="article">
+        <div>
+            <h1>YOLO算法简易应用</h1>
+        </div>
+        <div class="info">
+            <span class="date">
+                <span class="icon">
+                    <i class="fa-solid fa-calendar fa-fw"></i>
+                </span>
+                2025/6/19
+            </span>
+            
+            <span class="category">
+                <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                    <span class="icon">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </span>
+                    人工智能
+                </a>
+            </span>
+            
+            
+            <span class="tags">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                
+                
+                <span class="tag">
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="color: '#00a596'">
+                        深度学习
+                    </a>
+                </span>
+                
+                <span class="tag">
+                    
+                    <a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" style="color: '#ff7d73'">
+                        目标检测
+                    </a>
+                </span>
+                
+                <span class="tag">
+                    
+                    <a href="/tags/YOLO/" style="color: '#03a9f4'">
+                        YOLO
+                    </a>
+                </span>
+                
+                <span class="tag">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="color: '#00a596'">
+                        计算机视觉
+                    </a>
+                </span>
+                
+            </span>
+            
+        </div>
+        
+        <div class="content" v-pre>
+            <h1 id="YOLO算法详解与实践教程"><a href="#YOLO算法详解与实践教程" class="headerlink" title="YOLO算法详解与实践教程"></a>YOLO算法详解与实践教程</h1><h2 id="一、YOLO算法简介"><a href="#一、YOLO算法简介" class="headerlink" title="一、YOLO算法简介"></a>一、YOLO算法简介</h2><p>YOLO (You Only Look Once) 是一种快速、高效的目标检测算法，由Joseph Redmon等人在2015年提出。与传统的两阶段检测器（如R-CNN系列）不同，YOLO是一种单阶段检测器，它将目标检测任务看作单一的回归问题，从输入图像直接预测边界框坐标和类别概率。</p>
+<h3 id="1-1-YOLO的主要特点"><a href="#1-1-YOLO的主要特点" class="headerlink" title="1.1 YOLO的主要特点"></a>1.1 YOLO的主要特点</h3><ul>
+<li><strong>速度快</strong>：YOLO模型能够实现实时目标检测，在现代GPU上可达到45-155 FPS</li>
+<li><strong>全局推理</strong>：YOLO在整张图像上进行推理，能够学习到目标的上下文信息</li>
+<li><strong>泛化能力强</strong>：YOLO在新领域和非预期输入上表现良好</li>
+<li><strong>精度适中</strong>：虽然在早期版本中精度低于一些两阶段检测器，但最新版本已大幅提升精度</li>
+</ul>
+<h3 id="1-2-YOLO发展历程"><a href="#1-2-YOLO发展历程" class="headerlink" title="1.2 YOLO发展历程"></a>1.2 YOLO发展历程</h3><ul>
+<li><strong>YOLOv1</strong>：2015年首次提出，奠定了单阶段检测器的基础</li>
+<li><strong>YOLOv2/YOLO9000</strong>：2016年改进，引入了anchor box和批量归一化等技术</li>
+<li><strong>YOLOv3</strong>：2018年发布，采用多尺度预测，大幅提升了小目标检测能力</li>
+<li><strong>YOLOv4</strong>：2020年推出，整合了多种先进技术，平衡了速度和精度</li>
+<li><strong>YOLOv5</strong>：由Ultralytics开发的YOLO版本，工程化做得更好，易于使用</li>
+<li><strong>YOLOv6/v7/v8</strong>：后续版本不断优化，提供更好的性能和更丰富的功能</li>
+</ul>
+<h2 id="二、环境配置"><a href="#二、环境配置" class="headerlink" title="二、环境配置"></a>二、环境配置</h2><h3 id="2-1-下载安装Conda"><a href="#2-1-下载安装Conda" class="headerlink" title="2.1 下载安装Conda"></a>2.1 下载安装Conda</h3><p>Conda是一个开源的包管理系统和环境管理系统，我们将用它来创建一个独立的Python环境：</p>
+<ol>
+<li>访问<a target="_blank" rel="noopener" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda官网</a>下载适合您操作系统的安装包</li>
+<li>根据安装向导完成Miniconda的安装</li>
+<li>安装完成后，打开命令行工具，输入<code>conda --version</code>验证安装</li>
+</ol>
+<h3 id="2-2-创建虚拟环境"><a href="#2-2-创建虚拟环境" class="headerlink" title="2.2 创建虚拟环境"></a>2.2 创建虚拟环境</h3><p>创建一个名为<code>yolo_env</code>的Python环境:</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 创建Python 3.8环境</span></span>
+<span class="line"><span style="color:#B392F0">conda</span><span style="color:#9ECBFF"> create</span><span style="color:#79B8FF"> -n</span><span style="color:#9ECBFF"> yolo_env</span><span style="color:#9ECBFF"> python=</span><span style="color:#79B8FF">3.8</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 激活环境</span></span>
+<span class="line"><span style="color:#B392F0">conda</span><span style="color:#9ECBFF"> activate</span><span style="color:#9ECBFF"> yolo_env</span></span></code></pre>
+
+<h3 id="2-3-安装必要的库"><a href="#2-3-安装必要的库" class="headerlink" title="2.3 安装必要的库"></a>2.3 安装必要的库</h3><p>安装PyTorch、JupyterLab和其他所需依赖：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 安装PyTorch (根据您的CUDA版本选择适当的命令)</span></span>
+<span class="line"><span style="color:#6A737D"># 对于CUDA 11.7:</span></span>
+<span class="line"><span style="color:#B392F0">conda</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> pytorch</span><span style="color:#9ECBFF"> torchvision</span><span style="color:#9ECBFF"> torchaudio</span><span style="color:#9ECBFF"> pytorch-cuda=</span><span style="color:#79B8FF">11.7</span><span style="color:#79B8FF"> -c</span><span style="color:#9ECBFF"> pytorch</span><span style="color:#79B8FF"> -c</span><span style="color:#9ECBFF"> nvidia</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 安装JupyterLab</span></span>
+<span class="line"><span style="color:#B392F0">conda</span><span style="color:#9ECBFF"> install</span><span style="color:#79B8FF"> -c</span><span style="color:#9ECBFF"> conda-forge</span><span style="color:#9ECBFF"> jupyterlab</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 其他常用库</span></span>
+<span class="line"><span style="color:#B392F0">pip</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> opencv-python</span><span style="color:#9ECBFF"> matplotlib</span><span style="color:#9ECBFF"> pillow</span></span></code></pre>
+
+<h2 id="三、安装YOLO"><a href="#三、安装YOLO" class="headerlink" title="三、安装YOLO"></a>三、安装YOLO</h2><p>现在我们有两种方式获取YOLO：</p>
+<h3 id="3-1-通过pip安装"><a href="#3-1-通过pip安装" class="headerlink" title="3.1 通过pip安装"></a>3.1 通过pip安装</h3><p>这是最简单的方法，适用于YOLOv5及更新版本：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 安装YOLOv5</span></span>
+<span class="line"><span style="color:#B392F0">pip</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> ultralytics</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 或安装特定版本</span></span>
+<span class="line"><span style="color:#B392F0">pip</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> yolov5</span></span></code></pre>
+
+<h3 id="3-2-通过Git克隆源代码"><a href="#3-2-通过Git克隆源代码" class="headerlink" title="3.2 通过Git克隆源代码"></a>3.2 通过Git克隆源代码</h3><p>如果您想查看或修改源代码，可以选择克隆GitHub仓库：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 克隆YOLOv5仓库</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> clone</span><span style="color:#9ECBFF"> https://github.com/ultralytics/yolov5.git</span></span>
+<span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> yolov5</span></span>
+<span class="line"><span style="color:#B392F0">pip</span><span style="color:#9ECBFF"> install</span><span style="color:#79B8FF"> -r</span><span style="color:#9ECBFF"> requirements.txt</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 克隆YOLOv8仓库</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> clone</span><span style="color:#9ECBFF"> https://github.com/ultralytics/ultralytics.git</span></span>
+<span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> ultralytics</span></span>
+<span class="line"><span style="color:#B392F0">pip</span><span style="color:#9ECBFF"> install</span><span style="color:#79B8FF"> -e</span><span style="color:#9ECBFF"> .</span></span></code></pre>
+
+<h2 id="四、下载预训练模型"><a href="#四、下载预训练模型" class="headerlink" title="四、下载预训练模型"></a>四、下载预训练模型</h2><p>YOLOv5和YOLOv8提供了多种预训练模型，可以直接使用：</p>
+<h3 id="4-1-YOLOv5预训练模型"><a href="#4-1-YOLOv5预训练模型" class="headerlink" title="4.1 YOLOv5预训练模型"></a>4.1 YOLOv5预训练模型</h3><p>YOLOv5有不同大小的预训练模型，从小到大分别是：YOLOv5n、YOLOv5s、YOLOv5m、YOLOv5l、YOLOv5x：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 在Python中下载</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> torch</span></span>
+<span class="line"><span style="color:#E1E4E8">model </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> torch.hub.load(</span><span style="color:#9ECBFF">'ultralytics/yolov5'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'yolov5s'</span><span style="color:#E1E4E8">)  </span><span style="color:#6A737D"># 'yolov5s'是模型名称，可以换成其他型号</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 或通过命令行直接下载权重文件</span></span>
+<span class="line"><span style="color:#FDAEB7;font-style:italic">!</span><span style="color:#E1E4E8">wget https:</span><span style="color:#F97583">//</span><span style="color:#E1E4E8">github.com</span><span style="color:#F97583">/</span><span style="color:#E1E4E8">ultralytics</span><span style="color:#F97583">/</span><span style="color:#E1E4E8">yolov5</span><span style="color:#F97583">/</span><span style="color:#E1E4E8">releases</span><span style="color:#F97583">/</span><span style="color:#E1E4E8">download</span><span style="color:#F97583">/</span><span style="color:#E1E4E8">v6.1</span><span style="color:#F97583">/</span><span style="color:#E1E4E8">yolov5s.pt</span></span></code></pre>
+
+<h3 id="4-2-YOLOv8预训练模型"><a href="#4-2-YOLOv8预训练模型" class="headerlink" title="4.2 YOLOv8预训练模型"></a>4.2 YOLOv8预训练模型</h3><pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 安装ultralytics包后可以直接使用</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> ultralytics </span><span style="color:#F97583">import</span><span style="color:#79B8FF"> YOLO</span></span>
+<span class="line"><span style="color:#E1E4E8">model </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> YOLO(</span><span style="color:#9ECBFF">"yolov8n.pt"</span><span style="color:#E1E4E8">)  </span><span style="color:#6A737D"># 加载预训练的YOLOv8n模型</span></span></code></pre>
+
+<h2 id="五、使用YOLO进行目标检测"><a href="#五、使用YOLO进行目标检测" class="headerlink" title="五、使用YOLO进行目标检测"></a>五、使用YOLO进行目标检测</h2><h3 id="5-1-使用YOLOv5进行图像检测"><a href="#5-1-使用YOLOv5进行图像检测" class="headerlink" title="5.1 使用YOLOv5进行图像检测"></a>5.1 使用YOLOv5进行图像检测</h3><pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> torch</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 加载模型</span></span>
+<span class="line"><span style="color:#E1E4E8">model </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> torch.hub.load(</span><span style="color:#9ECBFF">'ultralytics/yolov5'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'yolov5s'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 对图像进行预测</span></span>
+<span class="line"><span style="color:#E1E4E8">img </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'path/to/your/image.jpg'</span><span style="color:#6A737D">  # 或者'https://ultralytics.com/images/zidane.jpg'</span></span>
+<span class="line"><span style="color:#E1E4E8">results </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> model(img)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 显示结果</span></span>
+<span class="line"><span style="color:#E1E4E8">results.print()  </span><span style="color:#6A737D"># 打印结果</span></span>
+<span class="line"><span style="color:#E1E4E8">results.show()   </span><span style="color:#6A737D"># 显示带有标记框的图像</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 保存结果</span></span>
+<span class="line"><span style="color:#E1E4E8">results.save()   </span><span style="color:#6A737D"># 保存带有标记框的图像到'runs/detect/exp'</span></span></code></pre>
+
+<h3 id="5-2-使用YOLOv8进行图像检测"><a href="#5-2-使用YOLOv8进行图像检测" class="headerlink" title="5.2 使用YOLOv8进行图像检测"></a>5.2 使用YOLOv8进行图像检测</h3><pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> ultralytics </span><span style="color:#F97583">import</span><span style="color:#79B8FF"> YOLO</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 加载模型</span></span>
+<span class="line"><span style="color:#E1E4E8">model </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> YOLO(</span><span style="color:#9ECBFF">'yolov8n.pt'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 对图像进行预测</span></span>
+<span class="line"><span style="color:#E1E4E8">results </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> model(</span><span style="color:#9ECBFF">'path/to/your/image.jpg'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 显示结果</span></span>
+<span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> r </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> results:</span></span>
+<span class="line"><span style="color:#79B8FF">    print</span><span style="color:#E1E4E8">(r.boxes)  </span><span style="color:#6A737D"># 打印边界框信息</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D"># 可视化结果</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> cv2</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#79B8FF"> PIL</span><span style="color:#F97583"> import</span><span style="color:#E1E4E8"> Image</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> numpy </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> np</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> r </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> results:</span></span>
+<span class="line"><span style="color:#E1E4E8">    im_array </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> r.plot()  </span><span style="color:#6A737D"># 绘制带有检测框的图像</span></span>
+<span class="line"><span style="color:#E1E4E8">    im </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Image.fromarray(im_array[</span><span style="color:#79B8FF">...</span><span style="color:#E1E4E8">, ::</span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">])  </span><span style="color:#6A737D"># RGB转BGR</span></span>
+<span class="line"><span style="color:#E1E4E8">    im.show()  </span><span style="color:#6A737D"># 显示图像</span></span>
+<span class="line"><span style="color:#E1E4E8">    im.save(</span><span style="color:#9ECBFF">'results.jpg'</span><span style="color:#E1E4E8">)  </span><span style="color:#6A737D"># 保存图像</span></span></code></pre>
+
+<h3 id="5-3-实时视频检测"><a href="#5-3-实时视频检测" class="headerlink" title="5.3 实时视频检测"></a>5.3 实时视频检测</h3><pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> ultralytics </span><span style="color:#F97583">import</span><span style="color:#79B8FF"> YOLO</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> cv2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 加载YOLOv8模型</span></span>
+<span class="line"><span style="color:#E1E4E8">model </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> YOLO(</span><span style="color:#9ECBFF">'yolov8n.pt'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 打开摄像头</span></span>
+<span class="line"><span style="color:#E1E4E8">cap </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> cv2.VideoCapture(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 循环读取视频帧</span></span>
+<span class="line"><span style="color:#F97583">while</span><span style="color:#E1E4E8"> cap.isOpened():</span></span>
+<span class="line"><span style="color:#6A737D">    # 读取一帧</span></span>
+<span class="line"><span style="color:#E1E4E8">    success, frame </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> cap.read()</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> success:</span></span>
+<span class="line"><span style="color:#6A737D">        # 对当前帧进行目标检测</span></span>
+<span class="line"><span style="color:#E1E4E8">        results </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> model(frame)</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#6A737D">        # 可视化结果</span></span>
+<span class="line"><span style="color:#E1E4E8">        annotated_frame </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> results[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">].plot()</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#6A737D">        # 显示带有检测框的帧</span></span>
+<span class="line"><span style="color:#E1E4E8">        cv2.imshow(</span><span style="color:#9ECBFF">"YOLOv8 Detection"</span><span style="color:#E1E4E8">, annotated_frame)</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#6A737D">        # 按'q'键退出</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> cv2.waitKey(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">&amp;</span><span style="color:#F97583"> 0x</span><span style="color:#79B8FF">FF</span><span style="color:#F97583"> ==</span><span style="color:#79B8FF"> ord</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'q'</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#F97583">            break</span></span>
+<span class="line"><span style="color:#F97583">    else</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">        break</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 释放资源</span></span>
+<span class="line"><span style="color:#E1E4E8">cap.release()</span></span>
+<span class="line"><span style="color:#E1E4E8">cv2.destroyAllWindows()</span></span></code></pre>
+
+<h2 id="六、训练自己的YOLO模型"><a href="#六、训练自己的YOLO模型" class="headerlink" title="六、训练自己的YOLO模型"></a>六、训练自己的YOLO模型</h2><h3 id="6-1-准备数据集"><a href="#6-1-准备数据集" class="headerlink" title="6.1 准备数据集"></a>6.1 准备数据集</h3><p>要训练自己的YOLO模型，首先需要准备一个标注好的数据集。数据集应该包含图像和相应的标注文件。YOLO使用的标注格式如下：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span>class x_center y_center width height</span></span></code></pre>
+
+<p>所有值都是相对于图像宽度和高度的归一化值，范围在0到1之间。</p>
+<h3 id="6-2-创建数据集配置文件"><a href="#6-2-创建数据集配置文件" class="headerlink" title="6.2 创建数据集配置文件"></a>6.2 创建数据集配置文件</h3><p>创建一个YAML文件描述数据集，例如<code>dataset.yaml</code>:</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 训练和验证数据集路径</span></span>
+<span class="line"><span style="color:#85E89D">train</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">path/to/train/images</span></span>
+<span class="line"><span style="color:#85E89D">val</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">path/to/validation/images</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 类别数和类别名称</span></span>
+<span class="line"><span style="color:#85E89D">nc</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">3</span><span style="color:#6A737D">  # 类别数</span></span>
+<span class="line"><span style="color:#85E89D">names</span><span style="color:#E1E4E8">: [</span><span style="color:#9ECBFF">'person'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'car'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'dog'</span><span style="color:#E1E4E8">]  </span><span style="color:#6A737D"># 类别名称</span></span></code></pre>
+
+<h3 id="6-3-使用YOLOv5进行训练"><a href="#6-3-使用YOLOv5进行训练" class="headerlink" title="6.3 使用YOLOv5进行训练"></a>6.3 使用YOLOv5进行训练</h3><pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 进入yolov5目录</span></span>
+<span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> yolov5</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 使用预训练权重开始训练</span></span>
+<span class="line"><span style="color:#B392F0">python</span><span style="color:#9ECBFF"> train.py</span><span style="color:#79B8FF"> --img</span><span style="color:#79B8FF"> 640</span><span style="color:#79B8FF"> --batch</span><span style="color:#79B8FF"> 16</span><span style="color:#79B8FF"> --epochs</span><span style="color:#79B8FF"> 50</span><span style="color:#79B8FF"> --data</span><span style="color:#9ECBFF"> dataset.yaml</span><span style="color:#79B8FF"> --weights</span><span style="color:#9ECBFF"> yolov5s.pt</span></span></code></pre>
+
+<h3 id="6-4-使用YOLOv8进行训练"><a href="#6-4-使用YOLOv8进行训练" class="headerlink" title="6.4 使用YOLOv8进行训练"></a>6.4 使用YOLOv8进行训练</h3><pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> ultralytics </span><span style="color:#F97583">import</span><span style="color:#79B8FF"> YOLO</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 加载预训练模型</span></span>
+<span class="line"><span style="color:#E1E4E8">model </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> YOLO(</span><span style="color:#9ECBFF">'yolov8n.pt'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 训练模型</span></span>
+<span class="line"><span style="color:#E1E4E8">results </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> model.train(</span></span>
+<span class="line"><span style="color:#FFAB70">    data</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">'dataset.yaml'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">    epochs</span><span style="color:#F97583">=</span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">    imgsz</span><span style="color:#F97583">=</span><span style="color:#79B8FF">640</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">    batch</span><span style="color:#F97583">=</span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">    name</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">'yolov8n_custom'</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+
+<h2 id="七、模型优化与部署"><a href="#七、模型优化与部署" class="headerlink" title="七、模型优化与部署"></a>七、模型优化与部署</h2><h3 id="7-1-模型量化"><a href="#7-1-模型量化" class="headerlink" title="7.1 模型量化"></a>7.1 模型量化</h3><p>为了在资源受限的设备上运行YOLO，可以使用模型量化技术减小模型大小并提高推理速度：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D"># YOLOv5模型量化示例</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> pathlib </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Path</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> torch</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> models.experimental </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> attempt_load</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> models.yolo </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Model</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> utils.torch_utils </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> select_device</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 加载训练好的模型</span></span>
+<span class="line"><span style="color:#E1E4E8">weights </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'yolov5s.pt'</span></span>
+<span class="line"><span style="color:#E1E4E8">device </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> select_device(</span><span style="color:#9ECBFF">'0'</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> torch.cuda.is_available() </span><span style="color:#F97583">else</span><span style="color:#9ECBFF"> 'cpu'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">model </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> attempt_load(weights, </span><span style="color:#FFAB70">device</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">device)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 使用torch.quantization进行量化</span></span>
+<span class="line"><span style="color:#E1E4E8">model_fp32 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> model.float()</span></span>
+<span class="line"><span style="color:#E1E4E8">model_int8 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> torch.quantization.quantize_dynamic(</span></span>
+<span class="line"><span style="color:#E1E4E8">    model_fp32,  </span><span style="color:#6A737D"># 原始FP32模型</span></span>
+<span class="line"><span style="color:#E1E4E8">    {torch.nn.Linear, torch.nn.Conv2d},  </span><span style="color:#6A737D"># 要量化的层类型</span></span>
+<span class="line"><span style="color:#FFAB70">    dtype</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">torch.qint8  </span><span style="color:#6A737D"># 量化的数据类型</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 保存量化模型</span></span>
+<span class="line"><span style="color:#E1E4E8">torch.save(model_int8.state_dict(), </span><span style="color:#9ECBFF">'yolov5s_quantized.pt'</span><span style="color:#E1E4E8">)</span></span></code></pre>
+
+<h3 id="7-2-模型导出为其他格式"><a href="#7-2-模型导出为其他格式" class="headerlink" title="7.2 模型导出为其他格式"></a>7.2 模型导出为其他格式</h3><p>YOLO模型可以导出为多种格式以便在不同平台上部署：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D"># YOLOv8导出为ONNX格式</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> ultralytics </span><span style="color:#F97583">import</span><span style="color:#79B8FF"> YOLO</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 加载模型</span></span>
+<span class="line"><span style="color:#E1E4E8">model </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> YOLO(</span><span style="color:#9ECBFF">'yolov8n.pt'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 导出模型</span></span>
+<span class="line"><span style="color:#E1E4E8">model.export(</span><span style="color:#FFAB70">format</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">'onnx'</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">opset</span><span style="color:#F97583">=</span><span style="color:#79B8FF">12</span><span style="color:#E1E4E8">)  </span><span style="color:#6A737D"># 导出ONNX格式</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 其他支持的格式</span></span>
+<span class="line"><span style="color:#6A737D"># format='torchscript'  # TorchScript格式</span></span>
+<span class="line"><span style="color:#6A737D"># format='tflite'       # TensorFlow Lite格式</span></span>
+<span class="line"><span style="color:#6A737D"># format='coreml'       # CoreML格式(iOS)</span></span></code></pre>
+
+<h2 id="八、YOLO的实际应用案例"><a href="#八、YOLO的实际应用案例" class="headerlink" title="八、YOLO的实际应用案例"></a>八、YOLO的实际应用案例</h2><p>YOLO广泛应用于各种计算机视觉任务：</p>
+<ul>
+<li><strong>自动驾驶</strong>：检测道路上的车辆、行人和交通标志</li>
+<li><strong>安防监控</strong>：识别异常行为和入侵者</li>
+<li><strong>零售分析</strong>：跟踪商店内顾客流动和商品陈列</li>
+<li><strong>工业质检</strong>：识别产品缺陷</li>
+<li><strong>医学图像分析</strong>：检测X射线和CT扫描中的异常</li>
+</ul>
+<h2 id="九、常见问题与解决方案"><a href="#九、常见问题与解决方案" class="headerlink" title="九、常见问题与解决方案"></a>九、常见问题与解决方案</h2><h3 id="9-1-检测精度不高"><a href="#9-1-检测精度不高" class="headerlink" title="9.1 检测精度不高"></a>9.1 检测精度不高</h3><ul>
+<li><strong>解决方案</strong>：尝试使用更大的模型（如YOLOv5l或YOLOv8x）</li>
+<li><strong>解决方案</strong>：增加训练数据，特别是难例数据</li>
+<li><strong>解决方案</strong>：尝试数据增强技术</li>
+</ul>
+<h3 id="9-2-检测速度慢"><a href="#9-2-检测速度慢" class="headerlink" title="9.2 检测速度慢"></a>9.2 检测速度慢</h3><ul>
+<li><strong>解决方案</strong>：使用更小的模型（如YOLOv5n或YOLOv8n）</li>
+<li><strong>解决方案</strong>：减小输入图像分辨率</li>
+<li><strong>解决方案</strong>：使用模型量化或TensorRT加速</li>
+</ul>
+<h3 id="9-3-GPU内存不足"><a href="#9-3-GPU内存不足" class="headerlink" title="9.3 GPU内存不足"></a>9.3 GPU内存不足</h3><ul>
+<li><strong>解决方案</strong>：减小批处理大小（batch size）</li>
+<li><strong>解决方案</strong>：使用梯度累积</li>
+<li><strong>解决方案</strong>：选择更小的模型</li>
+</ul>
+<h2 id="十、总结"><a href="#十、总结" class="headerlink" title="十、总结"></a>十、总结</h2><p>能用就行，深挖原理另说</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://pjreddie.com/darknet/yolo/">YOLO官方网站</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ultralytics/yolov5">YOLOv5 GitHub</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.ultralytics.com/">YOLOv8 Docs</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1506.02640">原始YOLO论文</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ultralytics/yolov5/wiki">YOLOv5教程</a></li>
+</ol>
+
+        </div>
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    
+    <!-- 侧边栏 -->
+    
+
+
+<div id="sidebar">
+    
+        
+<div id="article-toc" class="article-toc">
+    <div class="toc-title">
+        <i class="fa-solid fa-list fa-fw"></i>
+        <span>目录</span>
+    </div>
+    <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#YOLO%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%AE%9E%E8%B7%B5%E6%95%99%E7%A8%8B"><span class="toc-text">YOLO算法详解与实践教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81YOLO%E7%AE%97%E6%B3%95%E7%AE%80%E4%BB%8B"><span class="toc-text">一、YOLO算法简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-YOLO%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9"><span class="toc-text">1.1 YOLO的主要特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-YOLO%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-text">1.2 YOLO发展历程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">二、环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85Conda"><span class="toc-text">2.1 下载安装Conda</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="toc-text">2.2 创建虚拟环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%AE%89%E8%A3%85%E5%BF%85%E8%A6%81%E7%9A%84%E5%BA%93"><span class="toc-text">2.3 安装必要的库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85YOLO"><span class="toc-text">三、安装YOLO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E9%80%9A%E8%BF%87pip%E5%AE%89%E8%A3%85"><span class="toc-text">3.1 通过pip安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E9%80%9A%E8%BF%87Git%E5%85%8B%E9%9A%86%E6%BA%90%E4%BB%A3%E7%A0%81"><span class="toc-text">3.2 通过Git克隆源代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%B8%8B%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="toc-text">四、下载预训练模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-YOLOv5%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="toc-text">4.1 YOLOv5预训练模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-YOLOv8%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="toc-text">4.2 YOLOv8预训练模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%BD%BF%E7%94%A8YOLO%E8%BF%9B%E8%A1%8C%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B"><span class="toc-text">五、使用YOLO进行目标检测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%BD%BF%E7%94%A8YOLOv5%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E6%A3%80%E6%B5%8B"><span class="toc-text">5.1 使用YOLOv5进行图像检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E4%BD%BF%E7%94%A8YOLOv8%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E6%A3%80%E6%B5%8B"><span class="toc-text">5.2 使用YOLOv8进行图像检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E5%AE%9E%E6%97%B6%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B"><span class="toc-text">5.3 实时视频检测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E8%AE%AD%E7%BB%83%E8%87%AA%E5%B7%B1%E7%9A%84YOLO%E6%A8%A1%E5%9E%8B"><span class="toc-text">六、训练自己的YOLO模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">6.1 准备数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">6.2 创建数据集配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E4%BD%BF%E7%94%A8YOLOv5%E8%BF%9B%E8%A1%8C%E8%AE%AD%E7%BB%83"><span class="toc-text">6.3 使用YOLOv5进行训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E4%BD%BF%E7%94%A8YOLOv8%E8%BF%9B%E8%A1%8C%E8%AE%AD%E7%BB%83"><span class="toc-text">6.4 使用YOLOv8进行训练</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96%E4%B8%8E%E9%83%A8%E7%BD%B2"><span class="toc-text">七、模型优化与部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96"><span class="toc-text">7.1 模型量化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E6%A8%A1%E5%9E%8B%E5%AF%BC%E5%87%BA%E4%B8%BA%E5%85%B6%E4%BB%96%E6%A0%BC%E5%BC%8F"><span class="toc-text">7.2 模型导出为其他格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81YOLO%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="toc-text">八、YOLO的实际应用案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">九、常见问题与解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-%E6%A3%80%E6%B5%8B%E7%B2%BE%E5%BA%A6%E4%B8%8D%E9%AB%98"><span class="toc-text">9.1 检测精度不高</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-%E6%A3%80%E6%B5%8B%E9%80%9F%E5%BA%A6%E6%85%A2"><span class="toc-text">9.2 检测速度慢</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-GPU%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3"><span class="toc-text">9.3 GPU内存不足</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-text">十、总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol></li></ol>
+    </div>
+</div>
+ 
+    
+</div> 
+ 
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Tianyu の 个人博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;TianYu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    <script src="/js/blog-effects.js"></script>
+    <script src="/js/white-canvas-nest.js"></script>
+    
+        
+            <script src="/js/optimize/performance-loader.js"></script>
+        
+            <script defer-load src="/js/custom.js"></script>
+        
+            <script defer-load src="/js/blog-effects.js"></script>
+        
+            <script defer-load src="/js/particles-effect.js"></script>
+        
+            <script defer-load src="/js/scroll-header.js"></script>
+        
+            <script defer-load src="/js/img-lightbox.js"></script>
+        
+            <script defer-load src="/js/back-to-top.js"></script>
+        
+            <script defer-load src="/js/tag-cloud.js"></script>
+        
+            <script defer-load src="/js/music-player.js"></script>
+        
+            <script defer-load src="/js/effects-loader.js"></script>
+        
+            <script defer-load src="/js/toc-helper.js"></script>
+        
+    
+    
+    
+
+
+
+
+    
+<!-- hexo injector body_end start -->
+<script src="/assets/prism-bundle.js"></script>
+<script src="/assets/prism-plus.js" data-pjax=""></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
