@@ -6,7 +6,7 @@
   <link href="http://localhost:4000/atom.xml" rel="self"/>
   
   <link href="http://localhost:4000/"/>
-  <updated>2025-06-16T12:52:03.342Z</updated>
+  <updated>2025-06-16T13:29:45.976Z</updated>
   <id>http://localhost:4000/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://localhost:4000/2025/06/16/microservice-openfeign-tutorial/"/>
+    <id>http://localhost:4000/2025/06/16/microservice-openfeign-tutorial/</id>
+    <published>2025-06-16T13:29:45.640Z</published>
+    <updated>2025-06-16T13:29:45.976Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>使用Hexo插件增强博客体验</title>
@@ -42,35 +63,6 @@
     <category term="教程" scheme="http://localhost:4000/tags/%E6%95%99%E7%A8%8B/"/>
     
     <category term="插件" scheme="http://localhost:4000/tags/%E6%8F%92%E4%BB%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring Cloud-OpenFeign笔记</title>
-    <link href="http://localhost:4000/2025/06/12/microservice-openfeign-tutorial/"/>
-    <id>http://localhost:4000/2025/06/12/microservice-openfeign-tutorial/</id>
-    <published>2025-06-12T02:30:00.000Z</published>
-    <updated>2025-06-16T13:12:26.821Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;Spring-Cloud微服务实战：OpenFeign笔记&quot;&gt;&lt;a href=&quot;#Spring-Cloud微服务实战：OpenFeign笔记&quot; class=&quot;headerlink&quot; title=&quot;Spring Cloud微服务实战：OpenFeign笔记&quot;&gt;&lt;/a&gt;Spring Cloud微服务实战：OpenFeign笔记&lt;/h1&gt;&lt;p&gt;在微服务架构中，服务间通信是一个基础而关键的问题。Spring Cloud OpenFeign作为声明式REST客户端，极大地简化了微服务间的调用过程。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="后端开发" scheme="http://localhost:4000/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-    <category term="微服务" scheme="http://localhost:4000/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
-    
-    
-    <category term="Spring Cloud" scheme="http://localhost:4000/tags/Spring-Cloud/"/>
-    
-    <category term="OpenFeign" scheme="http://localhost:4000/tags/OpenFeign/"/>
-    
-    <category term="微服务" scheme="http://localhost:4000/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
-    
-    <category term="Java" scheme="http://localhost:4000/tags/Java/"/>
-    
-    <category term="Spring Boot" scheme="http://localhost:4000/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -183,6 +175,35 @@
     <category term="编程" scheme="http://localhost:4000/tags/%E7%BC%96%E7%A8%8B/"/>
     
     <category term="学习" scheme="http://localhost:4000/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nacos笔记</title>
+    <link href="http://localhost:4000/2023/07/20/nacos-registry-learning-notes/"/>
+    <id>http://localhost:4000/2023/07/20/nacos-registry-learning-notes/</id>
+    <published>2023-07-20T06:30:00.000Z</published>
+    <updated>2025-06-17T04:28:36.421Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Nacos注册中心实战笔记：从入门到精通&quot;&gt;&lt;a href=&quot;#Nacos注册中心实战笔记：从入门到精通&quot; class=&quot;headerlink&quot; title=&quot;Nacos注册中心实战笔记：从入门到精通&quot;&gt;&lt;/a&gt;Nacos注册中心实战笔记：从入门到精通&lt;/h1&gt;&lt;p&gt;在微服务架构中，服务注册与发现是基础核心组件。Nacos作为阿里巴巴开源的服务发现、配置管理和服务管理平台，已经成为Spring Cloud生态中的重要成员。本文将详细介绍Nacos的使用方法，帮助你快速掌握这一强大的服务治理工具。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="后端开发" scheme="http://localhost:4000/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="微服务" scheme="http://localhost:4000/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+    
+    <category term="Spring Cloud" scheme="http://localhost:4000/tags/Spring-Cloud/"/>
+    
+    <category term="Nacos" scheme="http://localhost:4000/tags/Nacos/"/>
+    
+    <category term="注册中心" scheme="http://localhost:4000/tags/%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/"/>
+    
+    <category term="配置中心" scheme="http://localhost:4000/tags/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/"/>
+    
+    <category term="微服务" scheme="http://localhost:4000/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   

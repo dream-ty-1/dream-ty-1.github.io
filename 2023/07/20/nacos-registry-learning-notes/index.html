@@ -1,0 +1,969 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>Nacos笔记 | Tianyu の 个人博客</title>
+    <meta name="author" content="TianYu" />
+    <meta name="description" content="这是一个使用Hexo框架和ParticleX主题的个人博客" />
+    <meta name="keywords" content="博客, 技术, 编程, 生活" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    
+        
+            <style>{% include "../source/css/optimize/critical.css" %}</style>
+        
+            <link rel="stylesheet" href="/css/code-fonts.css">
+        
+            <link rel="stylesheet" href="/css/friends.css">
+        
+            <link rel="stylesheet" href="/css/collections.css">
+        
+            <link rel="stylesheet" href="/css/categories-tags.css">
+        
+            <link rel="stylesheet" href="/css/custom.css">
+        
+            <link rel="stylesheet" href="/css/sidebar.css">
+        
+            <link rel="stylesheet" href="/css/toc.css">
+        
+            <link rel="preload" href="/fonts/main-font.woff2" as="font" type="font/woff2" crossorigin>
+        
+            <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+        
+            <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        
+            <meta name="theme-color" content="#212121">
+        
+            <link rel="manifest" href="/manifest.json">
+        
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Tianyu の 个人博客" type="application/atom+xml">
+</head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>TIANYU の 个人博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/friends">
+            <i class="fa-solid fa-link fa-fw"></i>
+            <span>&ensp;Friends</span>
+        </a>
+        
+        <a href="/collections">
+            <i class="fa-solid fa-folder-open fa-fw"></i>
+            <span>&ensp;Collections</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;TIANYU の 个人博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/friends">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-link fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Friends</div>
+                    </div>
+                </a>
+                
+                <a href="/collections">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-folder-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Collections</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article-container">
+    <div class="article">
+        <div>
+            <h1>Nacos笔记</h1>
+        </div>
+        <div class="info">
+            <span class="date">
+                <span class="icon">
+                    <i class="fa-solid fa-calendar fa-fw"></i>
+                </span>
+                2023/7/20
+            </span>
+            
+            <span class="category">
+                <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">
+                    <span class="icon">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </span>
+                    后端开发
+                </a>
+            </span>
+            
+            
+            <span class="tags">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                
+                
+                <span class="tag">
+                    
+                    <a href="/tags/Spring-Cloud/" style="color: '#ff7d73'">
+                        Spring Cloud
+                    </a>
+                </span>
+                
+                <span class="tag">
+                    
+                    <a href="/tags/Nacos/" style="color: '#03a9f4'">
+                        Nacos
+                    </a>
+                </span>
+                
+                <span class="tag">
+                    
+                    <a href="/tags/%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/" style="color: '#00bcd4'">
+                        注册中心
+                    </a>
+                </span>
+                
+                <span class="tag">
+                    
+                    <a href="/tags/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/" style="color: '#03a9f4'">
+                        配置中心
+                    </a>
+                </span>
+                
+                <span class="tag">
+                    
+                    <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="color: '#ffa2c4'">
+                        微服务
+                    </a>
+                </span>
+                
+            </span>
+            
+        </div>
+        
+        <div class="content" v-pre>
+            <h1 id="Nacos注册中心实战笔记：从入门到精通"><a href="#Nacos注册中心实战笔记：从入门到精通" class="headerlink" title="Nacos注册中心实战笔记：从入门到精通"></a>Nacos注册中心实战笔记：从入门到精通</h1><p>在微服务架构中，服务注册与发现是基础核心组件。Nacos作为阿里巴巴开源的服务发现、配置管理和服务管理平台，已经成为Spring Cloud生态中的重要成员。本文将详细介绍Nacos的使用方法，帮助你快速掌握这一强大的服务治理工具。</p>
+<span id="more"></span>
+
+<h2 id="什么是Nacos？"><a href="#什么是Nacos？" class="headerlink" title="什么是Nacos？"></a>什么是Nacos？</h2><p>Nacos（Dynamic Naming and Configuration Service）是阿里巴巴开源的一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。它提供了一组简单易用的特性，帮助您快速实现动态服务发现、服务配置、服务元数据及流量管理。</p>
+<p>Nacos的核心功能：</p>
+<ul>
+<li><strong>服务发现与服务健康监测</strong></li>
+<li><strong>动态配置管理</strong></li>
+<li><strong>动态DNS服务</strong></li>
+<li><strong>服务及其元数据管理</strong></li>
+<li><strong>负载均衡</strong></li>
+</ul>
+<h2 id="Nacos-vs-Eureka-vs-Consul"><a href="#Nacos-vs-Eureka-vs-Consul" class="headerlink" title="Nacos vs Eureka vs Consul"></a>Nacos vs Eureka vs Consul</h2><p>在选择微服务注册中心时，我们通常会考虑Nacos、Eureka和Consul这三种主流方案。下面是它们的简要对比：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Nacos</th>
+<th>Eureka</th>
+<th>Consul</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>一致性协议</td>
+<td>CP+AP</td>
+<td>AP</td>
+<td>CP</td>
+</tr>
+<tr>
+<td>健康检查</td>
+<td>TCP/HTTP/MYSQL/Client Beat</td>
+<td>Client Beat</td>
+<td>TCP/HTTP/gRPC/Cmd</td>
+</tr>
+<tr>
+<td>负载均衡</td>
+<td>权重/metadata/Selector</td>
+<td>Ribbon</td>
+<td>Fabio</td>
+</tr>
+<tr>
+<td>雪崩保护</td>
+<td>有</td>
+<td>有</td>
+<td>无</td>
+</tr>
+<tr>
+<td>自动注销实例</td>
+<td>支持</td>
+<td>支持，但实例需要等待3个心跳周期才能被清除</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>访问协议</td>
+<td>HTTP/DNS/RPC</td>
+<td>HTTP</td>
+<td>HTTP/DNS</td>
+</tr>
+<tr>
+<td>监听支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>多数据中心</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>跨注册中心</td>
+<td>支持</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>SpringCloud集成</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>Dubbo集成</td>
+<td>支持</td>
+<td>不支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>K8S集成</td>
+<td>支持</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+</tbody></table>
+<p>Nacos的优势在于：</p>
+<ul>
+<li>同时支持CP和AP模式切换</li>
+<li>支持服务注册与发现和配置管理</li>
+<li>支持多语言客户端</li>
+<li>支持Dubbo和Spring Cloud生态</li>
+<li>界面友好，操作简单</li>
+</ul>
+<h2 id="安装与启动Nacos-Server"><a href="#安装与启动Nacos-Server" class="headerlink" title="安装与启动Nacos Server"></a>安装与启动Nacos Server</h2><h3 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h3><ol>
+<li>从<a target="_blank" rel="noopener" href="https://github.com/alibaba/nacos/releases">Nacos GitHub Release</a>下载最新稳定版</li>
+<li>解压到指定目录，如<code>D:\nacos</code></li>
+</ol>
+<h3 id="单机模式启动"><a href="#单机模式启动" class="headerlink" title="单机模式启动"></a>单机模式启动</h3><p>进入<code>bin</code>目录，执行以下命令启动Nacos：</p>
+<p><strong>Windows</strong>:</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#B392F0">startup.cmd</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> standalone</span></span></code></pre>
+
+<p><strong>Linux/Mac</strong>:</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#B392F0">sh</span><span style="color:#9ECBFF"> startup.sh</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> standalone</span></span></code></pre>
+
+<h3 id="访问控制台"><a href="#访问控制台" class="headerlink" title="访问控制台"></a>访问控制台</h3><p>启动成功后，通过浏览器访问：<code>http://localhost:8848/nacos</code><br>默认账号密码：nacos/nacos</p>
+<h3 id="Docker方式启动"><a href="#Docker方式启动" class="headerlink" title="Docker方式启动"></a>Docker方式启动</h3><pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#B392F0">docker</span><span style="color:#9ECBFF"> run</span><span style="color:#79B8FF"> --name</span><span style="color:#9ECBFF"> nacos-standalone</span><span style="color:#79B8FF"> -e</span><span style="color:#9ECBFF"> MODE=standalone</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> 8848:8848</span><span style="color:#79B8FF"> -d</span><span style="color:#9ECBFF"> nacos/nacos-server:latest</span></span></code></pre>
+
+<h2 id="Nacos集群部署"><a href="#Nacos集群部署" class="headerlink" title="Nacos集群部署"></a>Nacos集群部署</h2><p>在生产环境，为保证高可用，通常需要部署Nacos集群。以下是简要步骤：</p>
+<ol>
+<li><p><strong>准备3台及以上服务器</strong></p>
+</li>
+<li><p><strong>配置cluster.conf</strong><br>在<code>conf</code>目录下创建<code>cluster.conf</code>文件，添加以下内容：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span>   192.168.16.101:8848</span></span>
+<span class="line"><span>   192.168.16.102:8848</span></span>
+<span class="line"><span>   192.168.16.103:8848</span></span></code></pre>
+</li>
+<li><p><strong>配置数据库</strong><br>默认情况下，Nacos使用内嵌数据库Derby存储数据，集群模式下需要使用MySQL。</p>
+<ul>
+<li>创建数据库，执行<code>conf/nacos-mysql.sql</code>脚本</li>
+<li>修改<code>conf/application.properties</code>文件：<pre><code>     spring.datasource.platform=mysql
+     db.num=1
+     db.url.0=jdbc:mysql://localhost:3306/nacos_config?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=true&amp;useUnicode=true&amp;useSSL=false&amp;serverTimezone=UTC
+     db.user=root
+     db.password=password</code></pre></li>
+</ul>
+</li>
+<li><p><strong>启动集群</strong><br>在每台服务器上启动Nacos：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#B392F0">   sh</span><span style="color:#9ECBFF"> startup.sh</span></span></code></pre></li>
+</ol>
+<h2 id="Spring-Cloud集成Nacos"><a href="#Spring-Cloud集成Nacos" class="headerlink" title="Spring Cloud集成Nacos"></a>Spring Cloud集成Nacos</h2><h3 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h3><p>在<code>pom.xml</code>中添加依赖：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#6A737D">    &lt;!-- Spring Cloud Alibaba Nacos Discovery --&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">        &lt;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;com.alibaba.cloud&lt;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">        &lt;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;spring-cloud-starter-alibaba-nacos-discovery&lt;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    &lt;!-- Spring Cloud Alibaba Nacos Config (如需配置中心) --&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">        &lt;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;com.alibaba.cloud&lt;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">        &lt;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;spring-cloud-starter-alibaba-nacos-config&lt;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;/</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">dependencyManagement</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">        &lt;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">            &lt;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;com.alibaba.cloud&lt;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">            &lt;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;spring-cloud-alibaba-dependencies&lt;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">            &lt;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">&gt;2021.0.1.0&lt;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">            &lt;</span><span style="color:#85E89D">type</span><span style="color:#E1E4E8">&gt;pom&lt;/</span><span style="color:#85E89D">type</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">            &lt;</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">&gt;import&lt;/</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">        &lt;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;/</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;/</span><span style="color:#85E89D">dependencyManagement</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+
+<h3 id="2-配置服务注册"><a href="#2-配置服务注册" class="headerlink" title="2. 配置服务注册"></a>2. 配置服务注册</h3><p>在<code>application.yml</code>中配置：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#85E89D">spring</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  application</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">service-provider</span></span>
+<span class="line"><span style="color:#85E89D">  cloud</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    nacos</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      discovery</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        server-addr</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">127.0.0.1:8848</span></span>
+<span class="line"><span style="color:#6A737D">        # 以下是可选配置</span></span>
+<span class="line"><span style="color:#85E89D">        namespace</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">public</span><span style="color:#6A737D"> # 命名空间ID</span></span>
+<span class="line"><span style="color:#85E89D">        group</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">DEFAULT_GROUP</span><span style="color:#6A737D"> # 分组</span></span>
+<span class="line"><span style="color:#85E89D">        cluster-name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">DEFAULT</span><span style="color:#6A737D"> # 集群名称</span></span>
+<span class="line"><span style="color:#85E89D">        weight</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#6A737D"> # 权重</span></span>
+<span class="line"><span style="color:#85E89D">        metadata</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">          version</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">v1</span><span style="color:#6A737D"> # 版本</span></span>
+<span class="line"><span style="color:#85E89D">          env</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">dev</span><span style="color:#6A737D"> # 环境</span></span></code></pre>
+
+<h3 id="3-启用服务注册与发现"><a href="#3-启用服务注册与发现" class="headerlink" title="3. 启用服务注册与发现"></a>3. 启用服务注册与发现</h3><p>在启动类上添加注解：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">SpringBootApplication</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">EnableDiscoveryClient</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ServiceProviderApplication</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        SpringApplication.</span><span style="color:#B392F0">run</span><span style="color:#E1E4E8">(ServiceProviderApplication.class, args);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+
+<h3 id="4-服务发现与负载均衡"><a href="#4-服务发现与负载均衡" class="headerlink" title="4. 服务发现与负载均衡"></a>4. 服务发现与负载均衡</h3><p>使用<code>@LoadBalanced</code>注解，整合RestTemplate实现负载均衡：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Configuration</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> RestConfig</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Bean</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">LoadBalanced</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> RestTemplate </span><span style="color:#B392F0">restTemplate</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> RestTemplate</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+
+<p>使用示例：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">RestController</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TestController</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Autowired</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> RestTemplate restTemplate;</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">GetMapping</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/test"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> String </span><span style="color:#B392F0">test</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // 直接使用服务名调用</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> restTemplate.</span><span style="color:#B392F0">getForObject</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"http://service-provider/api/hello"</span><span style="color:#E1E4E8">, String.class);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+
+<h2 id="Nacos作为配置中心"><a href="#Nacos作为配置中心" class="headerlink" title="Nacos作为配置中心"></a>Nacos作为配置中心</h2><p>Nacos不仅可以作为注册中心，还能作为配置中心使用。</p>
+<h3 id="1-添加配置中心依赖"><a href="#1-添加配置中心依赖" class="headerlink" title="1. 添加配置中心依赖"></a>1. 添加配置中心依赖</h3><pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;com.alibaba.cloud&lt;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;spring-cloud-starter-alibaba-nacos-config&lt;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+
+<h3 id="2-创建bootstrap-yml"><a href="#2-创建bootstrap-yml" class="headerlink" title="2. 创建bootstrap.yml"></a>2. 创建bootstrap.yml</h3><p>从Spring Cloud 2020版本开始，bootstrap.yml不会自动加载，需要添加依赖：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;org.springframework.cloud&lt;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;spring-cloud-starter-bootstrap&lt;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+
+<p>然后创建<code>bootstrap.yml</code>：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#85E89D">spring</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  application</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">service-provider</span></span>
+<span class="line"><span style="color:#85E89D">  cloud</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    nacos</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      config</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        server-addr</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">127.0.0.1:8848</span></span>
+<span class="line"><span style="color:#85E89D">        file-extension</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">yaml</span><span style="color:#6A737D"> # 配置文件格式</span></span>
+<span class="line"><span style="color:#6A737D">        # 以下是可选配置</span></span>
+<span class="line"><span style="color:#85E89D">        namespace</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">public</span><span style="color:#6A737D"> # 命名空间ID</span></span>
+<span class="line"><span style="color:#85E89D">        group</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">DEFAULT_GROUP</span><span style="color:#6A737D"> # 分组</span></span>
+<span class="line"><span style="color:#85E89D">        refresh-enabled</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#6A737D"> # 是否开启自动刷新</span></span>
+<span class="line"><span style="color:#6A737D">        # 扩展配置</span></span>
+<span class="line"><span style="color:#85E89D">        extension-configs</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">          - </span><span style="color:#85E89D">data-id</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">common-mysql.yaml</span><span style="color:#6A737D"> # 配置文件名</span></span>
+<span class="line"><span style="color:#85E89D">            group</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">COMMON_GROUP</span><span style="color:#6A737D"> # 所在分组</span></span>
+<span class="line"><span style="color:#85E89D">            refresh</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#6A737D"> # 是否动态刷新</span></span>
+<span class="line"><span style="color:#E1E4E8">          - </span><span style="color:#85E89D">data-id</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">common-redis.yaml</span></span>
+<span class="line"><span style="color:#85E89D">            group</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">COMMON_GROUP</span></span>
+<span class="line"><span style="color:#85E89D">            refresh</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span></span></code></pre>
+
+<h3 id="3-在Nacos控制台添加配置"><a href="#3-在Nacos控制台添加配置" class="headerlink" title="3. 在Nacos控制台添加配置"></a>3. 在Nacos控制台添加配置</h3><ol>
+<li>登录Nacos控制台</li>
+<li>进入”配置管理” -&gt; “配置列表”</li>
+<li>点击”+”按钮添加配置<ul>
+<li>Data ID: service-provider.yaml (与spring.application.name和file-extension组合)</li>
+<li>Group: DEFAULT_GROUP</li>
+<li>配置内容：<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#85E89D">     server</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">       port</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">8081</span></span>
+<span class="line"><span style="color:#E1E4E8">     </span></span>
+<span class="line"><span style="color:#85E89D">     user</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">       name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">nacos-user</span></span>
+<span class="line"><span style="color:#85E89D">       age</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">18</span></span></code></pre></li>
+</ul>
+</li>
+</ol>
+<h3 id="4-读取配置"><a href="#4-读取配置" class="headerlink" title="4. 读取配置"></a>4. 读取配置</h3><p>使用<code>@RefreshScope</code>注解实现配置自动刷新：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">RestController</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">RequestMapping</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/config"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">RefreshScope</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ConfigController</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Value</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"${user.name}"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> String name;</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Value</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"${user.age}"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> Integer age;</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">GetMapping</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/info"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> Map&lt;</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#E1E4E8">&gt; </span><span style="color:#B392F0">getConfig</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Map&lt;</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#E1E4E8">&gt; map </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> HashMap&lt;&gt;();</span></span>
+<span class="line"><span style="color:#E1E4E8">        map.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"name"</span><span style="color:#E1E4E8">, name);</span></span>
+<span class="line"><span style="color:#E1E4E8">        map.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"age"</span><span style="color:#E1E4E8">, age);</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> map;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+
+<p>也可以使用<code>@ConfigurationProperties</code>绑定配置：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Component</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">ConfigurationProperties</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">prefix</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "user"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">RefreshScope</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Data</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> UserConfig</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> String name;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> Integer age;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+
+<h2 id="Nacos高级特性"><a href="#Nacos高级特性" class="headerlink" title="Nacos高级特性"></a>Nacos高级特性</h2><h3 id="1-命名空间和分组"><a href="#1-命名空间和分组" class="headerlink" title="1. 命名空间和分组"></a>1. 命名空间和分组</h3><p>Nacos提供了命名空间（Namespace）和分组（Group）的概念，用于隔离不同环境或业务线的配置和服务。</p>
+<ul>
+<li><strong>Namespace</strong>：用于环境隔离，如开发、测试、生产环境</li>
+<li><strong>Group</strong>：用于业务隔离，如不同的业务模块</li>
+</ul>
+<p>创建新的命名空间：</p>
+<ol>
+<li>在Nacos控制台点击”命名空间”</li>
+<li>点击”新建命名空间”，填写ID、名称和描述</li>
+<li>点击”确定”</li>
+</ol>
+<p>在配置中指定命名空间和分组：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#85E89D">spring</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  cloud</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    nacos</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      discovery</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        server-addr</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">127.0.0.1:8848</span></span>
+<span class="line"><span style="color:#85E89D">        namespace</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">dev</span><span style="color:#6A737D"> # 命名空间ID，非名称</span></span>
+<span class="line"><span style="color:#85E89D">        group</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">SHOPPING_SERVICE</span><span style="color:#6A737D"> # 分组名称</span></span>
+<span class="line"><span style="color:#85E89D">      config</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        server-addr</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">127.0.0.1:8848</span></span>
+<span class="line"><span style="color:#85E89D">        namespace</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">dev</span></span>
+<span class="line"><span style="color:#85E89D">        group</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">SHOPPING_SERVICE</span></span></code></pre>
+
+<h3 id="2-服务权重和保护阈值"><a href="#2-服务权重和保护阈值" class="headerlink" title="2. 服务权重和保护阈值"></a>2. 服务权重和保护阈值</h3><p>Nacos支持设置服务实例的权重，用于控制负载均衡比例：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#85E89D">spring</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  cloud</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    nacos</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      discovery</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        weight</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">2</span><span style="color:#6A737D"> # 权重值，默认为1</span></span></code></pre>
+
+<p>保护阈值是一个0到1之间的浮点数：</p>
+<ul>
+<li>当健康实例占总实例的比例小于保护阈值时，无论实例是否健康，都会将其返回给客户端，这样可以保证服务的可用性</li>
+<li>在Nacos控制台可以为每个服务设置保护阈值</li>
+</ul>
+<h3 id="3-元数据管理"><a href="#3-元数据管理" class="headerlink" title="3. 元数据管理"></a>3. 元数据管理</h3><p>可以为服务添加自定义元数据，用于服务治理：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#85E89D">spring</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  cloud</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    nacos</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      discovery</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        metadata</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">          version</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">v1</span></span>
+<span class="line"><span style="color:#85E89D">          env</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">dev</span></span>
+<span class="line"><span style="color:#85E89D">          region</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">cn-shanghai</span></span></code></pre>
+
+<h3 id="4-Nacos的数据模型"><a href="#4-Nacos的数据模型" class="headerlink" title="4. Nacos的数据模型"></a>4. Nacos的数据模型</h3><p>Nacos的数据模型由三元组（Namespace, Group, Service/DataId）组成，提供了高度的配置和服务隔离能力：</p>
+<ul>
+<li>Namespace：租户/环境隔离</li>
+<li>Group：分组隔离</li>
+<li>Service/DataId：服务/配置标识</li>
+</ul>
+<h3 id="5-配置加密与安全"><a href="#5-配置加密与安全" class="headerlink" title="5. 配置加密与安全"></a>5. 配置加密与安全</h3><p>对于敏感配置，可以结合Jasypt等工具进行加密：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;com.github.ulisesbocchio&lt;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;jasypt-spring-boot-starter&lt;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">&gt;3.0.4&lt;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+
+<p>配置示例：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#85E89D">jasypt</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  encryptor</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    password</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">your-secret-key</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">spring</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  datasource</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    password</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">ENC(encrypted-password)</span></span></code></pre>
+
+<h2 id="Nacos监控与管理"><a href="#Nacos监控与管理" class="headerlink" title="Nacos监控与管理"></a>Nacos监控与管理</h2><h3 id="1-Nacos自带监控"><a href="#1-Nacos自带监控" class="headerlink" title="1. Nacos自带监控"></a>1. Nacos自带监控</h3><p>Nacos自带的控制台提供了基本的监控功能：</p>
+<ul>
+<li>服务列表与健康状态</li>
+<li>服务实例详情</li>
+<li>配置管理与版本历史</li>
+</ul>
+<h3 id="2-对接Prometheus和Grafana"><a href="#2-对接Prometheus和Grafana" class="headerlink" title="2. 对接Prometheus和Grafana"></a>2. 对接Prometheus和Grafana</h3><p>Nacos可以通过Actuator暴露监控指标，结合Prometheus和Grafana实现更强大的监控：</p>
+<p>添加依赖：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;org.springframework.boot&lt;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;spring-boot-starter-actuator&lt;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;io.micrometer&lt;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    &lt;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;micrometer-registry-prometheus&lt;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+
+<p>配置Actuator：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#85E89D">management</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  endpoints</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    web</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      exposure</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        include</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'*'</span></span>
+<span class="line"><span style="color:#85E89D">  metrics</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    export</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      prometheus</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        enabled</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span></span></code></pre>
+
+<p>然后配置Prometheus抓取这些指标，并在Grafana中创建仪表盘进行可视化。</p>
+<h2 id="实战案例：商品服务与订单服务"><a href="#实战案例：商品服务与订单服务" class="headerlink" title="实战案例：商品服务与订单服务"></a>实战案例：商品服务与订单服务</h2><p>以下是一个实际案例，演示如何使用Nacos实现服务注册发现和配置管理：</p>
+<h3 id="1-公共模块-common-api"><a href="#1-公共模块-common-api" class="headerlink" title="1. 公共模块 (common-api)"></a>1. 公共模块 (common-api)</h3><pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D">// 商品实体</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Data</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">AllArgsConstructor</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">NoArgsConstructor</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Product</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> Long id;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> String name;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> BigDecimal price;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> Integer stock;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 订单实体</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Data</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">AllArgsConstructor</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">NoArgsConstructor</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Order</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> Long id;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> Long productId;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> Integer quantity;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> BigDecimal amount;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> String address;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> Date createTime;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+
+<h3 id="2-商品服务-product-service"><a href="#2-商品服务-product-service" class="headerlink" title="2. 商品服务 (product-service)"></a>2. 商品服务 (product-service)</h3><pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D">// 启动类</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">SpringBootApplication</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">EnableDiscoveryClient</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ProductServiceApplication</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        SpringApplication.</span><span style="color:#B392F0">run</span><span style="color:#E1E4E8">(ProductServiceApplication.class, args);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 控制器</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">RestController</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">RequestMapping</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/api/products"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ProductController</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> Map&lt;</span><span style="color:#F97583">Long</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Product</span><span style="color:#E1E4E8">&gt; PRODUCT_DB </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> ConcurrentHashMap&lt;&gt;();</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">        PRODUCT_DB.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1L</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">new</span><span style="color:#B392F0"> Product</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1L</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"iPhone 13"</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">new</span><span style="color:#B392F0"> BigDecimal</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"5999"</span><span style="color:#E1E4E8">), </span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">        PRODUCT_DB.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">2L</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">new</span><span style="color:#B392F0"> Product</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">2L</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"MacBook Pro"</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">new</span><span style="color:#B392F0"> BigDecimal</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"12999"</span><span style="color:#E1E4E8">), </span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">        PRODUCT_DB.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">3L</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">new</span><span style="color:#B392F0"> Product</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">3L</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"iPad Pro"</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">new</span><span style="color:#B392F0"> BigDecimal</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"5999"</span><span style="color:#E1E4E8">), </span><span style="color:#79B8FF">80</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">GetMapping</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/{id}"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> Product </span><span style="color:#B392F0">getProductById</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">PathVariable</span><span style="color:#E1E4E8"> Long </span><span style="color:#FFAB70">id</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> PRODUCT_DB.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(id);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">GetMapping</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> List&lt;</span><span style="color:#F97583">Product</span><span style="color:#E1E4E8">&gt; </span><span style="color:#B392F0">getAllProducts</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> ArrayList&lt;&gt;(PRODUCT_DB.</span><span style="color:#B392F0">values</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">PutMapping</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/{id}/stock"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> Product </span><span style="color:#B392F0">updateStock</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">PathVariable</span><span style="color:#E1E4E8"> Long </span><span style="color:#FFAB70">id</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">RequestParam</span><span style="color:#E1E4E8"> Integer </span><span style="color:#FFAB70">quantity</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Product product </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> PRODUCT_DB.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(id);</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (product </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> RuntimeException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Product not found"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (product.</span><span style="color:#B392F0">getStock</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">&lt;</span><span style="color:#E1E4E8"> quantity) {</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> RuntimeException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Insufficient stock"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#E1E4E8">        product.</span><span style="color:#B392F0">setStock</span><span style="color:#E1E4E8">(product.</span><span style="color:#B392F0">getStock</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> quantity);</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> product;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+
+<h3 id="3-订单服务-order-service"><a href="#3-订单服务-order-service" class="headerlink" title="3. 订单服务 (order-service)"></a>3. 订单服务 (order-service)</h3><pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D">// 启动类</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">SpringBootApplication</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">EnableDiscoveryClient</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">EnableFeignClients</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> OrderServiceApplication</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        SpringApplication.</span><span style="color:#B392F0">run</span><span style="color:#E1E4E8">(OrderServiceApplication.class, args);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Feign客户端</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">FeignClient</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">name</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "product-service"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> ProductClient</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">GetMapping</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/api/products/{id}"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    Product </span><span style="color:#B392F0">getProductById</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">PathVariable</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">) Long </span><span style="color:#FFAB70">id</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">PutMapping</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/api/products/{id}/stock"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    Product </span><span style="color:#B392F0">updateStock</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">PathVariable</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">) Long </span><span style="color:#FFAB70">id</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">RequestParam</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"quantity"</span><span style="color:#E1E4E8">) Integer </span><span style="color:#FFAB70">quantity</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 配置类（从Nacos读取配置）</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Configuration</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">RefreshScope</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">ConfigurationProperties</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">prefix</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "order"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Data</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> OrderConfig</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> BigDecimal taxRate;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> BigDecimal discountRate;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> boolean</span><span style="color:#E1E4E8"> enableExpress;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 控制器</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">RestController</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">RequestMapping</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/api/orders"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> OrderController</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Autowired</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> ProductClient productClient;</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Autowired</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> OrderConfig orderConfig;</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> AtomicLong orderIdGenerator </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> AtomicLong</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">PostMapping</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> Order </span><span style="color:#B392F0">createOrder</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">RequestBody</span><span style="color:#E1E4E8"> CreateOrderRequest </span><span style="color:#FFAB70">request</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        // 1. 查询商品信息</span></span>
+<span class="line"><span style="color:#E1E4E8">        Product product </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> productClient.</span><span style="color:#B392F0">getProductById</span><span style="color:#E1E4E8">(request.</span><span style="color:#B392F0">getProductId</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (product </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> RuntimeException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Product not found"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#6A737D">        // 2. 计算订单金额（考虑税率和折扣）</span></span>
+<span class="line"><span style="color:#E1E4E8">        BigDecimal amount </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> product.</span><span style="color:#B392F0">getPrice</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">multiply</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#B392F0"> BigDecimal</span><span style="color:#E1E4E8">(request.</span><span style="color:#B392F0">getQuantity</span><span style="color:#E1E4E8">()))</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">multiply</span><span style="color:#E1E4E8">(BigDecimal.ONE.</span><span style="color:#B392F0">subtract</span><span style="color:#E1E4E8">(orderConfig.</span><span style="color:#B392F0">getDiscountRate</span><span style="color:#E1E4E8">()))</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">multiply</span><span style="color:#E1E4E8">(BigDecimal.ONE.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(orderConfig.</span><span style="color:#B392F0">getTaxRate</span><span style="color:#E1E4E8">()));</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#6A737D">        // 3. 扣减库存</span></span>
+<span class="line"><span style="color:#E1E4E8">        productClient.</span><span style="color:#B392F0">updateStock</span><span style="color:#E1E4E8">(product.</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">(), request.</span><span style="color:#B392F0">getQuantity</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#6A737D">        // 4. 创建订单</span></span>
+<span class="line"><span style="color:#E1E4E8">        Order order </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Order</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        order.</span><span style="color:#B392F0">setId</span><span style="color:#E1E4E8">(orderIdGenerator.</span><span style="color:#B392F0">getAndIncrement</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        order.</span><span style="color:#B392F0">setProductId</span><span style="color:#E1E4E8">(request.</span><span style="color:#B392F0">getProductId</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        order.</span><span style="color:#B392F0">setQuantity</span><span style="color:#E1E4E8">(request.</span><span style="color:#B392F0">getQuantity</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        order.</span><span style="color:#B392F0">setAmount</span><span style="color:#E1E4E8">(amount);</span></span>
+<span class="line"><span style="color:#E1E4E8">        order.</span><span style="color:#B392F0">setAddress</span><span style="color:#E1E4E8">(request.</span><span style="color:#B392F0">getAddress</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        order.</span><span style="color:#B392F0">setCreateTime</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#B392F0"> Date</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> order;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+
+<p>Nacos配置示例（order-service.yaml）：</p>
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#85E89D">order</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  tax-rate</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0.06</span></span>
+<span class="line"><span style="color:#85E89D">  discount-rate</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0.1</span></span>
+<span class="line"><span style="color:#85E89D">  enable-express</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span></span></code></pre>
+
+<h2 id="常见问题与解决方案"><a href="#常见问题与解决方案" class="headerlink" title="常见问题与解决方案"></a>常见问题与解决方案</h2><h3 id="1-服务注册失败"><a href="#1-服务注册失败" class="headerlink" title="1. 服务注册失败"></a>1. 服务注册失败</h3><p>问题：服务无法注册到Nacos<br>解决方案：</p>
+<ul>
+<li>检查Nacos服务器是否正常运行</li>
+<li>确认服务的配置（server-addr, namespace, group）是否正确</li>
+<li>检查网络连接，确保可以访问Nacos服务</li>
+<li>查看应用日志，分析具体错误信息</li>
+</ul>
+<h3 id="2-配置无法更新"><a href="#2-配置无法更新" class="headerlink" title="2. 配置无法更新"></a>2. 配置无法更新</h3><p>问题：修改了Nacos配置，但服务未生效<br>解决方案：</p>
+<ul>
+<li>确认配置项是否使用了@RefreshScope注解</li>
+<li>检查配置的DataId、Group是否正确</li>
+<li>验证命名空间是否匹配</li>
+<li>检查refresh-enabled是否设置为true</li>
+<li>调用/actuator/refresh端点手动刷新</li>
+</ul>
+<h3 id="3-服务发现延迟"><a href="#3-服务发现延迟" class="headerlink" title="3. 服务发现延迟"></a>3. 服务发现延迟</h3><p>问题：新注册的服务需要等待较长时间才能被发现<br>解决方案：</p>
+<ul>
+<li>调整客户端的缓存刷新时间</li>
+<li>检查健康检查间隔时间配置</li>
+<li>优化集群网络环境</li>
+</ul>
+<h3 id="4-集群同步问题"><a href="#4-集群同步问题" class="headerlink" title="4. 集群同步问题"></a>4. 集群同步问题</h3><p>问题：Nacos集群节点数据不同步<br>解决方案：</p>
+<ul>
+<li>确保集群配置正确</li>
+<li>检查MySQL数据库连接是否正常</li>
+<li>验证网络连通性</li>
+<li>检查JDK版本兼容性</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Nacos作为一站式服务发现、配置管理和服务治理平台，为微服务架构提供了强大的基础支持。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://nacos.io/zh-cn/docs/what-is-nacos.html">Nacos官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://spring-cloud-alibaba-group.github.io/github-pages/hoxton/zh-cn/index.html">Spring Cloud Alibaba官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/alibaba/nacos">Nacos GitHub</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/alibaba/spring-cloud-alibaba/wiki/Nacos-discovery">Spring Cloud Alibaba Nacos Discovery</a><br>abbrlink: ‘0’</li>
+</ul>
+<hr>
+
+        </div>
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    
+    <!-- 侧边栏 -->
+    
+
+
+<div id="sidebar">
+    
+        
+<div id="article-toc" class="article-toc">
+    <div class="toc-title">
+        <i class="fa-solid fa-list fa-fw"></i>
+        <span>目录</span>
+    </div>
+    <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nacos%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A"><span class="toc-text">Nacos注册中心实战笔记：从入门到精通</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFNacos%EF%BC%9F"><span class="toc-text">什么是Nacos？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nacos-vs-Eureka-vs-Consul"><span class="toc-text">Nacos vs Eureka vs Consul</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%8A%A8Nacos-Server"><span class="toc-text">安装与启动Nacos Server</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%90%AF%E5%8A%A8"><span class="toc-text">单机模式启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="toc-text">访问控制台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E6%96%B9%E5%BC%8F%E5%90%AF%E5%8A%A8"><span class="toc-text">Docker方式启动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nacos%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2"><span class="toc-text">Nacos集群部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Cloud%E9%9B%86%E6%88%90Nacos"><span class="toc-text">Spring Cloud集成Nacos</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96"><span class="toc-text">1. 添加依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="toc-text">2. 配置服务注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%90%AF%E7%94%A8%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0"><span class="toc-text">3. 启用服务注册与发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E4%B8%8E%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-text">4. 服务发现与负载均衡</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nacos%E4%BD%9C%E4%B8%BA%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="toc-text">Nacos作为配置中心</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%B7%BB%E5%8A%A0%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E4%BE%9D%E8%B5%96"><span class="toc-text">1. 添加配置中心依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BAbootstrap-yml"><span class="toc-text">2. 创建bootstrap.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9C%A8Nacos%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%B7%BB%E5%8A%A0%E9%85%8D%E7%BD%AE"><span class="toc-text">3. 在Nacos控制台添加配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%AF%BB%E5%8F%96%E9%85%8D%E7%BD%AE"><span class="toc-text">4. 读取配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nacos%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7"><span class="toc-text">Nacos高级特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E5%92%8C%E5%88%86%E7%BB%84"><span class="toc-text">1. 命名空间和分组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%87%8D%E5%92%8C%E4%BF%9D%E6%8A%A4%E9%98%88%E5%80%BC"><span class="toc-text">2. 服务权重和保护阈值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="toc-text">3. 元数据管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Nacos%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-text">4. Nacos的数据模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%85%8D%E7%BD%AE%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AE%89%E5%85%A8"><span class="toc-text">5. 配置加密与安全</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nacos%E7%9B%91%E6%8E%A7%E4%B8%8E%E7%AE%A1%E7%90%86"><span class="toc-text">Nacos监控与管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Nacos%E8%87%AA%E5%B8%A6%E7%9B%91%E6%8E%A7"><span class="toc-text">1. Nacos自带监控</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AF%B9%E6%8E%A5Prometheus%E5%92%8CGrafana"><span class="toc-text">2. 对接Prometheus和Grafana</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%95%86%E5%93%81%E6%9C%8D%E5%8A%A1%E4%B8%8E%E8%AE%A2%E5%8D%95%E6%9C%8D%E5%8A%A1"><span class="toc-text">实战案例：商品服务与订单服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%AC%E5%85%B1%E6%A8%A1%E5%9D%97-common-api"><span class="toc-text">1. 公共模块 (common-api)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%95%86%E5%93%81%E6%9C%8D%E5%8A%A1-product-service"><span class="toc-text">2. 商品服务 (product-service)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AE%A2%E5%8D%95%E6%9C%8D%E5%8A%A1-order-service"><span class="toc-text">3. 订单服务 (order-service)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">常见问题与解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E5%A4%B1%E8%B4%A5"><span class="toc-text">1. 服务注册失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE%E6%97%A0%E6%B3%95%E6%9B%B4%E6%96%B0"><span class="toc-text">2. 配置无法更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E5%BB%B6%E8%BF%9F"><span class="toc-text">3. 服务发现延迟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98"><span class="toc-text">4. 集群同步问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol></li></ol>
+    </div>
+</div>
+ 
+    
+</div> 
+ 
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Tianyu の 个人博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;TianYu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    <script src="/js/blog-effects.js"></script>
+    <script src="/js/white-canvas-nest.js"></script>
+    
+        
+            <script src="/js/optimize/performance-loader.js"></script>
+        
+            <script defer-load src="/js/custom.js"></script>
+        
+            <script defer-load src="/js/blog-effects.js"></script>
+        
+            <script defer-load src="/js/particles-effect.js"></script>
+        
+            <script defer-load src="/js/scroll-header.js"></script>
+        
+            <script defer-load src="/js/img-lightbox.js"></script>
+        
+            <script defer-load src="/js/back-to-top.js"></script>
+        
+            <script defer-load src="/js/tag-cloud.js"></script>
+        
+            <script defer-load src="/js/music-player.js"></script>
+        
+            <script defer-load src="/js/effects-loader.js"></script>
+        
+            <script defer-load src="/js/toc-helper.js"></script>
+        
+    
+    
+    
+
+
+
+
+    
+<!-- hexo injector body_end start -->
+<script src="/assets/prism-bundle.js"></script>
+<script src="/assets/prism-plus.js" data-pjax=""></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
